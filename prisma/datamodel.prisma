@@ -1,0 +1,41 @@
+type User {
+    id: ID! @id
+    firstName: String!
+    lastName: String!
+    email: String!
+    username: String!
+    password: String!
+    messages: [Message!]
+    communities: [Community!]!
+    posts: [Post!]!
+    createdAt: DateTime! @createdAt    
+}
+
+type Community {
+    id: ID! @id
+    name: String!
+    category: String!
+    posts: [Post!]!
+    hasPosts: Boolean!
+    hasMessages: Boolean!
+    privacy: String!
+    owner: User!
+    createdAt: DateTime! @createdAt
+}
+
+type Post {
+    id: ID! @id
+    text: String!
+    community: Community!
+    user: User!
+    createdAt: DateTime! @createdAt
+}
+
+type Message {
+    id: ID! @id
+    sender: User!
+    recip: String!
+    content: String!
+    community: Community!
+    createdAt: DateTime! @createdAt
+}
