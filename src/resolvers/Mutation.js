@@ -34,6 +34,7 @@ async function signup(parent, args, context, info) {
       url: args.url,
       description: args.description,
       postedBy: { connect: { id: userId } },
+      community: { connect: { id: args.community }}
     })
   }
 

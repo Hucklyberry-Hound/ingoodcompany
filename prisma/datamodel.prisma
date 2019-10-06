@@ -25,9 +25,10 @@ type Community {
 
 type Post {
     id: ID! @id
-    text: String!
+    url: String!
+    description: String!
     community: Community!
-    user: User!
+    postedBy: User!
     createdAt: DateTime! @createdAt
 }
 

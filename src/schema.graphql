@@ -4,7 +4,7 @@ type Query {
 }
 
 type Mutation {
-  createNewPost(url: String!, description: String!): Post!
+  createNewPost(url: String!, description: String!, community: String!): Post!
   createNewCommunity(name: String!, category: String!, hasPosts: Boolean!, hasMessages: Boolean!, privacy: String!): Community!
   signup(email: String!, password: String!, username: String!, firstName: String!, lastName: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload

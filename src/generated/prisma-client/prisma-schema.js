@@ -694,9 +694,10 @@ type PageInfo {
 
 type Post {
   id: ID!
-  text: String!
+  url: String!
+  description: String!
   community: Community!
-  user: User!
+  postedBy: User!
   createdAt: DateTime!
 }
 
@@ -708,9 +709,10 @@ type PostConnection {
 
 input PostCreateInput {
   id: ID
-  text: String!
+  url: String!
+  description: String!
   community: CommunityCreateOneWithoutPostsInput!
-  user: UserCreateOneWithoutPostsInput!
+  postedBy: UserCreateOneWithoutPostsInput!
 }
 
 input PostCreateManyWithoutCommunityInput {
@@ -718,20 +720,22 @@ input PostCreateManyWithoutCommunityInput {
   connect: [PostWhereUniqueInput!]
 }
 
-input PostCreateManyWithoutUserInput {
-  create: [PostCreateWithoutUserInput!]
+input PostCreateManyWithoutPostedByInput {
+  create: [PostCreateWithoutPostedByInput!]
   connect: [PostWhereUniqueInput!]
 }
 
 input PostCreateWithoutCommunityInput {
   id: ID
-  text: String!
-  user: UserCreateOneWithoutPostsInput!
+  url: String!
+  description: String!
+  postedBy: UserCreateOneWithoutPostsInput!
 }
 
-input PostCreateWithoutUserInput {
+input PostCreateWithoutPostedByInput {
   id: ID
-  text: String!
+  url: String!
+  description: String!
   community: CommunityCreateOneWithoutPostsInput!
 }
 
@@ -743,15 +747,18 @@ type PostEdge {
 enum PostOrderByInput {
   id_ASC
   id_DESC
-  text_ASC
-  text_DESC
+  url_ASC
+  url_DESC
+  description_ASC
+  description_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
 type PostPreviousValues {
   id: ID!
-  text: String!
+  url: String!
+  description: String!
   createdAt: DateTime!
 }
 
@@ -770,20 +777,34 @@ input PostScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -816,17 +837,20 @@ input PostSubscriptionWhereInput {
 }
 
 input PostUpdateInput {
-  text: String
+  url: String
+  description: String
   community: CommunityUpdateOneRequiredWithoutPostsInput
-  user: UserUpdateOneRequiredWithoutPostsInput
+  postedBy: UserUpdateOneRequiredWithoutPostsInput
 }
 
 input PostUpdateManyDataInput {
-  text: String
+  url: String
+  description: String
 }
 
 input PostUpdateManyMutationInput {
-  text: String
+  url: String
+  description: String
 }
 
 input PostUpdateManyWithoutCommunityInput {
@@ -841,14 +865,14 @@ input PostUpdateManyWithoutCommunityInput {
   updateMany: [PostUpdateManyWithWhereNestedInput!]
 }
 
-input PostUpdateManyWithoutUserInput {
-  create: [PostCreateWithoutUserInput!]
+input PostUpdateManyWithoutPostedByInput {
+  create: [PostCreateWithoutPostedByInput!]
   delete: [PostWhereUniqueInput!]
   connect: [PostWhereUniqueInput!]
   set: [PostWhereUniqueInput!]
   disconnect: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutUserInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutUserInput!]
+  update: [PostUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutPostedByInput!]
   deleteMany: [PostScalarWhereInput!]
   updateMany: [PostUpdateManyWithWhereNestedInput!]
 }
@@ -859,12 +883,14 @@ input PostUpdateManyWithWhereNestedInput {
 }
 
 input PostUpdateWithoutCommunityDataInput {
-  text: String
-  user: UserUpdateOneRequiredWithoutPostsInput
+  url: String
+  description: String
+  postedBy: UserUpdateOneRequiredWithoutPostsInput
 }
 
-input PostUpdateWithoutUserDataInput {
-  text: String
+input PostUpdateWithoutPostedByDataInput {
+  url: String
+  description: String
   community: CommunityUpdateOneRequiredWithoutPostsInput
 }
 
@@ -873,9 +899,9 @@ input PostUpdateWithWhereUniqueWithoutCommunityInput {
   data: PostUpdateWithoutCommunityDataInput!
 }
 
-input PostUpdateWithWhereUniqueWithoutUserInput {
+input PostUpdateWithWhereUniqueWithoutPostedByInput {
   where: PostWhereUniqueInput!
-  data: PostUpdateWithoutUserDataInput!
+  data: PostUpdateWithoutPostedByDataInput!
 }
 
 input PostUpsertWithWhereUniqueWithoutCommunityInput {
@@ -884,10 +910,10 @@ input PostUpsertWithWhereUniqueWithoutCommunityInput {
   create: PostCreateWithoutCommunityInput!
 }
 
-input PostUpsertWithWhereUniqueWithoutUserInput {
+input PostUpsertWithWhereUniqueWithoutPostedByInput {
   where: PostWhereUniqueInput!
-  update: PostUpdateWithoutUserDataInput!
-  create: PostCreateWithoutUserInput!
+  update: PostUpdateWithoutPostedByDataInput!
+  create: PostCreateWithoutPostedByInput!
 }
 
 input PostWhereInput {
@@ -905,22 +931,36 @@ input PostWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
   community: CommunityWhereInput
-  user: UserWhereInput
+  postedBy: UserWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -989,7 +1029,7 @@ input UserCreateInput {
   password: String!
   messages: MessageCreateManyWithoutSenderInput
   communities: CommunityCreateManyWithoutOwnerInput
-  posts: PostCreateManyWithoutUserInput
+  posts: PostCreateManyWithoutPostedByInput
 }
 
 input UserCreateOneWithoutCommunitiesInput {
@@ -1015,7 +1055,7 @@ input UserCreateWithoutCommunitiesInput {
   username: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
-  posts: PostCreateManyWithoutUserInput
+  posts: PostCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutMessagesInput {
@@ -1026,7 +1066,7 @@ input UserCreateWithoutMessagesInput {
   username: String!
   password: String!
   communities: CommunityCreateManyWithoutOwnerInput
-  posts: PostCreateManyWithoutUserInput
+  posts: PostCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutPostsInput {
@@ -1098,7 +1138,7 @@ input UserUpdateInput {
   password: String
   messages: MessageUpdateManyWithoutSenderInput
   communities: CommunityUpdateManyWithoutOwnerInput
-  posts: PostUpdateManyWithoutUserInput
+  posts: PostUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateManyMutationInput {
@@ -1137,7 +1177,7 @@ input UserUpdateWithoutCommunitiesDataInput {
   username: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
-  posts: PostUpdateManyWithoutUserInput
+  posts: PostUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutMessagesDataInput {
@@ -1147,7 +1187,7 @@ input UserUpdateWithoutMessagesDataInput {
   username: String
   password: String
   communities: CommunityUpdateManyWithoutOwnerInput
-  posts: PostUpdateManyWithoutUserInput
+  posts: PostUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutPostsDataInput {
