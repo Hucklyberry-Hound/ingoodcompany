@@ -6,7 +6,8 @@ type User {
     username: String!
     password: String!
     messages: [Message!]
-    communities: [Community!]!
+    communities: [Community!] @relation(name:"Users")
+    ownerOf: [Community!] @relation(name:"Owner")
     posts: [Post!]!
     createdAt: DateTime! @createdAt    
 }
@@ -18,8 +19,9 @@ type Community {
     posts: [Post!]!
     hasPosts: Boolean!
     hasMessages: Boolean!
+    users: [User!] @relation(name:"Users")
     privacy: String!
-    owner: User!
+    owner: User @relation(name:"Owner")
     createdAt: DateTime! @createdAt
 }
 

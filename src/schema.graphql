@@ -8,6 +8,7 @@ type Mutation {
   createNewCommunity(name: String!, category: String!, hasPosts: Boolean!, hasMessages: Boolean!, privacy: String!): Community!
   signup(email: String!, password: String!, username: String!, firstName: String!, lastName: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
+  setCommunity(userId: String!, communityId: String!) : User
 }
 
 type Subscription {
@@ -25,6 +26,7 @@ type User {
   password: String!
   messages: [Message!]
   communities: [Community!]
+  ownerOf: [Community!]! 
   posts: [Post!]!
 }
 
@@ -41,7 +43,8 @@ type Community {
     hasPosts: Boolean!
     hasMessages: Boolean!
     privacy: String!
-    owner: User
+    users: [User!]
+    owner: User!
 }
 
 type Post {

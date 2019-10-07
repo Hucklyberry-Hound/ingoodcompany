@@ -30,8 +30,9 @@ type Community {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
   hasPosts: Boolean!
   hasMessages: Boolean!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   privacy: String!
-  owner: User!
+  owner: User
   createdAt: DateTime!
 }
 
@@ -48,12 +49,18 @@ input CommunityCreateInput {
   posts: PostCreateManyWithoutCommunityInput
   hasPosts: Boolean!
   hasMessages: Boolean!
+  users: UserCreateManyWithoutCommunitiesInput
   privacy: String!
-  owner: UserCreateOneWithoutCommunitiesInput!
+  owner: UserCreateOneWithoutOwnerOfInput
 }
 
 input CommunityCreateManyWithoutOwnerInput {
   create: [CommunityCreateWithoutOwnerInput!]
+  connect: [CommunityWhereUniqueInput!]
+}
+
+input CommunityCreateManyWithoutUsersInput {
+  create: [CommunityCreateWithoutUsersInput!]
   connect: [CommunityWhereUniqueInput!]
 }
 
@@ -74,6 +81,7 @@ input CommunityCreateWithoutOwnerInput {
   posts: PostCreateManyWithoutCommunityInput
   hasPosts: Boolean!
   hasMessages: Boolean!
+  users: UserCreateManyWithoutCommunitiesInput
   privacy: String!
 }
 
@@ -83,8 +91,20 @@ input CommunityCreateWithoutPostsInput {
   category: String!
   hasPosts: Boolean!
   hasMessages: Boolean!
+  users: UserCreateManyWithoutCommunitiesInput
   privacy: String!
-  owner: UserCreateOneWithoutCommunitiesInput!
+  owner: UserCreateOneWithoutOwnerOfInput
+}
+
+input CommunityCreateWithoutUsersInput {
+  id: ID
+  name: String!
+  category: String!
+  posts: PostCreateManyWithoutCommunityInput
+  hasPosts: Boolean!
+  hasMessages: Boolean!
+  privacy: String!
+  owner: UserCreateOneWithoutOwnerOfInput
 }
 
 type CommunityEdge {
@@ -217,8 +237,9 @@ input CommunityUpdateDataInput {
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
+  users: UserUpdateManyWithoutCommunitiesInput
   privacy: String
-  owner: UserUpdateOneRequiredWithoutCommunitiesInput
+  owner: UserUpdateOneWithoutOwnerOfInput
 }
 
 input CommunityUpdateInput {
@@ -227,8 +248,9 @@ input CommunityUpdateInput {
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
+  users: UserUpdateManyWithoutCommunitiesInput
   privacy: String
-  owner: UserUpdateOneRequiredWithoutCommunitiesInput
+  owner: UserUpdateOneWithoutOwnerOfInput
 }
 
 input CommunityUpdateManyDataInput {
@@ -259,6 +281,18 @@ input CommunityUpdateManyWithoutOwnerInput {
   updateMany: [CommunityUpdateManyWithWhereNestedInput!]
 }
 
+input CommunityUpdateManyWithoutUsersInput {
+  create: [CommunityCreateWithoutUsersInput!]
+  delete: [CommunityWhereUniqueInput!]
+  connect: [CommunityWhereUniqueInput!]
+  set: [CommunityWhereUniqueInput!]
+  disconnect: [CommunityWhereUniqueInput!]
+  update: [CommunityUpdateWithWhereUniqueWithoutUsersInput!]
+  upsert: [CommunityUpsertWithWhereUniqueWithoutUsersInput!]
+  deleteMany: [CommunityScalarWhereInput!]
+  updateMany: [CommunityUpdateManyWithWhereNestedInput!]
+}
+
 input CommunityUpdateManyWithWhereNestedInput {
   where: CommunityScalarWhereInput!
   data: CommunityUpdateManyDataInput!
@@ -284,6 +318,7 @@ input CommunityUpdateWithoutOwnerDataInput {
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
+  users: UserUpdateManyWithoutCommunitiesInput
   privacy: String
 }
 
@@ -292,13 +327,29 @@ input CommunityUpdateWithoutPostsDataInput {
   category: String
   hasPosts: Boolean
   hasMessages: Boolean
+  users: UserUpdateManyWithoutCommunitiesInput
   privacy: String
-  owner: UserUpdateOneRequiredWithoutCommunitiesInput
+  owner: UserUpdateOneWithoutOwnerOfInput
+}
+
+input CommunityUpdateWithoutUsersDataInput {
+  name: String
+  category: String
+  posts: PostUpdateManyWithoutCommunityInput
+  hasPosts: Boolean
+  hasMessages: Boolean
+  privacy: String
+  owner: UserUpdateOneWithoutOwnerOfInput
 }
 
 input CommunityUpdateWithWhereUniqueWithoutOwnerInput {
   where: CommunityWhereUniqueInput!
   data: CommunityUpdateWithoutOwnerDataInput!
+}
+
+input CommunityUpdateWithWhereUniqueWithoutUsersInput {
+  where: CommunityWhereUniqueInput!
+  data: CommunityUpdateWithoutUsersDataInput!
 }
 
 input CommunityUpsertNestedInput {
@@ -315,6 +366,12 @@ input CommunityUpsertWithWhereUniqueWithoutOwnerInput {
   where: CommunityWhereUniqueInput!
   update: CommunityUpdateWithoutOwnerDataInput!
   create: CommunityCreateWithoutOwnerInput!
+}
+
+input CommunityUpsertWithWhereUniqueWithoutUsersInput {
+  where: CommunityWhereUniqueInput!
+  update: CommunityUpdateWithoutUsersDataInput!
+  create: CommunityCreateWithoutUsersInput!
 }
 
 input CommunityWhereInput {
@@ -367,6 +424,9 @@ input CommunityWhereInput {
   hasPosts_not: Boolean
   hasMessages: Boolean
   hasMessages_not: Boolean
+  users_every: UserWhereInput
+  users_some: UserWhereInput
+  users_none: UserWhereInput
   privacy: String
   privacy_not: String
   privacy_in: [String!]
@@ -1010,6 +1070,7 @@ type User {
   password: String!
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
   communities(where: CommunityWhereInput, orderBy: CommunityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Community!]
+  ownerOf(where: CommunityWhereInput, orderBy: CommunityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Community!]
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
   createdAt: DateTime!
 }
@@ -1028,17 +1089,23 @@ input UserCreateInput {
   username: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
-  communities: CommunityCreateManyWithoutOwnerInput
+  communities: CommunityCreateManyWithoutUsersInput
+  ownerOf: CommunityCreateManyWithoutOwnerInput
   posts: PostCreateManyWithoutPostedByInput
 }
 
-input UserCreateOneWithoutCommunitiesInput {
-  create: UserCreateWithoutCommunitiesInput
-  connect: UserWhereUniqueInput
+input UserCreateManyWithoutCommunitiesInput {
+  create: [UserCreateWithoutCommunitiesInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
 input UserCreateOneWithoutMessagesInput {
   create: UserCreateWithoutMessagesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutOwnerOfInput {
+  create: UserCreateWithoutOwnerOfInput
   connect: UserWhereUniqueInput
 }
 
@@ -1055,6 +1122,7 @@ input UserCreateWithoutCommunitiesInput {
   username: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
+  ownerOf: CommunityCreateManyWithoutOwnerInput
   posts: PostCreateManyWithoutPostedByInput
 }
 
@@ -1065,7 +1133,20 @@ input UserCreateWithoutMessagesInput {
   email: String!
   username: String!
   password: String!
-  communities: CommunityCreateManyWithoutOwnerInput
+  communities: CommunityCreateManyWithoutUsersInput
+  ownerOf: CommunityCreateManyWithoutOwnerInput
+  posts: PostCreateManyWithoutPostedByInput
+}
+
+input UserCreateWithoutOwnerOfInput {
+  id: ID
+  firstName: String!
+  lastName: String!
+  email: String!
+  username: String!
+  password: String!
+  messages: MessageCreateManyWithoutSenderInput
+  communities: CommunityCreateManyWithoutUsersInput
   posts: PostCreateManyWithoutPostedByInput
 }
 
@@ -1077,7 +1158,8 @@ input UserCreateWithoutPostsInput {
   username: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
-  communities: CommunityCreateManyWithoutOwnerInput
+  communities: CommunityCreateManyWithoutUsersInput
+  ownerOf: CommunityCreateManyWithoutOwnerInput
 }
 
 type UserEdge {
@@ -1112,6 +1194,104 @@ type UserPreviousValues {
   createdAt: DateTime!
 }
 
+input UserScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+}
+
 type UserSubscriptionPayload {
   mutation: MutationType!
   node: User
@@ -1137,8 +1317,17 @@ input UserUpdateInput {
   username: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
-  communities: CommunityUpdateManyWithoutOwnerInput
+  communities: CommunityUpdateManyWithoutUsersInput
+  ownerOf: CommunityUpdateManyWithoutOwnerInput
   posts: PostUpdateManyWithoutPostedByInput
+}
+
+input UserUpdateManyDataInput {
+  firstName: String
+  lastName: String
+  email: String
+  username: String
+  password: String
 }
 
 input UserUpdateManyMutationInput {
@@ -1149,11 +1338,21 @@ input UserUpdateManyMutationInput {
   password: String
 }
 
-input UserUpdateOneRequiredWithoutCommunitiesInput {
-  create: UserCreateWithoutCommunitiesInput
-  update: UserUpdateWithoutCommunitiesDataInput
-  upsert: UserUpsertWithoutCommunitiesInput
-  connect: UserWhereUniqueInput
+input UserUpdateManyWithoutCommunitiesInput {
+  create: [UserCreateWithoutCommunitiesInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutCommunitiesInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutCommunitiesInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyDataInput!
 }
 
 input UserUpdateOneRequiredWithoutMessagesInput {
@@ -1170,6 +1369,15 @@ input UserUpdateOneRequiredWithoutPostsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateOneWithoutOwnerOfInput {
+  create: UserCreateWithoutOwnerOfInput
+  update: UserUpdateWithoutOwnerOfDataInput
+  upsert: UserUpsertWithoutOwnerOfInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
 input UserUpdateWithoutCommunitiesDataInput {
   firstName: String
   lastName: String
@@ -1177,6 +1385,7 @@ input UserUpdateWithoutCommunitiesDataInput {
   username: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
+  ownerOf: CommunityUpdateManyWithoutOwnerInput
   posts: PostUpdateManyWithoutPostedByInput
 }
 
@@ -1186,7 +1395,19 @@ input UserUpdateWithoutMessagesDataInput {
   email: String
   username: String
   password: String
-  communities: CommunityUpdateManyWithoutOwnerInput
+  communities: CommunityUpdateManyWithoutUsersInput
+  ownerOf: CommunityUpdateManyWithoutOwnerInput
+  posts: PostUpdateManyWithoutPostedByInput
+}
+
+input UserUpdateWithoutOwnerOfDataInput {
+  firstName: String
+  lastName: String
+  email: String
+  username: String
+  password: String
+  messages: MessageUpdateManyWithoutSenderInput
+  communities: CommunityUpdateManyWithoutUsersInput
   posts: PostUpdateManyWithoutPostedByInput
 }
 
@@ -1197,12 +1418,13 @@ input UserUpdateWithoutPostsDataInput {
   username: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
-  communities: CommunityUpdateManyWithoutOwnerInput
+  communities: CommunityUpdateManyWithoutUsersInput
+  ownerOf: CommunityUpdateManyWithoutOwnerInput
 }
 
-input UserUpsertWithoutCommunitiesInput {
-  update: UserUpdateWithoutCommunitiesDataInput!
-  create: UserCreateWithoutCommunitiesInput!
+input UserUpdateWithWhereUniqueWithoutCommunitiesInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutCommunitiesDataInput!
 }
 
 input UserUpsertWithoutMessagesInput {
@@ -1210,9 +1432,20 @@ input UserUpsertWithoutMessagesInput {
   create: UserCreateWithoutMessagesInput!
 }
 
+input UserUpsertWithoutOwnerOfInput {
+  update: UserUpdateWithoutOwnerOfDataInput!
+  create: UserCreateWithoutOwnerOfInput!
+}
+
 input UserUpsertWithoutPostsInput {
   update: UserUpdateWithoutPostsDataInput!
   create: UserCreateWithoutPostsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutCommunitiesInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutCommunitiesDataInput!
+  create: UserCreateWithoutCommunitiesInput!
 }
 
 input UserWhereInput {
@@ -1306,6 +1539,9 @@ input UserWhereInput {
   communities_every: CommunityWhereInput
   communities_some: CommunityWhereInput
   communities_none: CommunityWhereInput
+  ownerOf_every: CommunityWhereInput
+  ownerOf_some: CommunityWhereInput
+  ownerOf_none: CommunityWhereInput
   posts_every: PostWhereInput
   posts_some: PostWhereInput
   posts_none: PostWhereInput

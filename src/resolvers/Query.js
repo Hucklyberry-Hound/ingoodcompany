@@ -1,7 +1,7 @@
 function feed(parent, args, context, info) {
-    return context.prisma.post()
-  }
-  
-  module.exports = {
-    feed,
-  }
+  return context.prisma.posts();
+}
+
+module.exports = {
+  feed,
+};

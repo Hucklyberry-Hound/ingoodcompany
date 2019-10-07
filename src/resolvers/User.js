@@ -1,12 +1,12 @@
 function posts(parent, args, context) {
-    return context.prisma.user({ id: parent.id }).post()
-  }
-
-function communities(parent, args, context) {
-    return context.prisma.user({ id: parent.id }).communities()
+  return context.prisma.user({ id: parent.id }).posts();
 }
 
-  module.exports = {
-    posts,
-    communities
-  }
+function communities(parent, args, context) {
+  return context.prisma.user({ id: parent.id }).communities();
+}
+
+module.exports = {
+  posts,
+  communities,
+};
