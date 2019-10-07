@@ -13,7 +13,7 @@ async function signup(parent, args, context, info) {
   };
 }
 
-async function login(parent, args, context, info) {
+async function login(parent, args, context, info) { // look into converting to try/catch
   const user = await context.prisma.user({ email: args.email });
   if (!user) {
     throw new Error('No such user found');
@@ -51,7 +51,7 @@ function createNewCommunity(parent, args, context, info) {
   });
 }
 
-async function setCommunity(parent, args, context, info) {
+async function setCommunity(parent, args, context, info) { // try/catch
   const { userId, communityId } = args;
   await context.prisma.updateCommunity({
     data: {

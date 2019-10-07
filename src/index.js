@@ -28,3 +28,8 @@ const server = new GraphQLServer({
     },
   })
 server.start(() => console.log(`Server is running on http://localhost:4000`))
+
+
+// David's general tips & notes
+
+// Look more into understanding graphql &
