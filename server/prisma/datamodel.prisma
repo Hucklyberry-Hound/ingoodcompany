@@ -1,0 +1,44 @@
+type User {
+    id: ID! @id
+    firstName: String!
+    lastName: String!
+    email: String!
+    username: String!
+    password: String!
+    messages: [Message!]
+    communities: [Community!] @relation(name:"Users")
+    ownerOf: [Community!] @relation(name:"Owner")
+    posts: [Post!]!
+    createdAt: DateTime! @createdAt    
+}
+
+type Community {
+    id: ID! @id
+    name: String!
+    category: String!
+    posts: [Post!]!
+    hasPosts: Boolean!
+    hasMessages: Boolean!
+    users: [User!] @relation(name:"Users")
+    privacy: String!
+    owner: User @relation(name:"Owner")
+    createdAt: DateTime! @createdAt
+}
+
+type Post {
+    id: ID! @id
+    url: String!
+    description: String!
+    community: Community!
+    postedBy: User!
+    createdAt: DateTime! @createdAt
+}
+
+type Message {
+    id: ID! @id
+    sender: User!
+    recip: String!
+    content: String!
+    community: Community!
+    createdAt: DateTime! @createdAt
+}
