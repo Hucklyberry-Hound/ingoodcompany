@@ -11,7 +11,7 @@ import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
 
-// creat connection between Apollo and GraphQL API
+// create connection to GraphQL API server
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/'
 })

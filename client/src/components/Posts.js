@@ -15,7 +15,6 @@ const Posts = (props) => {
       }
 `
 
-
 return (
     <Query query={POSTS_QUERY}>
       {({ loading, error, data }) => {
@@ -28,6 +27,7 @@ return (
   
         return (
           <div>
+              HERE ARE ALL THE POSTS 
             {postsToRender.map(post => <Post key={post.id} post={post} />)}
           </div>
         )
