@@ -1,7 +1,22 @@
-function feed(parent, args, context, info) {
+function posts(parent, args, context, info) {
   return context.prisma.posts();
 }
 
+function users(parent, args, context, info) {
+  return context.prisma.users();
+}
+
+function communities(parent, args, context, info) {
+  return context.prisma.communitys();
+}
+
+function comments(parent, args, context, info) {
+  return context.prisma.comments();
+}
+
 module.exports = {
-  feed,
+  posts,
+  users,
+  communities,
+  comments,
 };

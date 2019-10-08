@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateCommunity {
+/* GraphQL */ `type AggregateComment {
+  count: Int!
+}
+
+type AggregateCommunity {
   count: Int!
 }
 
@@ -23,10 +27,237 @@ type BatchPayload {
   count: Long!
 }
 
+type Comment {
+  id: ID!
+  author: User!
+  content: String!
+  post: Post!
+}
+
+type CommentConnection {
+  pageInfo: PageInfo!
+  edges: [CommentEdge]!
+  aggregate: AggregateComment!
+}
+
+input CommentCreateInput {
+  id: ID
+  author: UserCreateOneWithoutCommentsInput!
+  content: String!
+  post: PostCreateOneWithoutCommentsInput!
+}
+
+input CommentCreateManyWithoutAuthorInput {
+  create: [CommentCreateWithoutAuthorInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateManyWithoutPostInput {
+  create: [CommentCreateWithoutPostInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutAuthorInput {
+  id: ID
+  content: String!
+  post: PostCreateOneWithoutCommentsInput!
+}
+
+input CommentCreateWithoutPostInput {
+  id: ID
+  author: UserCreateOneWithoutCommentsInput!
+  content: String!
+}
+
+type CommentEdge {
+  node: Comment!
+  cursor: String!
+}
+
+enum CommentOrderByInput {
+  id_ASC
+  id_DESC
+  content_ASC
+  content_DESC
+}
+
+type CommentPreviousValues {
+  id: ID!
+  content: String!
+}
+
+input CommentScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  AND: [CommentScalarWhereInput!]
+  OR: [CommentScalarWhereInput!]
+  NOT: [CommentScalarWhereInput!]
+}
+
+type CommentSubscriptionPayload {
+  mutation: MutationType!
+  node: Comment
+  updatedFields: [String!]
+  previousValues: CommentPreviousValues
+}
+
+input CommentSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CommentWhereInput
+  AND: [CommentSubscriptionWhereInput!]
+  OR: [CommentSubscriptionWhereInput!]
+  NOT: [CommentSubscriptionWhereInput!]
+}
+
+input CommentUpdateInput {
+  author: UserUpdateOneRequiredWithoutCommentsInput
+  content: String
+  post: PostUpdateOneRequiredWithoutCommentsInput
+}
+
+input CommentUpdateManyDataInput {
+  content: String
+}
+
+input CommentUpdateManyMutationInput {
+  content: String
+}
+
+input CommentUpdateManyWithoutAuthorInput {
+  create: [CommentCreateWithoutAuthorInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutAuthorInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  updateMany: [CommentUpdateManyWithWhereNestedInput!]
+}
+
+input CommentUpdateManyWithoutPostInput {
+  create: [CommentCreateWithoutPostInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutPostInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutPostInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  updateMany: [CommentUpdateManyWithWhereNestedInput!]
+}
+
+input CommentUpdateManyWithWhereNestedInput {
+  where: CommentScalarWhereInput!
+  data: CommentUpdateManyDataInput!
+}
+
+input CommentUpdateWithoutAuthorDataInput {
+  content: String
+  post: PostUpdateOneRequiredWithoutCommentsInput
+}
+
+input CommentUpdateWithoutPostDataInput {
+  author: UserUpdateOneRequiredWithoutCommentsInput
+  content: String
+}
+
+input CommentUpdateWithWhereUniqueWithoutAuthorInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutAuthorDataInput!
+}
+
+input CommentUpdateWithWhereUniqueWithoutPostInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutPostDataInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutAuthorInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutAuthorDataInput!
+  create: CommentCreateWithoutAuthorInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutPostInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutPostDataInput!
+  create: CommentCreateWithoutPostInput!
+}
+
+input CommentWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  author: UserWhereInput
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  post: PostWhereInput
+  AND: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  NOT: [CommentWhereInput!]
+}
+
+input CommentWhereUniqueInput {
+  id: ID
+}
+
 type Community {
   id: ID!
   name: String!
   category: String!
+  slug: String!
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
   hasPosts: Boolean!
   hasMessages: Boolean!
@@ -46,6 +277,7 @@ input CommunityCreateInput {
   id: ID
   name: String!
   category: String!
+  slug: String!
   posts: PostCreateManyWithoutCommunityInput
   hasPosts: Boolean!
   hasMessages: Boolean!
@@ -78,6 +310,7 @@ input CommunityCreateWithoutOwnerInput {
   id: ID
   name: String!
   category: String!
+  slug: String!
   posts: PostCreateManyWithoutCommunityInput
   hasPosts: Boolean!
   hasMessages: Boolean!
@@ -89,6 +322,7 @@ input CommunityCreateWithoutPostsInput {
   id: ID
   name: String!
   category: String!
+  slug: String!
   hasPosts: Boolean!
   hasMessages: Boolean!
   users: UserCreateManyWithoutCommunitiesInput
@@ -100,6 +334,7 @@ input CommunityCreateWithoutUsersInput {
   id: ID
   name: String!
   category: String!
+  slug: String!
   posts: PostCreateManyWithoutCommunityInput
   hasPosts: Boolean!
   hasMessages: Boolean!
@@ -119,6 +354,8 @@ enum CommunityOrderByInput {
   name_DESC
   category_ASC
   category_DESC
+  slug_ASC
+  slug_DESC
   hasPosts_ASC
   hasPosts_DESC
   hasMessages_ASC
@@ -133,6 +370,7 @@ type CommunityPreviousValues {
   id: ID!
   name: String!
   category: String!
+  slug: String!
   hasPosts: Boolean!
   hasMessages: Boolean!
   privacy: String!
@@ -182,6 +420,20 @@ input CommunityScalarWhereInput {
   category_not_starts_with: String
   category_ends_with: String
   category_not_ends_with: String
+  slug: String
+  slug_not: String
+  slug_in: [String!]
+  slug_not_in: [String!]
+  slug_lt: String
+  slug_lte: String
+  slug_gt: String
+  slug_gte: String
+  slug_contains: String
+  slug_not_contains: String
+  slug_starts_with: String
+  slug_not_starts_with: String
+  slug_ends_with: String
+  slug_not_ends_with: String
   hasPosts: Boolean
   hasPosts_not: Boolean
   hasMessages: Boolean
@@ -234,6 +486,7 @@ input CommunitySubscriptionWhereInput {
 input CommunityUpdateDataInput {
   name: String
   category: String
+  slug: String
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
@@ -245,6 +498,7 @@ input CommunityUpdateDataInput {
 input CommunityUpdateInput {
   name: String
   category: String
+  slug: String
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
@@ -256,6 +510,7 @@ input CommunityUpdateInput {
 input CommunityUpdateManyDataInput {
   name: String
   category: String
+  slug: String
   hasPosts: Boolean
   hasMessages: Boolean
   privacy: String
@@ -264,6 +519,7 @@ input CommunityUpdateManyDataInput {
 input CommunityUpdateManyMutationInput {
   name: String
   category: String
+  slug: String
   hasPosts: Boolean
   hasMessages: Boolean
   privacy: String
@@ -315,6 +571,7 @@ input CommunityUpdateOneRequiredWithoutPostsInput {
 input CommunityUpdateWithoutOwnerDataInput {
   name: String
   category: String
+  slug: String
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
@@ -325,6 +582,7 @@ input CommunityUpdateWithoutOwnerDataInput {
 input CommunityUpdateWithoutPostsDataInput {
   name: String
   category: String
+  slug: String
   hasPosts: Boolean
   hasMessages: Boolean
   users: UserUpdateManyWithoutCommunitiesInput
@@ -335,6 +593,7 @@ input CommunityUpdateWithoutPostsDataInput {
 input CommunityUpdateWithoutUsersDataInput {
   name: String
   category: String
+  slug: String
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
@@ -417,6 +676,20 @@ input CommunityWhereInput {
   category_not_starts_with: String
   category_ends_with: String
   category_not_ends_with: String
+  slug: String
+  slug_not: String
+  slug_in: [String!]
+  slug_not_in: [String!]
+  slug_lt: String
+  slug_lte: String
+  slug_gt: String
+  slug_gte: String
+  slug_contains: String
+  slug_not_contains: String
+  slug_starts_with: String
+  slug_not_starts_with: String
+  slug_ends_with: String
+  slug_not_ends_with: String
   posts_every: PostWhereInput
   posts_some: PostWhereInput
   posts_none: PostWhereInput
@@ -709,6 +982,12 @@ input MessageWhereUniqueInput {
 }
 
 type Mutation {
+  createComment(data: CommentCreateInput!): Comment!
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
+  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  deleteManyComments(where: CommentWhereInput): BatchPayload!
   createCommunity(data: CommunityCreateInput!): Community!
   updateCommunity(data: CommunityUpdateInput!, where: CommunityWhereUniqueInput!): Community
   updateManyCommunities(data: CommunityUpdateManyMutationInput!, where: CommunityWhereInput): BatchPayload!
@@ -754,9 +1033,10 @@ type PageInfo {
 
 type Post {
   id: ID!
-  url: String!
-  description: String!
+  content: String!
+  slug: String!
   community: Community!
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
   postedBy: User!
   createdAt: DateTime!
 }
@@ -769,9 +1049,10 @@ type PostConnection {
 
 input PostCreateInput {
   id: ID
-  url: String!
-  description: String!
+  content: String!
+  slug: String!
   community: CommunityCreateOneWithoutPostsInput!
+  comments: CommentCreateManyWithoutPostInput
   postedBy: UserCreateOneWithoutPostsInput!
 }
 
@@ -785,18 +1066,33 @@ input PostCreateManyWithoutPostedByInput {
   connect: [PostWhereUniqueInput!]
 }
 
+input PostCreateOneWithoutCommentsInput {
+  create: PostCreateWithoutCommentsInput
+  connect: PostWhereUniqueInput
+}
+
+input PostCreateWithoutCommentsInput {
+  id: ID
+  content: String!
+  slug: String!
+  community: CommunityCreateOneWithoutPostsInput!
+  postedBy: UserCreateOneWithoutPostsInput!
+}
+
 input PostCreateWithoutCommunityInput {
   id: ID
-  url: String!
-  description: String!
+  content: String!
+  slug: String!
+  comments: CommentCreateManyWithoutPostInput
   postedBy: UserCreateOneWithoutPostsInput!
 }
 
 input PostCreateWithoutPostedByInput {
   id: ID
-  url: String!
-  description: String!
+  content: String!
+  slug: String!
   community: CommunityCreateOneWithoutPostsInput!
+  comments: CommentCreateManyWithoutPostInput
 }
 
 type PostEdge {
@@ -807,18 +1103,18 @@ type PostEdge {
 enum PostOrderByInput {
   id_ASC
   id_DESC
-  url_ASC
-  url_DESC
-  description_ASC
-  description_DESC
+  content_ASC
+  content_DESC
+  slug_ASC
+  slug_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
 type PostPreviousValues {
   id: ID!
-  url: String!
-  description: String!
+  content: String!
+  slug: String!
   createdAt: DateTime!
 }
 
@@ -837,34 +1133,34 @@ input PostScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  url: String
-  url_not: String
-  url_in: [String!]
-  url_not_in: [String!]
-  url_lt: String
-  url_lte: String
-  url_gt: String
-  url_gte: String
-  url_contains: String
-  url_not_contains: String
-  url_starts_with: String
-  url_not_starts_with: String
-  url_ends_with: String
-  url_not_ends_with: String
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  slug: String
+  slug_not: String
+  slug_in: [String!]
+  slug_not_in: [String!]
+  slug_lt: String
+  slug_lte: String
+  slug_gt: String
+  slug_gte: String
+  slug_contains: String
+  slug_not_contains: String
+  slug_starts_with: String
+  slug_not_starts_with: String
+  slug_ends_with: String
+  slug_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -897,20 +1193,21 @@ input PostSubscriptionWhereInput {
 }
 
 input PostUpdateInput {
-  url: String
-  description: String
+  content: String
+  slug: String
   community: CommunityUpdateOneRequiredWithoutPostsInput
+  comments: CommentUpdateManyWithoutPostInput
   postedBy: UserUpdateOneRequiredWithoutPostsInput
 }
 
 input PostUpdateManyDataInput {
-  url: String
-  description: String
+  content: String
+  slug: String
 }
 
 input PostUpdateManyMutationInput {
-  url: String
-  description: String
+  content: String
+  slug: String
 }
 
 input PostUpdateManyWithoutCommunityInput {
@@ -942,16 +1239,32 @@ input PostUpdateManyWithWhereNestedInput {
   data: PostUpdateManyDataInput!
 }
 
+input PostUpdateOneRequiredWithoutCommentsInput {
+  create: PostCreateWithoutCommentsInput
+  update: PostUpdateWithoutCommentsDataInput
+  upsert: PostUpsertWithoutCommentsInput
+  connect: PostWhereUniqueInput
+}
+
+input PostUpdateWithoutCommentsDataInput {
+  content: String
+  slug: String
+  community: CommunityUpdateOneRequiredWithoutPostsInput
+  postedBy: UserUpdateOneRequiredWithoutPostsInput
+}
+
 input PostUpdateWithoutCommunityDataInput {
-  url: String
-  description: String
+  content: String
+  slug: String
+  comments: CommentUpdateManyWithoutPostInput
   postedBy: UserUpdateOneRequiredWithoutPostsInput
 }
 
 input PostUpdateWithoutPostedByDataInput {
-  url: String
-  description: String
+  content: String
+  slug: String
   community: CommunityUpdateOneRequiredWithoutPostsInput
+  comments: CommentUpdateManyWithoutPostInput
 }
 
 input PostUpdateWithWhereUniqueWithoutCommunityInput {
@@ -962,6 +1275,11 @@ input PostUpdateWithWhereUniqueWithoutCommunityInput {
 input PostUpdateWithWhereUniqueWithoutPostedByInput {
   where: PostWhereUniqueInput!
   data: PostUpdateWithoutPostedByDataInput!
+}
+
+input PostUpsertWithoutCommentsInput {
+  update: PostUpdateWithoutCommentsDataInput!
+  create: PostCreateWithoutCommentsInput!
 }
 
 input PostUpsertWithWhereUniqueWithoutCommunityInput {
@@ -991,35 +1309,38 @@ input PostWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  url: String
-  url_not: String
-  url_in: [String!]
-  url_not_in: [String!]
-  url_lt: String
-  url_lte: String
-  url_gt: String
-  url_gte: String
-  url_contains: String
-  url_not_contains: String
-  url_starts_with: String
-  url_not_starts_with: String
-  url_ends_with: String
-  url_not_ends_with: String
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  slug: String
+  slug_not: String
+  slug_in: [String!]
+  slug_not_in: [String!]
+  slug_lt: String
+  slug_lte: String
+  slug_gt: String
+  slug_gte: String
+  slug_contains: String
+  slug_not_contains: String
+  slug_starts_with: String
+  slug_not_starts_with: String
+  slug_ends_with: String
+  slug_not_ends_with: String
   community: CommunityWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
   postedBy: UserWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
@@ -1039,6 +1360,9 @@ input PostWhereUniqueInput {
 }
 
 type Query {
+  comment(where: CommentWhereUniqueInput!): Comment
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
+  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
   community(where: CommunityWhereUniqueInput!): Community
   communities(where: CommunityWhereInput, orderBy: CommunityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Community]!
   communitiesConnection(where: CommunityWhereInput, orderBy: CommunityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommunityConnection!
@@ -1055,6 +1379,7 @@ type Query {
 }
 
 type Subscription {
+  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
   community(where: CommunitySubscriptionWhereInput): CommunitySubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
@@ -1069,6 +1394,7 @@ type User {
   username: String!
   password: String!
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
   communities(where: CommunityWhereInput, orderBy: CommunityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Community!]
   ownerOf(where: CommunityWhereInput, orderBy: CommunityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Community!]
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
@@ -1089,6 +1415,7 @@ input UserCreateInput {
   username: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
+  comments: CommentCreateManyWithoutAuthorInput
   communities: CommunityCreateManyWithoutUsersInput
   ownerOf: CommunityCreateManyWithoutOwnerInput
   posts: PostCreateManyWithoutPostedByInput
@@ -1097,6 +1424,11 @@ input UserCreateInput {
 input UserCreateManyWithoutCommunitiesInput {
   create: [UserCreateWithoutCommunitiesInput!]
   connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateOneWithoutCommentsInput {
+  create: UserCreateWithoutCommentsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutMessagesInput {
@@ -1114,6 +1446,19 @@ input UserCreateOneWithoutPostsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutCommentsInput {
+  id: ID
+  firstName: String!
+  lastName: String!
+  email: String!
+  username: String!
+  password: String!
+  messages: MessageCreateManyWithoutSenderInput
+  communities: CommunityCreateManyWithoutUsersInput
+  ownerOf: CommunityCreateManyWithoutOwnerInput
+  posts: PostCreateManyWithoutPostedByInput
+}
+
 input UserCreateWithoutCommunitiesInput {
   id: ID
   firstName: String!
@@ -1122,6 +1467,7 @@ input UserCreateWithoutCommunitiesInput {
   username: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
+  comments: CommentCreateManyWithoutAuthorInput
   ownerOf: CommunityCreateManyWithoutOwnerInput
   posts: PostCreateManyWithoutPostedByInput
 }
@@ -1133,6 +1479,7 @@ input UserCreateWithoutMessagesInput {
   email: String!
   username: String!
   password: String!
+  comments: CommentCreateManyWithoutAuthorInput
   communities: CommunityCreateManyWithoutUsersInput
   ownerOf: CommunityCreateManyWithoutOwnerInput
   posts: PostCreateManyWithoutPostedByInput
@@ -1146,6 +1493,7 @@ input UserCreateWithoutOwnerOfInput {
   username: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
+  comments: CommentCreateManyWithoutAuthorInput
   communities: CommunityCreateManyWithoutUsersInput
   posts: PostCreateManyWithoutPostedByInput
 }
@@ -1158,6 +1506,7 @@ input UserCreateWithoutPostsInput {
   username: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
+  comments: CommentCreateManyWithoutAuthorInput
   communities: CommunityCreateManyWithoutUsersInput
   ownerOf: CommunityCreateManyWithoutOwnerInput
 }
@@ -1317,6 +1666,7 @@ input UserUpdateInput {
   username: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
+  comments: CommentUpdateManyWithoutAuthorInput
   communities: CommunityUpdateManyWithoutUsersInput
   ownerOf: CommunityUpdateManyWithoutOwnerInput
   posts: PostUpdateManyWithoutPostedByInput
@@ -1355,6 +1705,13 @@ input UserUpdateManyWithWhereNestedInput {
   data: UserUpdateManyDataInput!
 }
 
+input UserUpdateOneRequiredWithoutCommentsInput {
+  create: UserCreateWithoutCommentsInput
+  update: UserUpdateWithoutCommentsDataInput
+  upsert: UserUpsertWithoutCommentsInput
+  connect: UserWhereUniqueInput
+}
+
 input UserUpdateOneRequiredWithoutMessagesInput {
   create: UserCreateWithoutMessagesInput
   update: UserUpdateWithoutMessagesDataInput
@@ -1378,6 +1735,18 @@ input UserUpdateOneWithoutOwnerOfInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateWithoutCommentsDataInput {
+  firstName: String
+  lastName: String
+  email: String
+  username: String
+  password: String
+  messages: MessageUpdateManyWithoutSenderInput
+  communities: CommunityUpdateManyWithoutUsersInput
+  ownerOf: CommunityUpdateManyWithoutOwnerInput
+  posts: PostUpdateManyWithoutPostedByInput
+}
+
 input UserUpdateWithoutCommunitiesDataInput {
   firstName: String
   lastName: String
@@ -1385,6 +1754,7 @@ input UserUpdateWithoutCommunitiesDataInput {
   username: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
+  comments: CommentUpdateManyWithoutAuthorInput
   ownerOf: CommunityUpdateManyWithoutOwnerInput
   posts: PostUpdateManyWithoutPostedByInput
 }
@@ -1395,6 +1765,7 @@ input UserUpdateWithoutMessagesDataInput {
   email: String
   username: String
   password: String
+  comments: CommentUpdateManyWithoutAuthorInput
   communities: CommunityUpdateManyWithoutUsersInput
   ownerOf: CommunityUpdateManyWithoutOwnerInput
   posts: PostUpdateManyWithoutPostedByInput
@@ -1407,6 +1778,7 @@ input UserUpdateWithoutOwnerOfDataInput {
   username: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
+  comments: CommentUpdateManyWithoutAuthorInput
   communities: CommunityUpdateManyWithoutUsersInput
   posts: PostUpdateManyWithoutPostedByInput
 }
@@ -1418,6 +1790,7 @@ input UserUpdateWithoutPostsDataInput {
   username: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
+  comments: CommentUpdateManyWithoutAuthorInput
   communities: CommunityUpdateManyWithoutUsersInput
   ownerOf: CommunityUpdateManyWithoutOwnerInput
 }
@@ -1425,6 +1798,11 @@ input UserUpdateWithoutPostsDataInput {
 input UserUpdateWithWhereUniqueWithoutCommunitiesInput {
   where: UserWhereUniqueInput!
   data: UserUpdateWithoutCommunitiesDataInput!
+}
+
+input UserUpsertWithoutCommentsInput {
+  update: UserUpdateWithoutCommentsDataInput!
+  create: UserCreateWithoutCommentsInput!
 }
 
 input UserUpsertWithoutMessagesInput {
@@ -1536,6 +1914,9 @@ input UserWhereInput {
   messages_every: MessageWhereInput
   messages_some: MessageWhereInput
   messages_none: MessageWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
   communities_every: CommunityWhereInput
   communities_some: CommunityWhereInput
   communities_none: CommunityWhereInput

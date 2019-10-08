@@ -27,6 +27,7 @@ type User {
   messages: [Message!]
   communities: [Community!]
   ownerOf: [Community!]! 
+  comments: [Comment!]
   posts: [Post!]!
 }
 
@@ -49,10 +50,10 @@ type Community {
 
 type Post {
   id: ID!
-  description: String!
-  url: String!
   postedBy: User
+  content: String!
   community: Community!
+  comments: [Comment!]
 }
 
 type Message {
@@ -63,3 +64,9 @@ type Message {
     community: Community!
 }
 
+type Comment {
+  id: ID!
+  author: User!
+  content: String!
+  post: Post!
+}
