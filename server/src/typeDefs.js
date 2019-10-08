@@ -1,6 +1,10 @@
+const { gql } = require('apollo-server-express');
+
+const typeDefs = gql`
 type Query {
   info: String!
   feed: [Post!]
+  currentUser: User
 }
 
 type Mutation {
@@ -9,6 +13,7 @@ type Mutation {
   signup(email: String!, password: String!, username: String!, firstName: String!, lastName: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   setCommunity(userId: String!, communityId: String!) : User
+  logout: Boolean
 }
 
 type Subscription {
@@ -62,4 +67,8 @@ type Message {
     content: String!
     community: Community!
 }
+`
 
+module.exports = {
+  typeDefs
+}
