@@ -1034,7 +1034,8 @@ type PageInfo {
 type Post {
   id: ID!
   content: String!
-  slug: String!
+  title: String!
+  slug: String
   community: Community!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
   postedBy: User!
@@ -1050,7 +1051,8 @@ type PostConnection {
 input PostCreateInput {
   id: ID
   content: String!
-  slug: String!
+  title: String!
+  slug: String
   community: CommunityCreateOneWithoutPostsInput!
   comments: CommentCreateManyWithoutPostInput
   postedBy: UserCreateOneWithoutPostsInput!
@@ -1074,7 +1076,8 @@ input PostCreateOneWithoutCommentsInput {
 input PostCreateWithoutCommentsInput {
   id: ID
   content: String!
-  slug: String!
+  title: String!
+  slug: String
   community: CommunityCreateOneWithoutPostsInput!
   postedBy: UserCreateOneWithoutPostsInput!
 }
@@ -1082,7 +1085,8 @@ input PostCreateWithoutCommentsInput {
 input PostCreateWithoutCommunityInput {
   id: ID
   content: String!
-  slug: String!
+  title: String!
+  slug: String
   comments: CommentCreateManyWithoutPostInput
   postedBy: UserCreateOneWithoutPostsInput!
 }
@@ -1090,7 +1094,8 @@ input PostCreateWithoutCommunityInput {
 input PostCreateWithoutPostedByInput {
   id: ID
   content: String!
-  slug: String!
+  title: String!
+  slug: String
   community: CommunityCreateOneWithoutPostsInput!
   comments: CommentCreateManyWithoutPostInput
 }
@@ -1105,6 +1110,8 @@ enum PostOrderByInput {
   id_DESC
   content_ASC
   content_DESC
+  title_ASC
+  title_DESC
   slug_ASC
   slug_DESC
   createdAt_ASC
@@ -1114,7 +1121,8 @@ enum PostOrderByInput {
 type PostPreviousValues {
   id: ID!
   content: String!
-  slug: String!
+  title: String!
+  slug: String
   createdAt: DateTime!
 }
 
@@ -1147,6 +1155,20 @@ input PostScalarWhereInput {
   content_not_starts_with: String
   content_ends_with: String
   content_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
   slug: String
   slug_not: String
   slug_in: [String!]
@@ -1194,6 +1216,7 @@ input PostSubscriptionWhereInput {
 
 input PostUpdateInput {
   content: String
+  title: String
   slug: String
   community: CommunityUpdateOneRequiredWithoutPostsInput
   comments: CommentUpdateManyWithoutPostInput
@@ -1202,11 +1225,13 @@ input PostUpdateInput {
 
 input PostUpdateManyDataInput {
   content: String
+  title: String
   slug: String
 }
 
 input PostUpdateManyMutationInput {
   content: String
+  title: String
   slug: String
 }
 
@@ -1248,6 +1273,7 @@ input PostUpdateOneRequiredWithoutCommentsInput {
 
 input PostUpdateWithoutCommentsDataInput {
   content: String
+  title: String
   slug: String
   community: CommunityUpdateOneRequiredWithoutPostsInput
   postedBy: UserUpdateOneRequiredWithoutPostsInput
@@ -1255,6 +1281,7 @@ input PostUpdateWithoutCommentsDataInput {
 
 input PostUpdateWithoutCommunityDataInput {
   content: String
+  title: String
   slug: String
   comments: CommentUpdateManyWithoutPostInput
   postedBy: UserUpdateOneRequiredWithoutPostsInput
@@ -1262,6 +1289,7 @@ input PostUpdateWithoutCommunityDataInput {
 
 input PostUpdateWithoutPostedByDataInput {
   content: String
+  title: String
   slug: String
   community: CommunityUpdateOneRequiredWithoutPostsInput
   comments: CommentUpdateManyWithoutPostInput
@@ -1323,6 +1351,20 @@ input PostWhereInput {
   content_not_starts_with: String
   content_ends_with: String
   content_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
   slug: String
   slug_not: String
   slug_in: [String!]
@@ -1941,6 +1983,8 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
+  username: String
 }
 `
       }

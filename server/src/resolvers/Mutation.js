@@ -1,7 +1,7 @@
 /* eslint-disable no-return-await */
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { APP_SECRET, getUserId } = require('../utils');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { APP_SECRET, getUserId } = require("../utils");
 
 async function signup(parent, args, context, info) {
   const password = await bcrypt.hash(args.password, 10);
@@ -9,23 +9,23 @@ async function signup(parent, args, context, info) {
   const token = jwt.sign({ userId: user.id }, APP_SECRET);
   return {
     token,
-    user,
+    user
   };
 }
 
 async function login(parent, args, context, info) {
   const user = await context.prisma.user({ email: args.email });
   if (!user) {
-    throw new Error('No such user found');
+    throw new Error("No such user found");
   }
   const valid = await bcrypt.compare(args.password, user.password);
   if (!valid) {
-    throw new Error('Invalid password');
+    throw new Error("Invalid password");
   }
   const token = jwt.sign({ userId: user.id }, APP_SECRET);
   return {
     token,
-    user,
+    user
   };
 }
 
@@ -35,7 +35,7 @@ function createNewPost(parent, args, context, info) {
     url: args.url,
     description: args.description,
     postedBy: { connect: { id: userId } },
-    community: { connect: { id: args.community } },
+    community: { connect: { id: args.community } }
   });
 }
 
@@ -47,7 +47,15 @@ function createNewCommunity(parent, args, context, info) {
     hasPosts: args.hasPosts,
     hasMessages: args.hasMessages,
     privacy: args.privacy,
-    owner: { connect: { id: userId } },
+    owner: { connect: { id: userId } }
+  });
+}
+
+function createNewComment(parent, args, context, info) {
+  return context.prisma.createComment({
+    content: args.content,
+    author: { connect: { id: args.authorId } },
+    post: { connect: { id: args.postId } }
   });
 }
 
@@ -55,19 +63,19 @@ async function setCommunity(parent, args, context, info) {
   const { userId, communityId } = args;
   await context.prisma.updateCommunity({
     data: {
-      users: { connect: [{ id: userId }] },
+      users: { connect: [{ id: userId }] }
     },
     where: {
-      id: communityId,
-    },
+      id: communityId
+    }
   });
   return await context.prisma.updateUser({
     data: {
-      communities: { connect: [{ id: communityId }] },
+      communities: { connect: [{ id: communityId }] } // connecting this way appends to the end of a list(n-m)
     },
     where: {
-      id: userId,
-    },
+      id: userId
+    }
   });
 }
 
@@ -76,5 +84,6 @@ module.exports = {
   login,
   createNewPost,
   createNewCommunity,
-  setCommunity,
+  createNewComment,
+  setCommunity
 };

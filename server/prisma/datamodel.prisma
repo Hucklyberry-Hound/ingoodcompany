@@ -2,8 +2,8 @@ type User {
     id: ID! @id
     firstName: String!
     lastName: String!
-    email: String!
-    username: String!
+    email: String! @unique
+    username: String! @unique
     password: String!
     messages: [Message!]
     comments: [Comment!]
@@ -15,9 +15,9 @@ type User {
 
 type Community {
     id: ID! @id
-    name: String!
+    name: String! @unique
     category: String!
-    slug: String!
+    slug: String! 
     posts: [Post!]!
     hasPosts: Boolean!
     hasMessages: Boolean!
@@ -30,7 +30,8 @@ type Community {
 type Post {
     id: ID! @id
     content: String!
-    slug: String!
+    title: String!
+    slug: String @unique
     community: Community!
     comments: [Comment!]
     postedBy: User!

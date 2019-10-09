@@ -272,6 +272,8 @@ export type PostOrderByInput =
   | "id_DESC"
   | "content_ASC"
   | "content_DESC"
+  | "title_ASC"
+  | "title_DESC"
   | "slug_ASC"
   | "slug_DESC"
   | "createdAt_ASC"
@@ -398,6 +400,20 @@ export interface PostWhereInput {
   content_not_starts_with?: Maybe<String>;
   content_ends_with?: Maybe<String>;
   content_not_ends_with?: Maybe<String>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
   slug?: Maybe<String>;
   slug_not?: Maybe<String>;
   slug_in?: Maybe<String[] | String>;
@@ -615,11 +631,13 @@ export interface PostUpdateWithWhereUniqueWithoutCommunityInput {
 
 export interface PostUpdateManyMutationInput {
   content?: Maybe<String>;
+  title?: Maybe<String>;
   slug?: Maybe<String>;
 }
 
 export interface PostUpdateWithoutCommunityDataInput {
   content?: Maybe<String>;
+  title?: Maybe<String>;
   slug?: Maybe<String>;
   comments?: Maybe<CommentUpdateManyWithoutPostInput>;
   postedBy?: Maybe<UserUpdateOneRequiredWithoutPostsInput>;
@@ -705,6 +723,8 @@ export interface CommentUpdateManyWithWhereNestedInput {
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+  username?: Maybe<String>;
 }>;
 
 export interface CommentUpdateManyDataInput {
@@ -885,6 +905,7 @@ export interface UserCreateOneWithoutPostsInput {
 
 export interface PostUpdateWithoutCommentsDataInput {
   content?: Maybe<String>;
+  title?: Maybe<String>;
   slug?: Maybe<String>;
   community?: Maybe<CommunityUpdateOneRequiredWithoutPostsInput>;
   postedBy?: Maybe<UserUpdateOneRequiredWithoutPostsInput>;
@@ -1309,6 +1330,7 @@ export interface CommunityUpdateManyDataInput {
 
 export interface PostUpdateInput {
   content?: Maybe<String>;
+  title?: Maybe<String>;
   slug?: Maybe<String>;
   community?: Maybe<CommunityUpdateOneRequiredWithoutPostsInput>;
   comments?: Maybe<CommentUpdateManyWithoutPostInput>;
@@ -1356,6 +1378,7 @@ export interface MessageUpdateInput {
 
 export interface PostUpdateWithoutPostedByDataInput {
   content?: Maybe<String>;
+  title?: Maybe<String>;
   slug?: Maybe<String>;
   community?: Maybe<CommunityUpdateOneRequiredWithoutPostsInput>;
   comments?: Maybe<CommentUpdateManyWithoutPostInput>;
@@ -1408,6 +1431,20 @@ export interface PostScalarWhereInput {
   content_not_starts_with?: Maybe<String>;
   content_ends_with?: Maybe<String>;
   content_not_ends_with?: Maybe<String>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
   slug?: Maybe<String>;
   slug_not?: Maybe<String>;
   slug_in?: Maybe<String[] | String>;
@@ -1468,6 +1505,7 @@ export interface CommunityCreateInput {
 
 export interface PostUpdateManyDataInput {
   content?: Maybe<String>;
+  title?: Maybe<String>;
   slug?: Maybe<String>;
 }
 
@@ -1749,7 +1787,8 @@ export interface CommunityUpdateManyWithoutUsersInput {
 export interface PostCreateInput {
   id?: Maybe<ID_Input>;
   content: String;
-  slug: String;
+  title: String;
+  slug?: Maybe<String>;
   community: CommunityCreateOneWithoutPostsInput;
   comments?: Maybe<CommentCreateManyWithoutPostInput>;
   postedBy: UserCreateOneWithoutPostsInput;
@@ -1800,7 +1839,8 @@ export interface CommunityUpsertWithWhereUniqueWithoutUsersInput {
 export interface PostCreateWithoutCommunityInput {
   id?: Maybe<ID_Input>;
   content: String;
-  slug: String;
+  title: String;
+  slug?: Maybe<String>;
   comments?: Maybe<CommentCreateManyWithoutPostInput>;
   postedBy: UserCreateOneWithoutPostsInput;
 }
@@ -1813,7 +1853,8 @@ export interface UserUpsertWithoutOwnerOfInput {
 export interface PostCreateWithoutCommentsInput {
   id?: Maybe<ID_Input>;
   content: String;
-  slug: String;
+  title: String;
+  slug?: Maybe<String>;
   community: CommunityCreateOneWithoutPostsInput;
   postedBy: UserCreateOneWithoutPostsInput;
 }
@@ -1826,7 +1867,8 @@ export interface CommunityUpsertWithoutPostsInput {
 export interface PostCreateWithoutPostedByInput {
   id?: Maybe<ID_Input>;
   content: String;
-  slug: String;
+  title: String;
+  slug?: Maybe<String>;
   community: CommunityCreateOneWithoutPostsInput;
   comments?: Maybe<CommentCreateManyWithoutPostInput>;
 }
@@ -2146,7 +2188,8 @@ export interface PageInfoSubscription
 export interface PostPreviousValues {
   id: ID_Output;
   content: String;
-  slug: String;
+  title: String;
+  slug?: String;
   createdAt: DateTimeOutput;
 }
 
@@ -2155,6 +2198,7 @@ export interface PostPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   content: () => Promise<String>;
+  title: () => Promise<String>;
   slug: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
 }
@@ -2164,6 +2208,7 @@ export interface PostPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   content: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
   slug: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -2594,13 +2639,15 @@ export interface CommunityConnectionSubscription
 export interface Post {
   id: ID_Output;
   content: String;
-  slug: String;
+  title: String;
+  slug?: String;
   createdAt: DateTimeOutput;
 }
 
 export interface PostPromise extends Promise<Post>, Fragmentable {
   id: () => Promise<ID_Output>;
   content: () => Promise<String>;
+  title: () => Promise<String>;
   slug: () => Promise<String>;
   community: <T = CommunityPromise>() => T;
   comments: <T = FragmentableArray<Comment>>(args?: {
@@ -2621,6 +2668,7 @@ export interface PostSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   content: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
   slug: () => Promise<AsyncIterator<String>>;
   community: <T = CommunitySubscription>() => T;
   comments: <T = Promise<AsyncIterator<CommentSubscription>>>(args?: {
@@ -2641,6 +2689,7 @@ export interface PostNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   content: () => Promise<String>;
+  title: () => Promise<String>;
   slug: () => Promise<String>;
   community: <T = CommunityPromise>() => T;
   comments: <T = FragmentableArray<Comment>>(args?: {

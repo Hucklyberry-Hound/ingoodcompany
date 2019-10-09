@@ -1,11 +1,22 @@
+# TODO: Need to implement unique constraints,
+#       however this requires resetting the service (i.e. deleting any rows on the db
+#       that violate this uniqueness constraint (having two Communities named 'Cats'))
+#       To reset, do: prisma reset
+
 type Query {
   info: String!
-  feed: [Post!]
+  posts: [Post!]
+  users: [User!]
+  communities: [Community!]
+  comments: [Comment!]
+  userByHandle(username: String!) : User
+  communityByName(name: String!) : Community
 }
 
 type Mutation {
   createNewPost(url: String!, description: String!, community: String!): Post!
   createNewCommunity(name: String!, category: String!, hasPosts: Boolean!, hasMessages: Boolean!, privacy: String!): Community!
+  createNewComment(authorId: String!, postId: String!, content: String!) : Comment!
   signup(email: String!, password: String!, username: String!, firstName: String!, lastName: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   setCommunity(userId: String!, communityId: String!) : User
@@ -51,9 +62,18 @@ type Community {
 type Post {
   id: ID!
   postedBy: User
+  title: String!
+  slug: String!
   content: String!
   community: Community!
   comments: [Comment!]
+}
+
+type Comment {
+  id: ID!
+  author: User!
+  content: String!
+  post: Post!
 }
 
 type Message {
@@ -64,9 +84,3 @@ type Message {
     community: Community!
 }
 
-type Comment {
-  id: ID!
-  author: User!
-  content: String!
-  post: Post!
-}
