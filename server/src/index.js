@@ -44,18 +44,41 @@ const uuid = require('uuid/v4');
 const passport = require('passport');
 const PORT = 4000;
 const { ApolloServer } = require('apollo-server-express');
-const {resolvers} = require('./resolver')
-const {typeDefs} = require('./typeDefs')
+const resolvers = require('./resolver')
+const typeDefs = require('./typeDefs')
+const { GraphQLLocalStrategy, buildContext } = require('graphql-passport')
 
 
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req, res }) => buildContext({ 
+    req: req, 
+    prisma,
+    res: res
+  }),
+
+});
+
+passport.use(
+  new GraphQLLocalStrategy(async (email, password, done) => {
+    const users = await prisma.users();
+    const matchingUser = users.find(user => email === user.email && password === user.password);
+    const error = matchingUser ? null : new Error('no matching user');
+    done(error, matchingUser);
+  }),
+);
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-  const users = User.getUsers();
+passport.deserializeUser(async (id, done) => {
+  const users = await prisma.users();
   const matchingUser = users.find(user => user.id === id);
+  // const matchingUser = await prisma.users({id})
+  console.log('HEEEEEERRRRRRRRRREEEEEEEE', matchingUser)
   done(null, matchingUser);
 });
 
@@ -66,19 +89,11 @@ app.use(session({
   secret: SESSION_SECRECT,
   resave: false,
   saveUninitialized: false,
+
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: ({ req }) => ({
-    user: req.user,
-    logout: () => req.logout(),
-  }),
-});
 
 server.applyMiddleware({ app });
 

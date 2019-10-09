@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express');
 
-const typeDefs = gql`
+module.exports = gql`
 type Query {
   info: String!
   feed: [Post!]
@@ -36,7 +36,6 @@ type User {
 }
 
 type AuthPayload {
-  token: String
   user: User
 }
 
@@ -68,7 +67,3 @@ type Message {
     community: Community!
 }
 `
-
-module.exports = {
-  typeDefs
-}
