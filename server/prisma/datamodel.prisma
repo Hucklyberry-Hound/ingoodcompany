@@ -9,7 +9,7 @@ type User {
     comments: [Comment!]
     communities: [Community!] @relation(name:"Users")
     ownerOf: [Community!] @relation(name:"Owner")
-    posts: [Post!]!
+    posts: [Post!]
     createdAt: DateTime! @createdAt    
 }
 
@@ -25,13 +25,14 @@ type Community {
     privacy: String!
     owner: User @relation(name:"Owner")
     createdAt: DateTime! @createdAt
+    about: String!
 }
 
 type Post {
     id: ID! @id
     content: String!
     title: String!
-    slug: String @unique
+    slug: String
     community: Community!
     comments: [Comment!]
     postedBy: User!

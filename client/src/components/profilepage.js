@@ -3,11 +3,21 @@ import ColumnData from './profilecolumn';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
-const GET_POSTS = gql`
+const GET_COMMUNITIES = gql`
   {
     communities {
+      id
       name
       category
+      privacy
+      users {
+        id
+        username
+      }
+      owner {
+        id
+        username
+      }
     }
   }
 `;
@@ -24,28 +34,38 @@ export default class UserProfile extends React.Component {
 
   render() {
     return (
-      <div className="profile-container">
-        <ColumnData
-          headerText="Communities You Own"
-          listData={this.state.owned}
-        />
-        <ColumnData
-          headerText="Communities You're Subscribed To"
-          listData={this.state.belongTo}
-        />
-        <Query query={GET_POSTS}>
-          {({ loading, error, data }) => {
-            if (loading) return <div>Loading</div>;
-            if (error) console.log(error);
-            return (
+      <Query query={GET_COMMUNITIES}>
+        {({ loading, error, data }) => {
+          if (loading) return <div>Loading</div>;
+          if (error) console.log(error);
+          console.log(data);
+          const { communities } = data;
+          const owned = communities.filter(
+            c => c.owner.id /**=== currentUser.id) */
+          );
+          // const belongsTo = communities.filter(c =>
+          //   c.users.includes(currentUser.id)
+          // );
+          const belongsTo = [];
+          const publicCommunities = communities.filter(
+            c => c.privacy === 'Public'
+          );
+          return (
+            <div className="profile-container">
+              <ColumnData headerText="Communities You Own" listData={owned} />
+              <ColumnData
+                headerText="Communities You're Subscribed To"
+                listData={belongsTo}
+              />
+
               <ColumnData
                 headerText="Public Communities"
-                listData={this.state.public}
+                listData={publicCommunities}
               />
-            );
-          }}
-        </Query>
-      </div>
+            </div>
+          );
+        }}
+      </Query>
     );
   }
 }

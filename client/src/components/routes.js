@@ -11,7 +11,7 @@ class Routes extends React.Component {
         <Route path="/signup" component={SignUp} />
         <Route path="/home" component={Profile} />
         <Route path="/create" component={CreatePage} />
-        <Route path="/:community" component={Community} />
+        <Route path="/community/:community" component={Community} />
         <Route component={HomePage} />
       </Switch>
     );

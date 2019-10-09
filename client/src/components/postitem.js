@@ -3,19 +3,13 @@ import { Link } from 'react-router-dom';
 
 const PostItem = props => {
   const { community, item } = props;
-  const { author, title, content } = item;
-  const slug = title.replace(/\s/g, '').toLowerCase();
+  const { postedBy, title, id, content, slug } = item;
   return (
     <div>
-      <Link
-        to={{
-          pathname: `/${community}/thread/${slug}`,
-          state: { content, author, title },
-        }}
-      >
+      <Link to={`/community/${community}/thread/${id}`}>
         <h3>{title}</h3>
       </Link>
-      <small> Posted By: {author}</small>
+      <small> Posted By: {postedBy.username}</small>
     </div>
   );
 };

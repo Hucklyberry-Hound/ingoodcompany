@@ -11,12 +11,15 @@ type Query {
   comments: [Comment!]
   userByHandle(username: String!, id: String) : User
   communityByName(name: String!, id: String) : Community
+  getPost(id: String!) : Post
+  getCommunity(id: String!) Community
 }
 
 type Mutation {
-  createNewPost(url: String!, description: String!, community: String!): Post!
-  createNewCommunity(name: String!, category: String!, hasPosts: Boolean!, hasMessages: Boolean!, privacy: String!): Community!
+  createNewPost(communityId: String!, userId: String!, title: String!, content: String!): Post!
+  createNewCommunity(ownerId: String, name: String!, category: String!, hasPosts: Boolean!, hasMessages: Boolean!, privacy: String!): Community!
   createNewComment(authorId: String!, postId: String!, content: String!) : Comment!
+  createNewUser(firstName: String!, lastName: String, email: String!, username: String!, password: String!) : User!
   signup(email: String!, password: String!, username: String!, firstName: String!, lastName: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   setCommunity(userId: String!, communityId: String!) : User
@@ -37,9 +40,9 @@ type User {
   password: String!
   messages: [Message!]
   communities: [Community!]
-  ownerOf: [Community!]! 
+  ownerOf: [Community!] 
   comments: [Comment!]
-  posts: [Post!]!
+  posts: [Post!]
 }
 
 type AuthPayload {
@@ -58,6 +61,7 @@ type Community {
     privacy: String!
     users: [User!]
     owner: User!
+    about: String!
 }
 
 type Post {
