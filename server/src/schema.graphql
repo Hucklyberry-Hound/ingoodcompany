@@ -12,7 +12,7 @@ type Query {
   userByHandle(username: String!, id: String) : User
   communityByName(name: String!, id: String) : Community
   getPost(id: String!) : Post
-  getCommunity(id: String!) Community
+  getCommunity(id: String!) : Community
 }
 
 type Mutation {
