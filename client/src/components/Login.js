@@ -1,5 +1,23 @@
 import React, { Component } from 'react'
 import { AUTH_TOKEN } from '../constants'
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const SIGNUP_MUTATION = gql`
+  mutation SignupMutation($email: String!, $password: String!, $firstName: String!, $lastName: String!, $username: String! ) {
+    signup(email: $email, password: $password, firstName: $firstName, lastName: $lastName, username: $username) {
+      token
+    }
+  }
+`
+
+const LOGIN_MUTATION = gql`
+  mutation LoginMutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+    }
+  }
+`
 
 class Login extends Component {
   state = {
@@ -54,9 +72,13 @@ class Login extends Component {
           />
         </div>
         <div >
-          <button onClick={() => this._confirm()}>
-            {login ? 'login' : 'create account'}
-          </button>
+            <Mutation mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
+                variables={this.state}
+                onCompleted={data => this._confirm(data)} >
+            {mutation => (
+            <button onClick={mutation}> {login ? 'login' : 'create account'} </button>
+            )}
+        </Mutation>
           <button
             onClick={() => this.setState({ login: !login })}
           >
@@ -69,8 +91,10 @@ class Login extends Component {
     )
   }
 
-  _confirm = async () => {
-    // ... you'll implement this 🔜
+  _confirm = async data => {
+    const { token } = this.state.login ? data.login : data.signup
+    this._saveUserData(token)
+    this.props.history.push(`/`)
   }
 
   //Save user data in local storage
