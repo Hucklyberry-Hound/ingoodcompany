@@ -9,8 +9,8 @@ type Query {
   users: [User!]
   communities: [Community!]
   comments: [Comment!]
-  userByHandle(username: String!) : User
-  communityByName(name: String!) : Community
+  userByHandle(username: String!, id: String) : User
+  communityByName(name: String!, id: String) : Community
 }
 
 type Mutation {
@@ -54,6 +54,7 @@ type Community {
     posts: [Post!]!
     hasPosts: Boolean!
     hasMessages: Boolean!
+    slug: String!
     privacy: String!
     users: [User!]
     owner: User!
