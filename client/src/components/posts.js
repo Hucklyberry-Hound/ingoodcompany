@@ -1,7 +1,7 @@
 /* eslint-disable no-unreachable */
-import React from "react";
+import React from 'react';
 
-import PostHeaderCard from "./postitem";
+import PostItem from './postitem';
 
 const Posts = props => {
   const { communityId, posts } = props;
@@ -9,7 +9,7 @@ const Posts = props => {
     posts.map(item => {
       return (
         <div>
-          <PostHeaderCard item={item} communityId={communityId} key={item.id} />
+          <PostItem item={item} communityId={communityId} key={item.id} />
         </div>
       );
     })

@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
 export default class CreatePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      category: "animals",
-      hasPosts: "yes",
-      hasMessages: "yes",
-      privacy: "Public",
-      about: ""
+      name: '',
+      category: 'animals',
+      hasPosts: 'yes',
+      hasMessages: 'yes',
+      privacy: 'Public',
+      about: '',
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,7 +36,7 @@ export default class CreatePage extends React.Component {
           onSubmit={this.handleSubmit}
         >
           <div className="create-field">
-            <label htmlFor="name">Community Name</label>
+            <label htmlFor="name">Community Name: </label>
             <input
               name="name"
               type="text"
@@ -45,7 +45,7 @@ export default class CreatePage extends React.Component {
             />
           </div>
           <div className="create-field">
-            <label htmlFor="category">Select A Topic</label>
+            <label htmlFor="category">Select A Topic: </label>
             <select
               name="category"
               onChange={event => this.handleOnChange(event)}
@@ -67,7 +67,7 @@ export default class CreatePage extends React.Component {
             />
           </div>
           <div className="create-field">
-            <label htmlFor="hasPosts">Has Posts</label>
+            <label htmlFor="hasPosts">Has Posts: </label>
             <select
               name="hasPosts"
               onChange={this.handleOnChange}
@@ -78,7 +78,7 @@ export default class CreatePage extends React.Component {
             </select>
           </div>
           <div className="create-field">
-            <label htmlFor="hasMessages">Has Messages</label>
+            <label htmlFor="hasMessages">Has Messages: </label>
             <select
               name="hasMessages"
               onChange={this.handleOnChange}
@@ -89,7 +89,7 @@ export default class CreatePage extends React.Component {
             </select>
           </div>
           <div className="create-field">
-            <label htmlFor="privacy">Privacy Settings</label>
+            <label htmlFor="privacy">Privacy Settings: </label>
             <select
               name="privacy"
               onChange={this.handleOnChange}
@@ -99,7 +99,6 @@ export default class CreatePage extends React.Component {
               <option value="private">Private</option>
             </select>
           </div>
-
           <div className="submit-button">
             <input type="submit" value="Submit" />
           </div>

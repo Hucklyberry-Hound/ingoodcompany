@@ -58,14 +58,28 @@ code {
 .create-form {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .create-field {
   margin-top: 20px;
+  width: 20%;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.create-field select {
+  position: relative;
+  bottom: 5px;
 }
 
 .submit-button {
   width: 100px;
+  align-self: center;
 }
 
 .comment {
