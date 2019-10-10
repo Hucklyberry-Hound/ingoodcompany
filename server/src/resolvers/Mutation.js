@@ -62,15 +62,8 @@ function createNewPost(
   });
 }
 
-function createNewCommunity(
-  parent,
-  { ownerId, name, category, hasPosts, hasMessages, privacy, about },
-  context,
-  info
-) {
-  if (!ownerId) {
-    const ownerId = getUserId(context);
-  }
+function createNewCommunity(parent,{ name, category, hasPosts, hasMessages, privacy, about }, context, info) {
+  const ownerId = getUserId(context);
   const slug = makeSlug(name);
   return context.prisma.createCommunity({
     name,
