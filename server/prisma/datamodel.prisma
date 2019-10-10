@@ -18,7 +18,7 @@ type Community {
     name: String! @unique
     category: String!
     slug: String! 
-    posts: [Post!]!
+    posts: [Post!]
     hasPosts: Boolean!
     hasMessages: Boolean!
     users: [User!] @relation(name:"Users")

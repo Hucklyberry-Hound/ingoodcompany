@@ -17,7 +17,7 @@ type Query {
 
 type Mutation {
   createNewPost(communityId: String!, userId: String!, title: String!, content: String!): Post!
-  createNewCommunity(ownerId: String, name: String!, category: String!, hasPosts: Boolean!, hasMessages: Boolean!, privacy: String!): Community!
+  createNewCommunity(ownerId: String, name: String!, category: String!, hasPosts: Boolean!, hasMessages: Boolean!, privacy: String!, about: String!): Community!
   createNewComment(authorId: String!, postId: String!, content: String!) : Comment!
   createNewUser(firstName: String!, lastName: String, email: String!, username: String!, password: String!) : User!
   signup(email: String!, password: String!, username: String!, firstName: String!, lastName: String!): AuthPayload
@@ -54,7 +54,7 @@ type Community {
     id: ID!
     name: String!
     category: String!
-    posts: [Post!]!
+    posts: [Post!]
     hasPosts: Boolean!
     hasMessages: Boolean!
     slug: String!

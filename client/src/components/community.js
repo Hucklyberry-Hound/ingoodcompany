@@ -15,6 +15,15 @@ const GET_COMMUNITY = gql`
       name
       about
       privacy
+      posts {
+        id
+        title
+        content
+        slug
+        postedBy {
+          username
+        }
+      }
     }
   }
 `;
@@ -34,7 +43,7 @@ export default class Community extends React.Component {
         {({ loading, error, data }) => {
           if (loading) return <div>Loading</div>;
           if (error) console.log(error);
-          const { name, privacy, about, id } = data.getCommunity;
+          const { name, privacy, about, id, posts } = data.getCommunity;
           return (
             <div className="community">
               <div className="community-header">
@@ -53,7 +62,9 @@ export default class Community extends React.Component {
                   />
                   <Route
                     path="/community/:community/posts"
-                    render={props => <Posts {...props} communityId={id} />}
+                    render={props => (
+                      <Posts {...props} posts={posts} communityId={id} />
+                    )}
                   />
                   <Route
                     path="/community/:community/thread/:postId"
