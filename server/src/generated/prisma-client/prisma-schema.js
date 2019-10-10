@@ -265,6 +265,7 @@ type Community {
   privacy: String!
   owner: User
   createdAt: DateTime!
+  about: String!
 }
 
 type CommunityConnection {
@@ -284,6 +285,7 @@ input CommunityCreateInput {
   users: UserCreateManyWithoutCommunitiesInput
   privacy: String!
   owner: UserCreateOneWithoutOwnerOfInput
+  about: String!
 }
 
 input CommunityCreateManyWithoutOwnerInput {
@@ -316,6 +318,7 @@ input CommunityCreateWithoutOwnerInput {
   hasMessages: Boolean!
   users: UserCreateManyWithoutCommunitiesInput
   privacy: String!
+  about: String!
 }
 
 input CommunityCreateWithoutPostsInput {
@@ -328,6 +331,7 @@ input CommunityCreateWithoutPostsInput {
   users: UserCreateManyWithoutCommunitiesInput
   privacy: String!
   owner: UserCreateOneWithoutOwnerOfInput
+  about: String!
 }
 
 input CommunityCreateWithoutUsersInput {
@@ -340,6 +344,7 @@ input CommunityCreateWithoutUsersInput {
   hasMessages: Boolean!
   privacy: String!
   owner: UserCreateOneWithoutOwnerOfInput
+  about: String!
 }
 
 type CommunityEdge {
@@ -364,6 +369,8 @@ enum CommunityOrderByInput {
   privacy_DESC
   createdAt_ASC
   createdAt_DESC
+  about_ASC
+  about_DESC
 }
 
 type CommunityPreviousValues {
@@ -375,6 +382,7 @@ type CommunityPreviousValues {
   hasMessages: Boolean!
   privacy: String!
   createdAt: DateTime!
+  about: String!
 }
 
 input CommunityScalarWhereInput {
@@ -460,6 +468,20 @@ input CommunityScalarWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  about: String
+  about_not: String
+  about_in: [String!]
+  about_not_in: [String!]
+  about_lt: String
+  about_lte: String
+  about_gt: String
+  about_gte: String
+  about_contains: String
+  about_not_contains: String
+  about_starts_with: String
+  about_not_starts_with: String
+  about_ends_with: String
+  about_not_ends_with: String
   AND: [CommunityScalarWhereInput!]
   OR: [CommunityScalarWhereInput!]
   NOT: [CommunityScalarWhereInput!]
@@ -493,6 +515,7 @@ input CommunityUpdateDataInput {
   users: UserUpdateManyWithoutCommunitiesInput
   privacy: String
   owner: UserUpdateOneWithoutOwnerOfInput
+  about: String
 }
 
 input CommunityUpdateInput {
@@ -505,6 +528,7 @@ input CommunityUpdateInput {
   users: UserUpdateManyWithoutCommunitiesInput
   privacy: String
   owner: UserUpdateOneWithoutOwnerOfInput
+  about: String
 }
 
 input CommunityUpdateManyDataInput {
@@ -514,6 +538,7 @@ input CommunityUpdateManyDataInput {
   hasPosts: Boolean
   hasMessages: Boolean
   privacy: String
+  about: String
 }
 
 input CommunityUpdateManyMutationInput {
@@ -523,6 +548,7 @@ input CommunityUpdateManyMutationInput {
   hasPosts: Boolean
   hasMessages: Boolean
   privacy: String
+  about: String
 }
 
 input CommunityUpdateManyWithoutOwnerInput {
@@ -577,6 +603,7 @@ input CommunityUpdateWithoutOwnerDataInput {
   hasMessages: Boolean
   users: UserUpdateManyWithoutCommunitiesInput
   privacy: String
+  about: String
 }
 
 input CommunityUpdateWithoutPostsDataInput {
@@ -588,6 +615,7 @@ input CommunityUpdateWithoutPostsDataInput {
   users: UserUpdateManyWithoutCommunitiesInput
   privacy: String
   owner: UserUpdateOneWithoutOwnerOfInput
+  about: String
 }
 
 input CommunityUpdateWithoutUsersDataInput {
@@ -599,6 +627,7 @@ input CommunityUpdateWithoutUsersDataInput {
   hasMessages: Boolean
   privacy: String
   owner: UserUpdateOneWithoutOwnerOfInput
+  about: String
 }
 
 input CommunityUpdateWithWhereUniqueWithoutOwnerInput {
@@ -723,6 +752,20 @@ input CommunityWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  about: String
+  about_not: String
+  about_in: [String!]
+  about_not_in: [String!]
+  about_lt: String
+  about_lte: String
+  about_gt: String
+  about_gte: String
+  about_contains: String
+  about_not_contains: String
+  about_starts_with: String
+  about_not_starts_with: String
+  about_ends_with: String
+  about_not_ends_with: String
   AND: [CommunityWhereInput!]
   OR: [CommunityWhereInput!]
   NOT: [CommunityWhereInput!]

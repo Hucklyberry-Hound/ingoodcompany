@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
-import PostHeaderCard from './postitem';
+import PostHeaderCard from "./postitem";
 
 const GET_POSTS = gql`
   {
@@ -20,10 +20,10 @@ const GET_POSTS = gql`
 `;
 
 const Posts = props => {
-  const { community } = props;
+  const { communityId } = props;
   return (
     <div>
-      <Link to={`/${community}/post/new`}>New Post</Link>
+      <Link to={`/${communityId}/post/new`}>New Post</Link>
       <Query query={GET_POSTS}>
         {({ loading, error, data }) => {
           if (loading) return <div>Loading</div>;
@@ -34,7 +34,7 @@ const Posts = props => {
               <div>
                 <PostHeaderCard
                   item={item}
-                  community={community}
+                  communityId={communityId}
                   key={item.id}
                 />
               </div>

@@ -1,9 +1,9 @@
 /* eslint-disable no-return-await */
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { APP_SECRET, getUserId } = require('../utils');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { APP_SECRET, getUserId } = require("../utils");
 
-const makeSlug = str => str.replace(/\s/g, '').toLowerCase();
+const makeSlug = str => str.replace(/\s/g, "").toLowerCase();
 
 async function signup(parent, args, context, info) {
   const password = await bcrypt.hash(args.password, 10);
@@ -11,23 +11,23 @@ async function signup(parent, args, context, info) {
   const token = jwt.sign({ userId: user.id }, APP_SECRET);
   return {
     token,
-    user,
+    user
   };
 }
 
 async function login(parent, args, context, info) {
   const user = await context.prisma.user({ email: args.email });
   if (!user) {
-    throw new Error('No such user found');
+    throw new Error("No such user found");
   }
   const valid = await bcrypt.compare(args.password, user.password);
   if (!valid) {
-    throw new Error('Invalid password');
+    throw new Error("Invalid password");
   }
   const token = jwt.sign({ userId: user.id }, APP_SECRET);
   return {
     token,
-    user,
+    user
   };
 }
 
@@ -42,7 +42,7 @@ function createNewUser(
     lastName,
     email,
     username,
-    password,
+    password
   });
 }
 
@@ -58,13 +58,13 @@ function createNewPost(
     slug,
     content,
     postedBy: { connect: { id: userId } },
-    community: { connect: { id: communityId } },
+    community: { connect: { id: communityId } }
   });
 }
 
 function createNewCommunity(
   parent,
-  { ownerId, name, category, hasPosts, hasMessages, privacy },
+  { ownerId, name, category, hasPosts, hasMessages, privacy, about },
   context,
   info
 ) {
@@ -79,15 +79,21 @@ function createNewCommunity(
     hasMessages,
     privacy,
     slug,
-    owner: { connect: { id: ownerId } },
+    about,
+    owner: { connect: { id: ownerId } }
   });
 }
 
-function createNewComment(parent, args, context, info) {
+function createNewComment(
+  parent,
+  { content, authorId, postId },
+  context,
+  info
+) {
   return context.prisma.createComment({
-    content: args.content,
-    author: { connect: { id: args.authorId } },
-    post: { connect: { id: args.postId } },
+    content,
+    author: { connect: { id: authorId } },
+    post: { connect: { id: postId } }
   });
 }
 
@@ -95,19 +101,19 @@ async function setCommunity(parent, args, context, info) {
   const { userId, communityId } = args;
   await context.prisma.updateCommunity({
     data: {
-      users: { connect: [{ id: userId }] },
+      users: { connect: [{ id: userId }] }
     },
     where: {
-      id: communityId,
-    },
+      id: communityId
+    }
   });
   return await context.prisma.updateUser({
     data: {
-      communities: { connect: [{ id: communityId }] }, // connecting this way appends to the end of a list(n-m)
+      communities: { connect: [{ id: communityId }] } // connecting this way appends to the end of a list(n-m)
     },
     where: {
-      id: userId,
-    },
+      id: userId
+    }
   });
 }
 
@@ -118,5 +124,5 @@ module.exports = {
   createNewPost,
   createNewCommunity,
   createNewComment,
-  setCommunity,
+  setCommunity
 };

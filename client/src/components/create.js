@@ -1,14 +1,15 @@
-import React from 'react';
+import React from "react";
 
 export default class CreatePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      category: 'animals',
-      hasPosts: 'yes',
-      hasMessages: 'yes',
-      privacy: 'Public',
+      name: "",
+      category: "animals",
+      hasPosts: "yes",
+      hasMessages: "yes",
+      privacy: "Public",
+      about: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -55,6 +56,15 @@ export default class CreatePage extends React.Component {
               <option value="food">Food</option>
               <option value="chair">Chair</option>
             </select>
+          </div>
+          <div className="create-field">
+            <label htmlFor="about">About: </label>
+            <textarea
+              name="about"
+              placeholder="Describe your community"
+              value={this.state.about}
+              onChange={this.handleOnChange}
+            />
           </div>
           <div className="create-field">
             <label htmlFor="hasPosts">Has Posts</label>

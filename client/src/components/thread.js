@@ -1,8 +1,8 @@
-import React from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import React from "react";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
-import CommentContainer from './commentcontainer';
+import CommentContainer from "./commentcontainer";
 
 const GET_ONE_POST = gql`
   query GetPost($postId: String!) {
@@ -12,24 +12,15 @@ const GET_ONE_POST = gql`
       postedBy {
         username
       }
+      comments {
+        author {
+          username
+        }
+        content
+      }
     }
   }
 `;
-
-const comments = [
-  {
-    author: 'Some person',
-    content: 'Good post',
-  },
-  {
-    author: 'Me',
-    content: 'I dont like this post',
-  },
-  {
-    author: 'Another person',
-    content: 'asdklfjslfk',
-  },
-];
 
 const Thread = props => {
   const { postId } = props.match.params;
@@ -39,8 +30,9 @@ const Thread = props => {
         if (loading) return <div>Loading</div>;
         if (error) console.log(error);
         const thread = data.getPost;
-        const { title, content, postedBy } = thread;
+        const { title, content, postedBy, comments } = thread;
         const author = postedBy.username;
+        console.log(comments);
         return (
           <div className="thread-container">
             <div className="thread-header">
