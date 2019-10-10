@@ -21,7 +21,6 @@ class Header extends React.Component {
                     this.props.history.push(`/`);
                   }}
                 >
-                  {' '}
                   logout
                 </div>
               </Link> 
