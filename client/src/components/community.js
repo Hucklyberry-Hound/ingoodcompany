@@ -9,8 +9,8 @@ import Thread from "./thread";
 
 // do abouts
 const GET_COMMUNITY = gql`
-  query GetCommunity($communityId: String!) {
-    getCommunity(id: $communityId) {
+  query GetCommunity($slug: String!) {
+    getCommunity(slug: $slug) {
       id
       name
       about
@@ -32,14 +32,14 @@ export default class Community extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.match.params.community
+      slug: props.match.params.community
     };
   }
 
   render() {
-    const communityId = this.state.id;
+    const slug = this.state.slug;
     return (
-      <Query query={GET_COMMUNITY} variables={{ communityId }}>
+      <Query query={GET_COMMUNITY} variables={{ slug }}>
         {({ loading, error, data }) => {
           if (loading) return <div>Loading</div>;
           if (error) console.log(error);
@@ -47,9 +47,9 @@ export default class Community extends React.Component {
           return (
             <div className="community">
               <div className="community-header">
-                <Link to={`/community/${id}/about`}>About</Link>
-                <Link to={`/community/${id}/posts`}>Posts</Link>
-                <Link to={`/community/${id}/messages`}>Messages</Link>
+                <Link to={`/community/${slug}/about`}>About</Link>
+                <Link to={`/community/${slug}/posts`}>Posts</Link>
+                <Link to={`/community/${slug}/messages`}>Messages</Link>
               </div>
               <div className="community-container">
                 <Switch>

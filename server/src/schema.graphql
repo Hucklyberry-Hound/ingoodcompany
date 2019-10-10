@@ -12,7 +12,7 @@ type Query {
   userByHandle(username: String!, id: String) : User
   communityByName(name: String!, id: String) : Community
   getPost(id: String!) : Post
-  getCommunity(id: String!) : Community
+  getCommunity(slug: String!) : Community
 }
 
 type Mutation {
@@ -40,7 +40,7 @@ type User {
   password: String!
   messages: [Message!]
   communities: [Community!]
-  ownerOf: [Community!] 
+  ownerOf: [Community!]
   comments: [Comment!]
   posts: [Post!]
 }

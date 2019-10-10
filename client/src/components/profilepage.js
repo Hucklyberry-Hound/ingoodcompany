@@ -10,6 +10,7 @@ const GET_COMMUNITIES = gql`
       name
       category
       privacy
+      slug
       users {
         id
         username
