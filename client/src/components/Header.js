@@ -13,16 +13,20 @@ class Header extends React.Component {
           {authToken ? (
             <div>
               <h4>You are logged in as {user}</h4>
-              <Link>
+              <Link to="/">
                 <div
                   onClick={() => {
                     localStorage.removeItem(AUTH_TOKEN);
+                    localStorage.removeItem(USER);
                     this.props.history.push(`/`);
                   }}
                 >
                   {' '}
                   logout
                 </div>
+              </Link> 
+              <Link to="/create">
+              <div>create a community</div>
               </Link>
             </div>
           ) : (

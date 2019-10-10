@@ -1,45 +1,113 @@
-import React from 'react';
-import FormField from './formfield';
+import React, { Component } from 'react'
+import { AUTH_TOKEN, USER } from '../constants'
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
 
-export default class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-    };
-    this.handleUsernameOnChange = this.handleUsernameOnChange.bind(this);
-    this.handlePasswordOnChange = this.handlePasswordOnChange.bind(this);
+const SIGNUP_MUTATION = gql`
+  mutation SignupMutation($email: String!, $password: String!, $firstName: String!, $lastName: String!, $username: String! ) {
+    signup(email: $email, password: $password, firstName: $firstName, lastName: $lastName, username: $username) {
+      token
+      user{
+        username
+      }
+    }
   }
+`
 
-  handleUsernameOnChange(event) {
-    this.setState({ username: event.target.value });
+const LOGIN_MUTATION = gql`
+  mutation LoginMutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        username
+      }
+    }
   }
+`
 
-  handlePasswordOnChange(event) {
-    this.setState({ password: event.target.value });
+class Login extends Component {
+  state = {
+    login: true, // switch between Login and SignUp
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    username: ''
   }
 
   render() {
+      const {login } = this.state;
+
     return (
       <div>
-        <h1>Sign In To Your Account</h1>
-        <form name="login">
-          <FormField
-            labelText="Username"
-            fieldType="username"
+        <h4>{login ? 'Login' : 'Sign Up'}</h4>
+        <div>
+          {!login && (
+              <div>
+            <input
+              value={this.state.firstName}
+              onChange={e => this.setState({ firstName: e.target.value })}
+              type="text"
+              placeholder="First Name"
+            />
+            <input
+            value={this.state.name}
+            onChange={e => this.setState({ lastName: e.target.value })}
+            type="text"
+            placeholder="Last Name"
+          />
+            <input
             value={this.state.username}
-            onChange={this.handleUsernameOnChange}
+            onChange={e => this.setState({ username: e.target.value })}
+            type="text"
+            placeholder="Username"
           />
-          <FormField
-            labelText="Password"
-            fieldType="password"
+            </div>
+          )}
+          <input
+            value={this.state.email}
+            onChange={e => this.setState({ email: e.target.value })}
+            type="text"
+            placeholder="Your email address"
+          />
+          <input
             value={this.state.password}
-            onChange={this.handlePasswordOnChange}
+            onChange={e => this.setState({ password: e.target.value })}
+            type="password"
+            placeholder="Password"
           />
-          <button type="submit">Login</button>
-        </form>
+        </div>
+        <div >
+            <Mutation mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
+                variables={this.state}
+                onCompleted={data => this._confirm(data)} >
+            {mutation => (
+            <button onClick={mutation}> Submit </button>
+            )}
+        </Mutation>
+          <button
+            onClick={() => this.setState({ login: !login })}
+          >
+            {login
+              ? 'Click Here to Create Account'
+              : 'Click Here to Login'}
+          </button>
+        </div>
       </div>
-    );
+    )
+  }
+
+  _confirm = async data => {
+    const { token, user } = this.state.login ? data.login : data.signup
+    this._saveUserData(token, user.username)
+    this.props.history.push(`/`)
+  }
+
+  //Save user data in local storage
+  _saveUserData = (token, username) => {
+    localStorage.setItem(AUTH_TOKEN, token)
+    localStorage.setItem(USER, username)
   }
 }
+
+export default Login

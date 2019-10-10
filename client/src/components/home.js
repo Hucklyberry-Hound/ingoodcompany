@@ -6,11 +6,7 @@ export default class HomePage extends React.Component {
     return (
       <div>
         <h1>Welcome to Good Company!</h1>
-        <div style={{ marginRight: 20 }}>
-          <Link to="/login">Login</Link>
         </div>
-        <Link to="/signup">Register</Link>
-      </div>
     );
   }
 }
