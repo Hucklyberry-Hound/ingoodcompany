@@ -649,6 +649,7 @@ export interface PostUpdateWithoutCommunityDataInput {
 export type CommunityWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   name?: Maybe<String>;
+  slug?: Maybe<String>;
 }>;
 
 export interface CommentUpdateManyWithoutPostInput {
