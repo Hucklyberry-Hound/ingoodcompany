@@ -9,27 +9,36 @@ import ReactDOM from 'react-dom';
 import '../src/styles/index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-
-import { Router } from 'react-router-dom';
-import { createMemoryHistory, createBrowserHistory } from 'history';
-const history = createBrowserHistory();
+import { setContext } from 'apollo-link-context';
+import { AUTH_TOKEN } from './constants';
+import { BrowserRouter } from 'react-router-dom';
 
 // create connection to GraphQL API server
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/graphql',
 });
 
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem(AUTH_TOKEN);
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <Router history={history}>
+  <BrowserRouter>
+    <ApolloProvider client={client}>
       <App />
-    </Router>
-  </ApolloProvider>,
+    </ApolloProvider>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 serviceWorker.unregister();
