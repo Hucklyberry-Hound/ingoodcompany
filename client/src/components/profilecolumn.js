@@ -9,7 +9,7 @@ const ColumnData = props => {
       {listData.map((community, index) => {
         return (
           <div className="column column-li" key={index}>
-            <Link to={`/community/${community.id}`}>
+            <Link to={`/community/${community.slug}`}>
               <h5>{community.name}</h5>
               <small>Category: {community.category}</small>
             </Link>
@@ -18,11 +18,11 @@ const ColumnData = props => {
       })}
     </div>
   ) : (
-    <div className="column">
-      <h2>{headerText}</h2>
-      <p>Looks Like there's nothing here</p>
-    </div>
-  );
+      <div className="column">
+        <h2>{headerText}</h2>
+        <p>Looks Like there's nothing here</p>
+      </div>
+    );
 };
 
 export default ColumnData;

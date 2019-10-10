@@ -10,14 +10,14 @@ type User {
     communities: [Community!] @relation(name:"Users")
     ownerOf: [Community!] @relation(name:"Owner")
     posts: [Post!]
-    createdAt: DateTime! @createdAt    
+    createdAt: DateTime! @createdAt
 }
 
 type Community {
     id: ID! @id
     name: String! @unique
     category: String!
-    slug: String! 
+    slug: String!  @unique
     posts: [Post!]
     hasPosts: Boolean!
     hasMessages: Boolean!

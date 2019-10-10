@@ -774,6 +774,7 @@ input CommunityWhereInput {
 input CommunityWhereUniqueInput {
   id: ID
   name: String
+  slug: String
 }
 
 scalar DateTime
