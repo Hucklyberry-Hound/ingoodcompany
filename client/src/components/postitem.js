@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PostItem = props => {
   const { communityId, item } = props;
-  const { postedBy, title, id, content, slug } = item;
+  const { postedBy, title, id } = item;
   return (
     <div>
       <Link to={`/community/${communityId}/thread/${id}`}>

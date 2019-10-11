@@ -1,8 +1,8 @@
-import React from "react";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import React from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
-import CommentContainer from "./commentcontainer";
+import CommentContainer from './commentcontainer';
 
 const GET_ONE_POST = gql`
   query GetPost($postId: String!) {
@@ -18,6 +18,9 @@ const GET_ONE_POST = gql`
         }
         content
       }
+      community {
+        id
+      }
     }
   }
 `;
@@ -30,9 +33,9 @@ const Thread = props => {
         if (loading) return <div>Loading</div>;
         if (error) console.log(error);
         const thread = data.getPost;
-        const { title, content, postedBy, comments } = thread;
+        const { title, content, postedBy, comments, community } = thread;
         const author = postedBy.username;
-        console.log(comments);
+        const communityId = community.id;
         return (
           <div className="thread-container">
             <div className="thread-header">
@@ -42,7 +45,11 @@ const Thread = props => {
             <div className="thread-content">
               <p>{content}</p>
             </div>
-            <CommentContainer comments={comments} />
+            <CommentContainer
+              communityId={communityId}
+              postId={postId}
+              comments={comments}
+            />
           </div>
         );
       }}
