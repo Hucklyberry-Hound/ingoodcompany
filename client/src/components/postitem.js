@@ -9,7 +9,9 @@ const PostItem = props => {
       <Link to={`/community/${communityId}/thread/${id}`}>
         <h3>{title}</h3>
       </Link>
-      <small> Posted By: {postedBy.username}</small>
+      <Link to={`/user/${postedBy.username}`}>
+        <small> Posted By: {postedBy.username}</small>
+      </Link>
     </div>
   );
 };

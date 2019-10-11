@@ -91,3 +91,17 @@ code {
   display: flex;
   flex-direction: column;
 }
+
+.user-profile {
+  align-self: center;
+  width: 25%;
+  text-align: left;
+  margin-left: 38%;
+}
+
+
+
+.profile-item small {
+  position: relative;
+  bottom: 15px;
+}

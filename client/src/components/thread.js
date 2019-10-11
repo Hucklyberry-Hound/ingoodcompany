@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -35,18 +36,19 @@ const Thread = props => {
         const thread = data.getPost;
         const { title, content, postedBy, comments, community } = thread;
         const author = postedBy.username;
-        const communityId = community.id;
         return (
           <div className="thread-container">
             <div className="thread-header">
               <h2>{title}</h2>
-              <small>Posted By: {author}</small>
+              <Link to={`/user/${author}`}>
+                <small>Posted By: {author}</small>
+              </Link>
             </div>
             <div className="thread-content">
               <p>{content}</p>
             </div>
             <CommentContainer
-              communityId={communityId}
+              communityId={community.id}
               postId={postId}
               comments={comments}
             />

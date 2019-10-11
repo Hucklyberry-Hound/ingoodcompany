@@ -1,11 +1,14 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Comment = props => {
   const { author, content } = props.comment;
 
   return (
     <div className="comment">
-      <small>{author.username} wrote...:</small>
+      <Link to={`/user/${author.username}`}>
+        <small>{author.username} wrote...:</small>
+      </Link>
       <p>{content}</p>
     </div>
   );
