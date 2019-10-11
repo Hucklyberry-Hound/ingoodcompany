@@ -32,7 +32,7 @@ type Post {
     id: ID! @id
     content: String!
     title: String!
-    slug: String
+    slug: String!
     community: Community!
     comments: [Comment!]
     postedBy: User!

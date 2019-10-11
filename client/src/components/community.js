@@ -2,7 +2,6 @@ import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-
 import About from "./about";
 import Posts from "./posts";
 import Thread from "./thread";
@@ -15,13 +14,14 @@ const GET_COMMUNITY = gql`
       name
       about
       privacy
+      slug
       posts {
         id
         title
         content
-        slug
         postedBy {
           username
+          id
         }
       }
     }
@@ -43,7 +43,7 @@ export default class Community extends React.Component {
         {({ loading, error, data }) => {
           if (loading) return <div>Loading</div>;
           if (error) console.log(error);
-          const { name, privacy, about, id, posts } = data.getCommunity;
+          const { name, privacy, about, id, posts, slug } = data.getCommunity;
           return (
             <div className="community">
               <div className="community-header">

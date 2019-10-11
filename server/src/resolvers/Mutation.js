@@ -46,19 +46,15 @@ function createNewUser(
   });
 }
 
-function createNewPost(
-  parent,
-  { userId, communityId, title, content },
-  context,
-  info
-) {
-  const slug = makeSlug(title);
+function createNewPost(parent, args, context, info) {
+  Id = getUserId(context);
+  const slug = makeSlug(args.title);
   return context.prisma.createPost({
-    title,
-    slug,
-    content,
-    postedBy: { connect: { id: userId } },
-    community: { connect: { id: communityId } }
+    title: args.title,
+    content: args.content,
+    postedBy: { connect: { id: Id } },
+    community: { connect: { id: args.communityId } },
+    slug: slug
   });
 }
 
