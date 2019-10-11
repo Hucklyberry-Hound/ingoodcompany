@@ -37,6 +37,10 @@ async function getCommunity(parent, { slug }, context, info) {
   return community;
 }
 
+async function getCurrentUser(parent, { username }, context, info) {
+  return context.prisma.user({ username: username })
+}
+
 module.exports = {
   posts,
   users,
@@ -46,4 +50,5 @@ module.exports = {
   communityByName,
   getPost,
   getCommunity,
+  getCurrentUser
 };

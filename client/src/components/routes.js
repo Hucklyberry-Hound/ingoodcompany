@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter, Route, Switch } from 'react-router-dom';
 
-import { Login, HomePage, Profile, Community, CreatePage } from '.';
+import { Login, HomePage, Profile, Community, CreatePage, JoinCommunity } from '.';
 
 class Routes extends React.Component {
   render() {

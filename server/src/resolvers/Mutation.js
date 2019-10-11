@@ -90,8 +90,10 @@ function createNewComment(
   });
 }
 
-async function setCommunity(parent, args, context, info) {
-  const { userId, communityId } = args;
+async function addUserToCommunity(parent, args, context, info) {
+  const { communityId } = args;
+  const userId = getUserId(context);
+
   await context.prisma.updateCommunity({
     data: {
       users: { connect: [{ id: userId }] }
@@ -117,5 +119,5 @@ module.exports = {
   createNewPost,
   createNewCommunity,
   createNewComment,
-  setCommunity
+  addUserToCommunity
 };

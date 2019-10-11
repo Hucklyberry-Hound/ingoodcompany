@@ -13,6 +13,7 @@ type Query {
   communityByName(name: String!, id: String) : Community
   getPost(id: String!) : Post
   getCommunity(slug: String!) : Community
+  getCurrentUser(username: String! ) : User
 }
 
 type Mutation {
@@ -22,7 +23,7 @@ type Mutation {
   createNewUser(firstName: String!, lastName: String, email: String!, username: String!, password: String!) : User!
   signup(email: String!, password: String!, username: String!, firstName: String!, lastName: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
-  setCommunity(userId: String!, communityId: String!) : User
+  addUserToCommunity(communityId: String!) : User
 }
 
 type Subscription {

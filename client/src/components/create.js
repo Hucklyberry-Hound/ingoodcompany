@@ -102,7 +102,10 @@ export default class CreatePage extends React.Component {
             </select>
           </div>
           <div className="submit-button">
-            <Mutation mutation={CREATE_COMMUNITY_MUTATION} variables={this.state} >
+            <Mutation mutation={CREATE_COMMUNITY_MUTATION} 
+                variables={this.state} 
+                onCompleted={data => this.props.history.push(`community/${data.createNewCommunity.slug}`)}
+               >
                 {createMutation => <button onClick={createMutation}>Submit</button>}
             </Mutation>
           </div>
