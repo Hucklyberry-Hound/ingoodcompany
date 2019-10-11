@@ -29,9 +29,9 @@ const GET_COMMUNITY = gql`
         id
         title
         content
-        slug
         postedBy {
           username
+          id
         }
       }
     }
@@ -41,7 +41,7 @@ const GET_COMMUNITY = gql`
 const ADD_USER = gql`
   mutation AddUserToCommunity($communityId: String!) {
     addUserToCommunity(communityId: $communityId ) {
-      id 
+      id
     }
   }
 `
@@ -59,38 +59,38 @@ export default class Community extends React.Component {
     const username = localStorage.getItem(USER);
     const slug = this.state.slug;
     const collectionOfUsers = []
-    
+
     return (
       <React.Fragment>
-      <Query query={GET_COMMUNITY} variables={this.state}>
-        {({ loading, error, data }) => {
-          if (loading) return <div>Loading</div>;
-          if (error) return<div>Error</div>;
-          const { name, privacy, about, id, posts, users, slug, hasPosts, hasMessages } = data.getCommunity;
-          return (
-            <div className="community">
-              {users.map(user => {
-                collectionOfUsers.push(user.username)
-              })} 
-              {(!collectionOfUsers.includes(username)) ? 
-              <div>
-              <Mutation mutation={ADD_USER} variables={{communityId: id }} >
-                {mutation => <button onClick={mutation}>Click Here to Join!</button>}
-              </Mutation>
-            </div>
-             : <CustomCommunity 
-                  name={name} 
-                  privacy={privacy} 
-                  about={about} 
-                  id={id} 
-                  posts={posts} 
-                  slug={slug}
-                  hasMessages={hasMessages}
-                  hasPosts={hasPosts}/>}
-            </div>
-          );
-        }}
-      </Query>
+        <Query query={GET_COMMUNITY} variables={this.state}>
+          {({ loading, error, data }) => {
+            if (loading) return <div>Loading</div>;
+            if (error) return <div>Error</div>;
+            const { name, privacy, about, id, posts, users, slug, hasPosts, hasMessages } = data.getCommunity;
+            return (
+              <div className="community">
+                {users.map(user => {
+                  collectionOfUsers.push(user.username)
+                })}
+                {(!collectionOfUsers.includes(username)) ?
+                  <div>
+                    <Mutation mutation={ADD_USER} variables={{ communityId: id }} >
+                      {mutation => <button onClick={mutation}>Click Here to Join!</button>}
+                    </Mutation>
+                  </div>
+                  : <CustomCommunity
+                    name={name}
+                    privacy={privacy}
+                    about={about}
+                    id={id}
+                    posts={posts}
+                    slug={slug}
+                    hasMessages={hasMessages}
+                    hasPosts={hasPosts} />}
+              </div>
+            );
+          }}
+        </Query>
       </React.Fragment>
     );
   }
