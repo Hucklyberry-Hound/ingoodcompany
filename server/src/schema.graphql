@@ -13,16 +13,17 @@ type Query {
   communityByName(name: String!, id: String) : Community
   getPost(id: String!) : Post
   getCommunity(slug: String!) : Community
+  getCurrentUser(username: String! ) : User
 }
 
 type Mutation {
   createNewPost(communityId: String!, title: String!, content: String!): Post!
-  createNewCommunity(ownerId: String, name: String!, category: String!, hasPosts: Boolean!, hasMessages: Boolean!, privacy: String!, about: String!): Community!
+  createNewCommunity(name: String!, category: String!, hasPosts: Boolean!, hasMessages: Boolean!, privacy: String!, about: String!): Community!
   createNewComment(authorId: String!, postId: String!, content: String!) : Comment!
   createNewUser(firstName: String!, lastName: String, email: String!, username: String!, password: String!) : User!
   signup(email: String!, password: String!, username: String!, firstName: String!, lastName: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
-  setCommunity(userId: String!, communityId: String!) : User
+  addUserToCommunity(communityId: String!) : User
 }
 
 type Subscription {

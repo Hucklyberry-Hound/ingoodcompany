@@ -1,4 +1,16 @@
 import React from 'react';
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const CREATE_COMMUNITY_MUTATION = gql`
+mutation CreateMutation($name: String!, $category: String!, $hasPosts: Boolean!, $hasMessages: Boolean!, $privacy: String!, $about: String!) {
+  createNewCommunity(name: $name, category: $category, hasPosts: $hasPosts, hasMessages: $hasMessages, privacy: $privacy, about: $about) {
+      name
+      slug
+    
+    }
+  }
+`
 
 export default class CreatePage extends React.Component {
   constructor(props) {
@@ -6,18 +18,13 @@ export default class CreatePage extends React.Component {
     this.state = {
       name: '',
       category: 'animals',
-      hasPosts: 'yes',
-      hasMessages: 'yes',
+      hasPosts: true,
+      hasMessages: true,
       privacy: 'Public',
       about: '',
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
-  }
-
-  handleSubmit() {
-    alert(this.state.hasPosts);
   }
 
   handleOnChange(event) {
@@ -30,11 +37,6 @@ export default class CreatePage extends React.Component {
     return (
       <div>
         <h1>Create A New Community</h1>
-        <form
-          className="create-form"
-          name="create"
-          onSubmit={this.handleSubmit}
-        >
           <div className="create-field">
             <label htmlFor="name">Community Name: </label>
             <input
@@ -70,22 +72,22 @@ export default class CreatePage extends React.Component {
             <label htmlFor="hasPosts">Has Posts: </label>
             <select
               name="hasPosts"
-              onChange={this.handleOnChange}
+              onChange={() => this.setState({ hasPosts: !this.state.hasPosts})}
               value={this.state.hasPosts}
             >
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           <div className="create-field">
             <label htmlFor="hasMessages">Has Messages: </label>
             <select
               name="hasMessages"
-              onChange={this.handleOnChange}
+              onChange={() => this.setState({ hasMessages: !this.state.hasMessages})}
               value={this.state.hasMessages}
             >
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           <div className="create-field">
@@ -100,9 +102,13 @@ export default class CreatePage extends React.Component {
             </select>
           </div>
           <div className="submit-button">
-            <input type="submit" value="Submit" />
+            <Mutation mutation={CREATE_COMMUNITY_MUTATION} 
+                variables={this.state} 
+                onCompleted={data => this.props.history.push(`community/${data.createNewCommunity.slug}`)}
+               >
+                {createMutation => <button onClick={createMutation}>Submit</button>}
+            </Mutation>
           </div>
-        </form>
       </div>
     );
   }
