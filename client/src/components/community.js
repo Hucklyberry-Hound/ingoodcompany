@@ -1,20 +1,30 @@
 import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import { USER } from '../constants'
+import CustomCommunity from './CustomCommunity'
+import { useMutation } from '@apollo/react-hooks'
 
 import About from "./about";
 import Posts from "./posts";
 import Thread from "./thread";
 
-// do abouts
+
 const GET_COMMUNITY = gql`
   query GetCommunity($slug: String!) {
     getCommunity(slug: $slug) {
       id
       name
       about
+      slug
       privacy
+      hasMessages
+      hasPosts
+      users {
+        id
+        username
+      }
       posts {
         id
         title
@@ -28,6 +38,14 @@ const GET_COMMUNITY = gql`
   }
 `;
 
+const ADD_USER = gql`
+  mutation AddUserToCommunity($communityId: String!) {
+    addUserToCommunity(communityId: $communityId ) {
+      id 
+    }
+  }
+`
+
 export default class Community extends React.Component {
   constructor(props) {
     super(props);
@@ -36,46 +54,44 @@ export default class Community extends React.Component {
     };
   }
 
+
   render() {
+    const username = localStorage.getItem(USER);
     const slug = this.state.slug;
+    const collectionOfUsers = []
+    
     return (
-      <Query query={GET_COMMUNITY} variables={{ slug }}>
+      <React.Fragment>
+      <Query query={GET_COMMUNITY} variables={this.state}>
         {({ loading, error, data }) => {
           if (loading) return <div>Loading</div>;
-          if (error) console.log(error);
-          const { name, privacy, about, id, posts } = data.getCommunity;
+          if (error) return<div>Error</div>;
+          const { name, privacy, about, id, posts, users, slug, hasPosts, hasMessages } = data.getCommunity;
           return (
             <div className="community">
-              <div className="community-header">
-                <Link to={`/community/${slug}/about`}>About</Link>
-                <Link to={`/community/${slug}/posts`}>Posts</Link>
-                <Link to={`/community/${slug}/messages`}>Messages</Link>
-              </div>
-              <div className="community-container">
-                <Switch>
-                  {/* https://tylermcginnis.com/react-router-pass-props-to-components/ */}
-                  <Route
-                    path="/community/:community/about"
-                    render={props => (
-                      <About {...props} info={about} name={name} />
-                    )}
-                  />
-                  <Route
-                    path="/community/:community/posts"
-                    render={props => (
-                      <Posts {...props} posts={posts} communityId={id} />
-                    )}
-                  />
-                  <Route
-                    path="/community/:community/thread/:postId"
-                    component={Thread}
-                  />
-                </Switch>
-              </div>
+              {users.map(user => {
+                collectionOfUsers.push(user.username)
+              })} 
+              {(!collectionOfUsers.includes(username)) ? 
+              <div>
+              <Mutation mutation={ADD_USER} variables={{communityId: id }} >
+                {mutation => <button onClick={mutation}>Click Here to Join!</button>}
+              </Mutation>
+            </div>
+             : <CustomCommunity 
+                  name={name} 
+                  privacy={privacy} 
+                  about={about} 
+                  id={id} 
+                  posts={posts} 
+                  slug={slug}
+                  hasMessages={hasMessages}
+                  hasPosts={hasPosts}/>}
             </div>
           );
         }}
       </Query>
+      </React.Fragment>
     );
   }
 }
