@@ -11,6 +11,9 @@ const NEW_COMMENT = gql`
     createNewComment(content: $content, authorId: $authorId, postId: $postId) {
       post {
         id
+        community {
+          slug
+        }
       }
     }
   }
@@ -54,7 +57,7 @@ export default class CommentForm extends React.Component {
             }}
             onCompleted={newComment => {
               this.props.history.push(
-                `/community/${communityId}/thread/${newComment.post.id}`
+                `/community/${newComment.community.slug}/thread/${newComment.post.id}`
               );
             }}
           >

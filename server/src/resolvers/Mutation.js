@@ -46,31 +46,20 @@ function createNewUser(
   });
 }
 
-function createNewPost(
-  parent,
-  { userId, communityId, title, content },
-  context,
-  info
-) {
-  const slug = makeSlug(title);
+function createNewPost(parent, args, context, info) {
+  Id = getUserId(context);
+  const slug = makeSlug(args.title);
   return context.prisma.createPost({
-    title,
-    slug,
-    content,
-    postedBy: { connect: { id: userId } },
-    community: { connect: { id: communityId } }
+    title: args.title,
+    content: args.content,
+    postedBy: { connect: { id: Id } },
+    community: { connect: { id: args.communityId } },
+    slug: slug
   });
 }
 
-function createNewCommunity(
-  parent,
-  { ownerId, name, category, hasPosts, hasMessages, privacy, about },
-  context,
-  info
-) {
-  if (!ownerId) {
-    const ownerId = getUserId(context);
-  }
+function createNewCommunity(parent,{ name, category, hasPosts, hasMessages, privacy, about }, context, info) {
+  const ownerId = getUserId(context);
   const slug = makeSlug(name);
   return context.prisma.createCommunity({
     name,
@@ -97,8 +86,10 @@ function createNewComment(
   });
 }
 
-async function setCommunity(parent, args, context, info) {
-  const { userId, communityId } = args;
+async function addUserToCommunity(parent, args, context, info) {
+  const { communityId } = args;
+  const userId = getUserId(context);
+
   await context.prisma.updateCommunity({
     data: {
       users: { connect: [{ id: userId }] }
@@ -124,5 +115,5 @@ module.exports = {
   createNewPost,
   createNewCommunity,
   createNewComment,
-  setCommunity
+  addUserToCommunity
 };

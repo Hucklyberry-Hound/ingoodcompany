@@ -32,9 +32,13 @@ async function getPost(parent, { id }, context, info) {
   return post;
 }
 
-async function getCommunity(parent, { id }, context, info) {
-  const community = await context.prisma.community({ id });
+async function getCommunity(parent, { slug }, context, info) {
+  const community = await context.prisma.community({ slug });
   return community;
+}
+
+async function getCurrentUser(parent, { username }, context, info) {
+  return context.prisma.user({ username: username })
 }
 
 module.exports = {
@@ -46,4 +50,5 @@ module.exports = {
   communityByName,
   getPost,
   getCommunity,
+  getCurrentUser
 };

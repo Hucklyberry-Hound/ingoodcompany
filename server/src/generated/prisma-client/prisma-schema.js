@@ -774,6 +774,7 @@ input CommunityWhereInput {
 input CommunityWhereUniqueInput {
   id: ID
   name: String
+  slug: String
 }
 
 scalar DateTime
@@ -1079,7 +1080,7 @@ type Post {
   id: ID!
   content: String!
   title: String!
-  slug: String
+  slug: String!
   community: Community!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
   postedBy: User!
@@ -1096,7 +1097,7 @@ input PostCreateInput {
   id: ID
   content: String!
   title: String!
-  slug: String
+  slug: String!
   community: CommunityCreateOneWithoutPostsInput!
   comments: CommentCreateManyWithoutPostInput
   postedBy: UserCreateOneWithoutPostsInput!
@@ -1121,7 +1122,7 @@ input PostCreateWithoutCommentsInput {
   id: ID
   content: String!
   title: String!
-  slug: String
+  slug: String!
   community: CommunityCreateOneWithoutPostsInput!
   postedBy: UserCreateOneWithoutPostsInput!
 }
@@ -1130,7 +1131,7 @@ input PostCreateWithoutCommunityInput {
   id: ID
   content: String!
   title: String!
-  slug: String
+  slug: String!
   comments: CommentCreateManyWithoutPostInput
   postedBy: UserCreateOneWithoutPostsInput!
 }
@@ -1139,7 +1140,7 @@ input PostCreateWithoutPostedByInput {
   id: ID
   content: String!
   title: String!
-  slug: String
+  slug: String!
   community: CommunityCreateOneWithoutPostsInput!
   comments: CommentCreateManyWithoutPostInput
 }
@@ -1166,7 +1167,7 @@ type PostPreviousValues {
   id: ID!
   content: String!
   title: String!
-  slug: String
+  slug: String!
   createdAt: DateTime!
 }
 

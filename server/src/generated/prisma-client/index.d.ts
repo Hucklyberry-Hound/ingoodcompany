@@ -649,6 +649,7 @@ export interface PostUpdateWithoutCommunityDataInput {
 export type CommunityWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   name?: Maybe<String>;
+  slug?: Maybe<String>;
 }>;
 
 export interface CommentUpdateManyWithoutPostInput {
@@ -1827,7 +1828,7 @@ export interface PostCreateInput {
   id?: Maybe<ID_Input>;
   content: String;
   title: String;
-  slug?: Maybe<String>;
+  slug: String;
   community: CommunityCreateOneWithoutPostsInput;
   comments?: Maybe<CommentCreateManyWithoutPostInput>;
   postedBy: UserCreateOneWithoutPostsInput;
@@ -1880,7 +1881,7 @@ export interface PostCreateWithoutCommunityInput {
   id?: Maybe<ID_Input>;
   content: String;
   title: String;
-  slug?: Maybe<String>;
+  slug: String;
   comments?: Maybe<CommentCreateManyWithoutPostInput>;
   postedBy: UserCreateOneWithoutPostsInput;
 }
@@ -1894,7 +1895,7 @@ export interface PostCreateWithoutCommentsInput {
   id?: Maybe<ID_Input>;
   content: String;
   title: String;
-  slug?: Maybe<String>;
+  slug: String;
   community: CommunityCreateOneWithoutPostsInput;
   postedBy: UserCreateOneWithoutPostsInput;
 }
@@ -1908,7 +1909,7 @@ export interface PostCreateWithoutPostedByInput {
   id?: Maybe<ID_Input>;
   content: String;
   title: String;
-  slug?: Maybe<String>;
+  slug: String;
   community: CommunityCreateOneWithoutPostsInput;
   comments?: Maybe<CommentCreateManyWithoutPostInput>;
 }
@@ -2231,7 +2232,7 @@ export interface PostPreviousValues {
   id: ID_Output;
   content: String;
   title: String;
-  slug?: String;
+  slug: String;
   createdAt: DateTimeOutput;
 }
 
@@ -2682,7 +2683,7 @@ export interface Post {
   id: ID_Output;
   content: String;
   title: String;
-  slug?: String;
+  slug: String;
   createdAt: DateTimeOutput;
 }
 
