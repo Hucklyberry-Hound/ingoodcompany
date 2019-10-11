@@ -13,8 +13,10 @@ const GET_USER = gql`
       communities {
         name
         category
+        slug
       }
       posts {
+        id
         title
         content
         community {
@@ -27,6 +29,7 @@ const GET_USER = gql`
           title
           community {
             name
+            slug
           }
         }
       }
