@@ -65,6 +65,11 @@ class Login extends Component {
 
     return (
       <div className="login-page">
+        <div className="login-welcome-message">
+          <h4>Welcome to in Good Company!</h4>
+          <p>A place to build your own community of like-minded people</p>
+          <p>Sign Up or Login to Start!</p>
+        </div>
         <div className="login-box">
         <h4>{login ? 'Login' : 'Sign Up'}</h4>
         <div>

@@ -1,21 +1,40 @@
 .login-page {
     background-image: url('https://cdn1.vectorstock.com/i/1000x1000/18/40/social-network-background-with-media-icons-vector-1291840.jpg');
     height: 100vh; 
-    display: column;
-    justify-content: center;
     border: line;
+    display: flex;
+}
+
+.login-welcome-message{
+    margin-top: 100px;
+    width: 400px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #101357;
+    font-size: 25px;
+    margin-left: 300px;
+    margin-right: 50px;
+    text-shadow:
+		-1px -1px 0 white,
+		1px -1px 0 white,
+		-1px 1px 0 white,
+		1px 1px 0 white;
+
+}
+
+.login-welcome-message h4{
+    font-size: 40px;
 }
 
 .login-box{
-    height: 650px;
+    height: 550px;
     width: 400px;
     border-style: solid;
     border-color: white;
     box-shadow: 5px;
-    margin-left: 500px;
     background: lightskyblue;
     border-radius: 15px;
-    transition: .5s
+    transition: .5s;
+    margin-top: 70px;
 }
 
 .login-box h4{ 

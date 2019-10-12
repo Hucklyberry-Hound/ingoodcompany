@@ -4,6 +4,8 @@
     color: white;
     transition: .5s;
     height: 100px;
+    position: fixed;
+    border-radius: 10px;
 }
 
 .header-bar h4{
