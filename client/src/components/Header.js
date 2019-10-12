@@ -18,7 +18,7 @@ class Header extends React.Component {
                   onClick={() => {
                     localStorage.removeItem(AUTH_TOKEN);
                     localStorage.removeItem(USER);
-                    this.props.history.push(`/`);
+                    this.props.history.push(`/login`);
                   }}
                 >
                   logout
@@ -27,6 +27,15 @@ class Header extends React.Component {
               <Link to="/create">
               <div>create a community</div>
               </Link>
+
+              <Link to="/home">
+              <div>home</div>
+              </Link>
+
+              <Link to={`/user/${user}`} >
+                <div>profile</div>
+              </Link>
+
             </div>
           ) : (
             <Link to="/login"> login/create account </Link>

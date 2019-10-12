@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AUTH_TOKEN, USER } from '../constants';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import '../styles/Login.css'
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation(
@@ -51,7 +52,7 @@ class Login extends Component {
     const { login } = this.state;
 
     return (
-      <div>
+      <div className="login-page">
         <h4>{login ? 'Login' : 'Sign Up'}</h4>
         <div>
           {!login && (
@@ -113,7 +114,7 @@ class Login extends Component {
   _confirm = async data => {
     const { token, user } = this.state.login ? data.login : data.signup;
     this._saveUserData(token, user.username);
-    this.props.history.push(`/`);
+    this.props.history.push(`/home`);
   };
 
   //Save user data in local storage
