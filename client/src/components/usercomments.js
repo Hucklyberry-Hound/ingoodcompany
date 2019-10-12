@@ -9,8 +9,13 @@ const UserComments = ({ user }) => {
         return (
           <div className="profile-item">
             <h3>
-              {user.username} commented on {comment.post.title} in{' '}
-              {comment.post.community.name}:
+              {user.username} commented on
+              <Link
+                to={`/community/${comment.post.community.slug}/thread/${comment.post.id}`}
+              >
+                {comment.post.title}
+              </Link>
+              in {comment.post.community.name}:
             </h3>
             <small>{comment.content}</small>
           </div>

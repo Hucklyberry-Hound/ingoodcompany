@@ -21,11 +21,13 @@ const GET_USER = gql`
         content
         community {
           name
+          slug
         }
       }
       comments {
         content
         post {
+          id
           title
           community {
             name
