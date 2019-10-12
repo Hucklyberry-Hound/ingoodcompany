@@ -2,6 +2,7 @@ import React from "react";
 import ColumnData from "./profilecolumn";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import '../styles/ProfilePage.css'
 
 const GET_COMMUNITIES = gql`
   {
