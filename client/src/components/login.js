@@ -39,14 +39,26 @@ const LOGIN_MUTATION = gql`
 `;
 
 class Login extends Component {
-  state = {
-    login: true, // switch between Login and SignUp
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    username: '',
-  };
+  constructor() {
+    super()
+    this.state = {
+      login: true, // switch between Login and SignUp
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      username: '',
+    };
+
+    this.handleClick=this.handleClick.bind(this)
+
+  }
+ 
+
+  handleClick() {
+    // document.getElementsByClassName("login-box").style.height = "650px";
+    this.setState({ login: !this.state.login})
+  }
 
   render() {
     const { login } = this.state;
@@ -104,7 +116,7 @@ class Login extends Component {
               </button>
             )}
           </Mutation>
-          <button onClick={() => this.setState({ login: !login })}>
+          <button onClick={this.handleClick}>
             {login ? 'need to create an account?' : 'already have an account?'}
           </button>
         </div>
