@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { AUTH_TOKEN, USER } from '../constants';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import React, { Component } from "react";
+import { AUTH_TOKEN, USER } from "../constants";
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation(
@@ -40,11 +40,11 @@ const LOGIN_MUTATION = gql`
 class Login extends Component {
   state = {
     login: true, // switch between Login and SignUp
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    username: '',
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    username: ""
   };
 
   render() {
@@ -52,7 +52,7 @@ class Login extends Component {
 
     return (
       <div>
-        <h4>{login ? 'Login' : 'Sign Up'}</h4>
+        <h4>{login ? "Login" : "Sign Up"}</h4>
         <div>
           {!login && (
             <div>
@@ -97,13 +97,13 @@ class Login extends Component {
           >
             {mutation => (
               <button onClick={mutation}>
-                {' '}
-                {login ? 'login' : 'create account'}{' '}
+                {" "}
+                {login ? "login" : "create account"}{" "}
               </button>
             )}
           </Mutation>
           <button onClick={() => this.setState({ login: !login })}>
-            {login ? 'need to create an account?' : 'already have an account?'}
+            {login ? "need to create an account?" : "already have an account?"}
           </button>
         </div>
       </div>
@@ -113,7 +113,7 @@ class Login extends Component {
   _confirm = async data => {
     const { token, user } = this.state.login ? data.login : data.signup;
     this._saveUserData(token, user.username);
-    this.props.history.push(`/`);
+    this.props.history.push(`/home`);
   };
 
   //Save user data in local storage

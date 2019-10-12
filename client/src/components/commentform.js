@@ -1,6 +1,6 @@
-import React from 'react';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import React from "react";
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
 
 const NEW_COMMENT = gql`
   mutation CreateNewComment($content: String!, $postId: String!) {
@@ -18,11 +18,11 @@ const NEW_COMMENT = gql`
 export default class CommentForm extends React.Component {
   constructor(props) {
     super(props);
-    const { postId, authorId, communityId } = props;
+    const { postId, communityId } = props;
     this.state = {
-      content: '',
+      content: "",
       postId,
-      communityId,
+      communityId
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -33,7 +33,7 @@ export default class CommentForm extends React.Component {
   }
 
   render() {
-    const { postId, content, communityId } = this.state;
+    const { postId, content } = this.state;
     return (
       <div>
         <form name="newcomment" className="comment-form">
@@ -47,7 +47,7 @@ export default class CommentForm extends React.Component {
             mutation={NEW_COMMENT}
             variables={{
               postId,
-              content,
+              content
             }}
             onCompleted={newComment => {
               this.props.history.push(

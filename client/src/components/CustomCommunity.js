@@ -1,8 +1,8 @@
-import React from 'react';
-import About from './about';
-import Posts from './posts';
-import Thread from './thread';
-import { Link, Route, Switch } from 'react-router-dom';
+import React from "react";
+import About from "./about";
+import Posts from "./posts";
+import Thread from "./thread";
+import { Link, Route, Switch } from "react-router-dom";
 
 const CustomCommunity = props => {
   const { slug, about, name, id, posts, hasPosts, hasMessages } = props;
@@ -11,11 +11,11 @@ const CustomCommunity = props => {
     <React.Fragment>
       <div className="community-header">
         <Link to={`/community/${slug}/about`}>About</Link>
-        {hasPosts ? <Link to={`/community/${slug}/posts`}>Posts</Link> : ''}
+        {hasPosts ? <Link to={`/community/${slug}/posts`}>Posts</Link> : ""}
         {hasMessages ? (
           <Link to={`/community/${slug}/messages`}>Messages</Link>
         ) : (
-          ''
+          ""
         )}
       </div>
 
@@ -35,6 +35,11 @@ const CustomCommunity = props => {
           <Route
             path="/community/:community/thread/:postId"
             component={Thread}
+          />
+          <Route
+            render={props => (
+              <Posts {...props} posts={posts} communityId={id} slug={slug} />
+            )}
           />
         </Switch>
       </div>

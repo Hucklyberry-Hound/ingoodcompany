@@ -105,3 +105,11 @@ code {
   position: relative;
   bottom: 15px;
 }
+
+nav {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: space-between;
+}

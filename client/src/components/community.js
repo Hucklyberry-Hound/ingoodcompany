@@ -2,14 +2,13 @@ import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
-import { USER } from '../constants'
-import CustomCommunity from './CustomCommunity'
-import { useMutation } from '@apollo/react-hooks'
+import { USER } from "../constants";
+import CustomCommunity from "./CustomCommunity";
+import { useMutation } from "@apollo/react-hooks";
 
 import About from "./about";
 import Posts from "./posts";
 import Thread from "./thread";
-
 
 const GET_COMMUNITY = gql`
   query GetCommunity($slug: String!) {
@@ -40,11 +39,11 @@ const GET_COMMUNITY = gql`
 
 const ADD_USER = gql`
   mutation AddUserToCommunity($communityId: String!) {
-    addUserToCommunity(communityId: $communityId ) {
+    addUserToCommunity(communityId: $communityId) {
       id
     }
   }
-`
+`;
 
 export default class Community extends React.Component {
   constructor(props) {
@@ -54,11 +53,10 @@ export default class Community extends React.Component {
     };
   }
 
-
   render() {
     const username = localStorage.getItem(USER);
     const slug = this.state.slug;
-    const collectionOfUsers = []
+    const collectionOfUsers = [];
 
     return (
       <React.Fragment>
@@ -66,19 +64,38 @@ export default class Community extends React.Component {
           {({ loading, error, data }) => {
             if (loading) return <div>Loading</div>;
             if (error) return <div>Error</div>;
-            const { name, privacy, about, id, posts, users, slug, hasPosts, hasMessages } = data.getCommunity;
+            const {
+              name,
+              privacy,
+              about,
+              id,
+              posts,
+              users,
+              slug,
+              hasPosts,
+              hasMessages
+            } = data.getCommunity;
             return (
               <div className="community">
                 {users.map(user => {
-                  collectionOfUsers.push(user.username)
+                  collectionOfUsers.push(user.username);
                 })}
-                {(!collectionOfUsers.includes(username)) ?
+                {!collectionOfUsers.includes(username) ? (
                   <div>
-                    <Mutation mutation={ADD_USER} variables={{ communityId: id }} >
-                      {mutation => <button onClick={mutation}>Click Here to Join!</button>}
+                    <Mutation
+                      mutation={ADD_USER}
+                      variables={{ communityId: id }}
+                      onCompleted={post =>
+                        this.props.history.push(`/community/${slug}`)
+                      }
+                    >
+                      {mutation => (
+                        <button onClick={mutation}>Click Here to Join!</button>
+                      )}
                     </Mutation>
                   </div>
-                  : <CustomCommunity
+                ) : (
+                  <CustomCommunity
                     name={name}
                     privacy={privacy}
                     about={about}
@@ -86,7 +103,9 @@ export default class Community extends React.Component {
                     posts={posts}
                     slug={slug}
                     hasMessages={hasMessages}
-                    hasPosts={hasPosts} />}
+                    hasPosts={hasPosts}
+                  />
+                )}
               </div>
             );
           }}
