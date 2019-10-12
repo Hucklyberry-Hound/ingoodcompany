@@ -53,6 +53,7 @@ class Login extends Component {
 
     return (
       <div className="login-page">
+        <div className="login-box">
         <h4>{login ? 'Login' : 'Sign Up'}</h4>
         <div>
           {!login && (
@@ -106,6 +107,7 @@ class Login extends Component {
           <button onClick={() => this.setState({ login: !login })}>
             {login ? 'need to create an account?' : 'already have an account?'}
           </button>
+        </div>
         </div>
       </div>
     );

@@ -1,4 +1,17 @@
 .login-page {
     background-image: url('https://cdn1.vectorstock.com/i/1000x1000/18/40/social-network-background-with-media-icons-vector-1291840.jpg');
     height: 100vh; 
+    display: column;
+    justify-content: center;
+    border: line;
+}
+
+.login-box{
+    height: 300px;
+    width: 400px;
+    border-style: solid;
+    border-color: white;
+    box-shadow: 5px;
+    margin-left: 500px;
+    background: lightskyblue;
 }
