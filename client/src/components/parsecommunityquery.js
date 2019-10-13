@@ -51,6 +51,7 @@ class ParseCommunityQuery extends React.Component {
       hasMessages,
       privacy
     } = this.state;
+
     return owner.username === thisUser ||
       users.map(user => user.username).includes(thisUser) ? (
       <div className="community">
@@ -67,11 +68,7 @@ class ParseCommunityQuery extends React.Component {
         />
       </div>
     ) : (
-      <JoinPage
-        slug={slug}
-        communityId={id}
-        updateParent={this.updateMembers}
-      />
+      <JoinPage communityId={id} updateParent={this.updateMembers} />
     );
   }
 }

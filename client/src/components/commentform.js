@@ -61,6 +61,12 @@ class CommentForm extends React.Component {
             const comment = mutation.createNewComment;
             this.setState({ content: "" });
             updateParent(comment);
+            return (
+              <p>
+                Your comment has been posted if it doesn't show up, try
+                refreshing this page!
+              </p>
+            );
           }}
         >
           {doMutation => <button onClick={doMutation}>Reply</button>}

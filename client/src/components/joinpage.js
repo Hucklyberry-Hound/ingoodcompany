@@ -16,14 +16,13 @@ class JoinPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      slug: props.slug,
       communityId: props.communityId,
       updateParent: props.updateParent
     };
   }
 
   render() {
-    const { slug, communityId, updateParent } = this.state;
+    const { communityId, updateParent } = this.state;
     return (
       <div>
         <Mutation

@@ -21,9 +21,10 @@ code {
 .column {
   display: flex;
   flex-direction: column;
-  width: 33%;
+  width: 25%;
   border: 1px solid black;
   align-items: center;
+  word-break: break-all;
 }
 
 .col-container h2 {

@@ -4,15 +4,6 @@ import gql from "graphql-tag";
 import ParseCommunityQuery from "./parsecommunityquery";
 import { withRouter } from "react-router-dom";
 
-const GET_NEW_MEMBER = gql`
-  subscription {
-    newMember {
-      id
-      username
-    }
-  }
-`;
-
 const GET_COMMUNITY = gql`
   query GetCommunity($slug: String!) {
     getCommunity(slug: $slug) {
@@ -43,23 +34,6 @@ class Community extends React.Component {
     };
   }
 
-  async subscribeMembers(subscribeToMore) {
-    subscribeToMore({
-      document: GET_NEW_MEMBER,
-      updateQuery: (prev, { subscriptionData }) => {
-        console.log("fff", subscriptionData);
-        if (!subscriptionData.data) return prev;
-        const newMember = subscriptionData.data.newMember;
-        return Object.assign({}, prev, {
-          getCommunity: {
-            users: [newMember, ...prev.users],
-            __typename: prev.feed.__typename
-          }
-        });
-      }
-    });
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -67,7 +41,6 @@ class Community extends React.Component {
           {({ loading, error, data, subscribeToMore }) => {
             if (loading) return <div>Loading</div>;
             if (error) return console.log(error);
-            this.subscribeMembers(subscribeToMore);
             const {
               name,
               privacy,

@@ -1,5 +1,6 @@
 import React from "react";
 import ColumnData from "./profilecolumn";
+import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
@@ -32,9 +33,7 @@ export default class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      owned: ["Cats", "Dog People"],
-      belongTo: ["Cat People", "People who like umbrellas"],
-      public: ["I need to buy cups", "Computers"]
+      categories: ["Animals", "Computers", "Food", "Chair"]
     };
   }
 
@@ -46,14 +45,12 @@ export default class UserProfile extends React.Component {
           if (loading) return <div>Loading</div>;
           if (error) console.log(error);
           const { communities } = data;
-          const owned = communities.filter(
-            c => c.owner.username === username /**=== currentUser.id) */
-          );
+          const owned = communities.filter(c => c.owner.username === username);
           const belongsTo = communities.filter(c =>
             c.users.map(u => u.username).includes(username)
           );
           const publicCommunities = communities.filter(
-            c => c.privacy === "Public"
+            c => c.privacy.toLowerCase() === "public"
           );
           return (
             <div className="profile-container">
@@ -67,6 +64,16 @@ export default class UserProfile extends React.Component {
                 headerText="Public Communities"
                 listData={publicCommunities}
               />
+              <div className="column">
+                <h2>Find Communities By Topic</h2>
+                {this.state.categories.map((cat, index) => {
+                  return (
+                    <div className="column column-li" key={index}>
+                      <Link to={`/topics/${cat}`}>{cat}</Link>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           );
         }}
