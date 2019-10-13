@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const UserCommunities = ({ user }) => {
   return (
@@ -7,7 +8,9 @@ const UserCommunities = ({ user }) => {
       {user.communities.map(community => {
         return (
           <div className="profile-item">
-            <h3>{community.name}</h3>
+            <Link to={`/community/${community.slug}`}>
+              <h3>{community.name}</h3>
+            </Link>
             <small>Topic: {community.category}</small>
           </div>
         );

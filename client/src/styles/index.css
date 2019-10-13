@@ -113,3 +113,8 @@ nav {
   align-self: center;
   justify-content: space-between;
 }
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+}

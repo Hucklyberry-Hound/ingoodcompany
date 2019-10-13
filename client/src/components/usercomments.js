@@ -15,7 +15,10 @@ const UserComments = ({ user }) => {
               >
                 {comment.post.title}
               </Link>{" "}
-              in {comment.post.community.name}:
+              in{" "}
+              <Link to={`/community/${comment.post.community.slug}`}>
+                {comment.post.community.name}:
+              </Link>
             </h3>
             <small>{comment.content}</small>
           </div>
