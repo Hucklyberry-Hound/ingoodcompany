@@ -11,6 +11,8 @@ const CREATE_POST_MUTATION = gql`
   ) {
     createNewPost(communityId: $communityId, title: $title, content: $content) {
       id
+      content
+      title
       postedBy {
         username
       }
@@ -27,7 +29,8 @@ class CreatPostForm extends Component {
     this.state = {
       communityId: props.communityId,
       title: "",
-      content: ""
+      content: "",
+      updateParent: props.updateParent
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -63,11 +66,10 @@ class CreatPostForm extends Component {
         <Mutation
           mutation={CREATE_POST_MUTATION}
           variables={{ ...this.state }}
-          onCompleted={newPost => {
-            const post = newPost.createNewPost;
-            this.props.history.push(
-              `/community/${post.community.slug}/thread/${post.id}`
-            );
+          onCompleted={mutation => {
+            const post = mutation.createNewPost;
+            this.setState({ title: "", content: "" });
+            this.state.updateParent(post);
           }}
         >
           {createMutation => <button onClick={createMutation}>Submit</button>}

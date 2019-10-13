@@ -7,6 +7,7 @@ const ADD_USER = gql`
   mutation AddUserToCommunity($communityId: String!) {
     addUserToCommunity(communityId: $communityId) {
       id
+      username
     }
   }
 `;
@@ -16,22 +17,21 @@ class JoinPage extends React.Component {
     super(props);
     this.state = {
       slug: props.slug,
-      communityId: props.communityId
+      communityId: props.communityId,
+      updateParent: props.updateParent
     };
   }
 
   render() {
-    const { slug, communityId } = this.state;
+    const { slug, communityId, updateParent } = this.state;
     return (
       <div>
         <Mutation
           mutation={ADD_USER}
           variables={{ communityId }}
-          onCompleted={post => {
-            this.props.history.push({
-              pathname: `/community/${slug}`,
-              state: { isNowMember: true }
-            });
+          onCompleted={mutation => {
+            const newMember = mutation.addUserToCommunity;
+            updateParent(newMember);
           }}
         >
           {mutation => <button onClick={mutation}>Click Here to Join!</button>}

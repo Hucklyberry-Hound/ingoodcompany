@@ -1,9 +1,9 @@
 /* eslint-disable no-unreachable */
 import React from "react";
-import PostItem from "./postitem";
-import CreatePostForm from "./createPostForm";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+
+import PostContainer from "./postscontainer";
 
 const GET_POSTS = gql`
   query {
@@ -32,25 +32,8 @@ const Posts = props => {
         const posts = data.posts.filter(
           post => post.community.id === communityId
         );
-        return posts.length ? (
-          <div>
-            <CreatePostForm communityId={communityId} />
-            {posts.map(post => {
-              return (
-                <PostItem
-                  item={post}
-                  slug={slug}
-                  communityId={communityId}
-                  key={post.id}
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <div>
-            <h1>Looks Like There Are No Posts Here :(</h1>
-            <CreatePostForm communityId={communityId} />
-          </div>
+        return (
+          <PostContainer posts={posts} communityId={communityId} slug={slug} />
         );
       }}
     </Query>

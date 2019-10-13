@@ -41,7 +41,6 @@ class CommentForm extends React.Component {
 
   render() {
     const { postId, content, updateParent } = this.state;
-    console.log(postId);
     return (
       <div>
         <form name="newcomment" className="comment-form">
@@ -60,10 +59,8 @@ class CommentForm extends React.Component {
           }}
           onCompleted={mutation => {
             const comment = mutation.createNewComment;
+            this.setState({ content: "" });
             updateParent(comment);
-            this.props.history.push(
-              `/community/${comment.post.community.slug}/thread/${comment.post.id}`
-            );
           }}
         >
           {doMutation => <button onClick={doMutation}>Reply</button>}

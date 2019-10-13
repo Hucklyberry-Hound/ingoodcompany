@@ -4,42 +4,76 @@ import { USER } from "../constants";
 import CustomCommunity from "./CustomCommunity";
 import JoinPage from "./joinpage";
 
-const ParseCommunityQuery = props => {
-  const thisUser = localStorage.getItem(USER);
-  const isNowMember = props.location.state
-    ? props.location.state.isNowMember
-    : null;
-  const {
-    name,
-    about,
-    id,
-    owner,
-    users,
-    slug,
-    hasPosts,
-    hasMessages,
-    privacy
-  } = props;
+class ParseCommunityQuery extends React.Component {
+  constructor(props) {
+    super(props);
+    const {
+      name,
+      about,
+      id,
+      owner,
+      users,
+      slug,
+      hasPosts,
+      hasMessages,
+      privacy
+    } = props;
 
-  return owner.username === thisUser ||
-    isNowMember ||
-    users.map(user => user.username).includes(thisUser) ? (
-    <div className="community">
-      <CustomCommunity
-        name={name}
-        privacy={privacy}
-        about={about}
-        id={id}
+    this.state = {
+      name,
+      about,
+      id,
+      owner,
+      users,
+      slug,
+      hasPosts,
+      hasMessages,
+      privacy
+    };
+
+    this.updateMembers = this.updateMembers.bind(this);
+  }
+
+  updateMembers(newMember) {
+    this.setState({ users: [...this.state.users, newMember] });
+  }
+
+  render() {
+    const thisUser = localStorage.getItem(USER);
+    const {
+      name,
+      about,
+      id,
+      owner,
+      users,
+      slug,
+      hasPosts,
+      hasMessages,
+      privacy
+    } = this.state;
+    return owner.username === thisUser ||
+      users.map(user => user.username).includes(thisUser) ? (
+      <div className="community">
+        <CustomCommunity
+          name={name}
+          privacy={privacy}
+          about={about}
+          id={id}
+          slug={slug}
+          hasMessages={hasMessages}
+          hasPosts={hasPosts}
+          users={users}
+          owner={owner}
+        />
+      </div>
+    ) : (
+      <JoinPage
         slug={slug}
-        hasMessages={hasMessages}
-        hasPosts={hasPosts}
-        users={users}
-        owner={owner}
+        communityId={id}
+        updateParent={this.updateMembers}
       />
-    </div>
-  ) : (
-    <JoinPage slug={slug} communityId={id} />
-  );
-};
+    );
+  }
+}
 
 export default withRouter(ParseCommunityQuery);
