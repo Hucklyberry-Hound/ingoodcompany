@@ -1,4 +1,4 @@
-.column-li {
+/* .column-li {
     font-family:arial,sans-serif;
     font-size:100%;
     font-weight:normal;
@@ -28,12 +28,8 @@
 .column-li a{
     text-decoration: none;
     color: inherit;
-    -o-transform:rotate(4deg);
-    -webkit-transform:rotate(4deg);
-    -moz-transform:rotate(4deg);
     position:relative;
     top:5px;
-    transform: inherit;
 
 }
 
@@ -46,4 +42,4 @@
 .column-li small {
   font-family:"Reenie Beanie",arial,sans-serif;
   font-size:110%;
-}
+} */

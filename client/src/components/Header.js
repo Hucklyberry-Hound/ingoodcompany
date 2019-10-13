@@ -15,7 +15,7 @@ class Header extends React.Component {
 
   toggleMenu() {
     this.setState({show: !this.state.show})
-    const menu = document.getElementsByClassName("menu-burger")[0].classList.toggle('active-burger');
+    document.getElementsByClassName("loggedin-header-bar")[0].classList.toggle("loggedin-header-bar-active");
   }
 
   render() {
@@ -23,14 +23,17 @@ class Header extends React.Component {
     const user = localStorage.getItem(USER);
     return (
       <div className ="header-bar">
+        <div className='burger'>
+        <i class="fa fa-bars" aria-hidden="true" onClick={() => this.toggleMenu()}></i>
+        </div>
         <div>
           {authToken ? (
             <div className="loggedin-header-bar">
-              <div className="menu-burger">
-              <i class="fa fa-bars" aria-hidden="true" onClick={() => this.toggleMenu()}></i>
-              </div>
               {(this.state.show) ?
               <React.Fragment>
+                <div className="close">
+                <i class="fa fa-window-close" aria-hidden="true" onClick={() => this.toggleMenu()}></i>
+                </div>
               <h4 className="welcome-header-bar">Welcome {user}!</h4>
               <div className="links-header-bar">
               <Link className="element-header-bar" to="/home">
