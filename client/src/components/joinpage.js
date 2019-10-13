@@ -1,7 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
-import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const ADD_USER = gql`
   mutation AddUserToCommunity($communityId: String!) {
@@ -11,7 +11,7 @@ const ADD_USER = gql`
   }
 `;
 
-export default class JoinPage extends React.Component {
+class JoinPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,15 +21,17 @@ export default class JoinPage extends React.Component {
   }
 
   render() {
-    const { slug, communityId } = this.props.location.state;
-    console.log(slug, communityId);
+    const { slug, communityId } = this.state;
     return (
       <div>
         <Mutation
           mutation={ADD_USER}
           variables={{ communityId }}
           onCompleted={post => {
-            this.props.history.push(`/community/${slug}`);
+            this.props.history.push({
+              pathname: `/community/${slug}`,
+              state: { isNowMember: true }
+            });
           }}
         >
           {mutation => <button onClick={mutation}>Click Here to Join!</button>}
@@ -38,3 +40,5 @@ export default class JoinPage extends React.Component {
     );
   }
 }
+
+export default withRouter(JoinPage);

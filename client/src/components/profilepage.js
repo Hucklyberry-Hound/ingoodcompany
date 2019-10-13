@@ -1,7 +1,9 @@
-import React from 'react';
-import ColumnData from './profilecolumn';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import React from "react";
+import ColumnData from "./profilecolumn";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+
+import { USER } from "../constants";
 
 const GET_COMMUNITIES = gql`
   {
@@ -30,13 +32,14 @@ export default class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      owned: ['Cats', 'Dog People'],
-      belongTo: ['Cat People', 'People who like umbrellas'],
-      public: ['I need to buy cups', 'Computers'],
+      owned: ["Cats", "Dog People"],
+      belongTo: ["Cat People", "People who like umbrellas"],
+      public: ["I need to buy cups", "Computers"]
     };
   }
 
   render() {
+    const username = localStorage.getItem(USER);
     return (
       <Query query={GET_COMMUNITIES}>
         {({ loading, error, data }) => {
@@ -44,14 +47,13 @@ export default class UserProfile extends React.Component {
           if (error) console.log(error);
           const { communities } = data;
           const owned = communities.filter(
-            c => c.owner.id /**=== currentUser.id) */
+            c => c.owner.username === username /**=== currentUser.id) */
           );
-          // const belongsTo = communities.filter(c =>
-          //   c.users.includes(currentUser.id)
-          // );
-          const belongsTo = [];
+          const belongsTo = communities.filter(c =>
+            c.users.map(u => u.username).includes(username)
+          );
           const publicCommunities = communities.filter(
-            c => c.privacy === 'Public'
+            c => c.privacy === "Public"
           );
           return (
             <div className="profile-container">

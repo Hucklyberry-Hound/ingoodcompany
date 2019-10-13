@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
+import { withRouter } from "react-router-dom";
 import gql from "graphql-tag";
 
 const CREATE_POST_MUTATION = gql`
@@ -9,10 +10,10 @@ const CREATE_POST_MUTATION = gql`
     $content: String!
   ) {
     createNewPost(communityId: $communityId, title: $title, content: $content) {
+      id
       postedBy {
         username
       }
-      id
       community {
         slug
       }
@@ -20,7 +21,7 @@ const CREATE_POST_MUTATION = gql`
   }
 `;
 
-export default class CreatPostForm extends Component {
+class CreatPostForm extends Component {
   constructor(props) {
     super();
     this.state = {
@@ -32,7 +33,6 @@ export default class CreatPostForm extends Component {
   }
   componentDidMount() {
     this.setState({ communityId: this.props.communityId });
-    console.log(this.props);
   }
   handleChange(evt) {
     this.setState({
@@ -60,10 +60,21 @@ export default class CreatPostForm extends Component {
             required
           />
         </form>
-        <Mutation mutation={CREATE_POST_MUTATION} variables={{ ...this.state }}>
+        <Mutation
+          mutation={CREATE_POST_MUTATION}
+          variables={{ ...this.state }}
+          onCompleted={newPost => {
+            const post = newPost.createNewPost;
+            this.props.history.push(
+              `/community/${post.community.slug}/thread/${post.id}`
+            );
+          }}
+        >
           {createMutation => <button onClick={createMutation}>Submit</button>}
         </Mutation>
       </div>
     );
   }
 }
+
+export default withRouter(CreatPostForm);

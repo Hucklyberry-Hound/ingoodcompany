@@ -46,13 +46,14 @@ code {
   justify-content: space-evenly;
   align-self: center;
   width: 33%;
-  margin-bottom: 50px;
-  margin-top: 100px;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .community-container {
   align-self: center;
   width: 33%;
+  margin-bottom: 30px;
 }
 
 .create-form {
@@ -80,6 +81,10 @@ code {
 .submit-button {
   width: 100px;
   align-self: center;
+}
+
+.comment-container{
+  margin-bottom: 0px;
 }
 
 .comment {

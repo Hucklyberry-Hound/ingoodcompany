@@ -6,7 +6,17 @@ import Members from "./memberlist";
 import { Link, Route, Switch } from "react-router-dom";
 
 const CustomCommunity = props => {
-  const { slug, about, name, id, posts, hasPosts, hasMessages, users } = props;
+  const {
+    slug,
+    about,
+    name,
+    id,
+    posts,
+    hasPosts,
+    hasMessages,
+    users,
+    owner
+  } = props;
 
   return (
     <React.Fragment>
@@ -37,7 +47,12 @@ const CustomCommunity = props => {
           <Route
             path="/community/:community/members"
             render={props => (
-              <Members {...props} users={users} communityName={name} />
+              <Members
+                {...props}
+                users={users}
+                communityName={name}
+                owner={owner}
+              />
             )}
           />
           <Route
@@ -45,9 +60,7 @@ const CustomCommunity = props => {
             component={Thread}
           />
           <Route
-            render={props => (
-              <Posts {...props} posts={posts} communityId={id} slug={slug} />
-            )}
+            render={props => <Posts {...props} communityId={id} slug={slug} />}
           />
         </Switch>
       </div>

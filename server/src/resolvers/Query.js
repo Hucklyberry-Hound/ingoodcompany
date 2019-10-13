@@ -19,8 +19,9 @@ function comments(parent, args, context, info) {
 // can make these getters more flexible by having them take optional id or name
 // as long as they are at least getting 1 of those
 
-function userByHandle(parent, args, context, info) {
-  return context.prisma.user({ username: args.username });
+async function userByHandle(parent, args, context, info) {
+  const user = await context.prisma.user({ username: args.username });
+  return user;
 }
 
 function communityByName(parent, args, context, info) {
@@ -38,7 +39,7 @@ async function getCommunity(parent, { slug }, context, info) {
 }
 
 async function getCurrentUser(parent, { username }, context, info) {
-  return context.prisma.user({ username: username })
+  return context.prisma.user({ username: username });
 }
 
 module.exports = {

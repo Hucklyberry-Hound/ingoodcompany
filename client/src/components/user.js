@@ -1,10 +1,10 @@
-import React from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import React from "react";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
-import UserCommunities from './usercommunities';
-import UserComments from './usercomments';
-import UserPosts from './userposts';
+import UserCommunities from "./usercommunities";
+import UserComments from "./usercomments";
+import UserPosts from "./userposts";
 
 const GET_USER = gql`
   query GetUser($username: String!) {

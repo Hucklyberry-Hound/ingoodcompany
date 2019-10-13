@@ -1,10 +1,16 @@
 import React from "react";
 import { Mutation } from "react-apollo";
+import { withRouter } from "react-router-dom";
 import gql from "graphql-tag";
 
 const NEW_COMMENT = gql`
   mutation CreateNewComment($content: String!, $postId: String!) {
     createNewComment(content: $content, postId: $postId) {
+      id
+      content
+      author {
+        username
+      }
       post {
         id
         community {
@@ -15,14 +21,15 @@ const NEW_COMMENT = gql`
   }
 `;
 
-export default class CommentForm extends React.Component {
+class CommentForm extends React.Component {
   constructor(props) {
     super(props);
-    const { postId, communityId } = props;
+    const { postId, communityId, updateParent } = props;
     this.state = {
       content: "",
       postId,
-      communityId
+      communityId,
+      updateParent
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -33,7 +40,8 @@ export default class CommentForm extends React.Component {
   }
 
   render() {
-    const { postId, content } = this.state;
+    const { postId, content, updateParent } = this.state;
+    console.log(postId);
     return (
       <div>
         <form name="newcomment" className="comment-form">
@@ -43,22 +51,26 @@ export default class CommentForm extends React.Component {
             onChange={this.handleOnChange}
             placeholder="Reply to this thread"
           />
-          <Mutation
-            mutation={NEW_COMMENT}
-            variables={{
-              postId,
-              content
-            }}
-            onCompleted={newComment => {
-              this.props.history.push(
-                `/community/${newComment.community.slug}/thread/${newComment.post.id}`
-              );
-            }}
-          >
-            {doMutation => <button onClick={doMutation}>Reply</button>}
-          </Mutation>
         </form>
+        <Mutation
+          mutation={NEW_COMMENT}
+          variables={{
+            postId,
+            content
+          }}
+          onCompleted={mutation => {
+            const comment = mutation.createNewComment;
+            updateParent(comment);
+            this.props.history.push(
+              `/community/${comment.post.community.slug}/thread/${comment.post.id}`
+            );
+          }}
+        >
+          {doMutation => <button onClick={doMutation}>Reply</button>}
+        </Mutation>
       </div>
     );
   }
 }
+
+export default withRouter(CommentForm);

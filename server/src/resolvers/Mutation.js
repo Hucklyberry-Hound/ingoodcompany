@@ -78,14 +78,16 @@ function createNewCommunity(
   });
 }
 
-async function createNewComment(parent, { content, postId }, context, info) {
+function createNewComment(parent, { content, postId }, context, info) {
   const authorId = getUserId(context);
   console.log(authorId);
-  return context.prisma.createComment({
+  const newComment = context.prisma.createComment({
     content,
     author: { connect: { id: authorId } },
     post: { connect: { id: postId } }
   });
+
+  return newComment;
 }
 
 async function addUserToCommunity(parent, args, context, info) {

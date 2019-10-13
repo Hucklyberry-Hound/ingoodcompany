@@ -1,12 +1,17 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
-import { Query, Mutation } from "react-apollo";
+import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import { USER } from "../constants";
-import CustomCommunity from "./CustomCommunity";
-import { useMutation } from "@apollo/react-hooks";
+import ParseCommunityQuery from "./parsecommunityquery";
+import { withRouter } from "react-router-dom";
 
-import JoinPage from "./joinpage";
+const GET_NEW_MEMBER = gql`
+  subscription {
+    newMember {
+      id
+      username
+    }
+  }
+`;
 
 const GET_COMMUNITY = gql`
   query GetCommunity($slug: String!) {
@@ -18,24 +23,19 @@ const GET_COMMUNITY = gql`
       privacy
       hasMessages
       hasPosts
-      users {
+      owner {
         id
         username
       }
-      posts {
+      users {
         id
-        title
-        content
-        postedBy {
-          username
-          id
-        }
+        username
       }
     }
   }
 `;
 
-export default class Community extends React.Component {
+class Community extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,60 +43,55 @@ export default class Community extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.forceUpdate();
+  async subscribeMembers(subscribeToMore) {
+    subscribeToMore({
+      document: GET_NEW_MEMBER,
+      updateQuery: (prev, { subscriptionData }) => {
+        console.log("fff", subscriptionData);
+        if (!subscriptionData.data) return prev;
+        const newMember = subscriptionData.data.newMember;
+        return Object.assign({}, prev, {
+          getCommunity: {
+            users: [newMember, ...prev.users],
+            __typename: prev.feed.__typename
+          }
+        });
+      }
+    });
   }
 
   render() {
-    const username = localStorage.getItem(USER);
-    const slug = this.state.slug;
-
     return (
       <React.Fragment>
         <Query query={GET_COMMUNITY} variables={this.state}>
-          {({ loading, error, data }) => {
+          {({ loading, error, data, subscribeToMore }) => {
             if (loading) return <div>Loading</div>;
-            if (error) return <div>Error</div>;
+            if (error) return console.log(error);
+            this.subscribeMembers(subscribeToMore);
             const {
               name,
               privacy,
               about,
               id,
-              posts,
+              owner,
               users,
               slug,
               hasPosts,
               hasMessages
             } = data.getCommunity;
-            console.log(users);
+
             return (
-              <div className="community">
-                {users.map(user => user.username).includes(username) ? (
-                  <CustomCommunity
-                    name={name}
-                    privacy={privacy}
-                    about={about}
-                    id={id}
-                    posts={posts}
-                    slug={slug}
-                    hasMessages={hasMessages}
-                    hasPosts={hasPosts}
-                    users={users}
-                  />
-                ) : (
-                  <div>
-                    <Redirect
-                      to={{
-                        pathname: "/join",
-                        state: {
-                          communityId: id,
-                          slug
-                        }
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
+              <ParseCommunityQuery
+                name={name}
+                privacy={privacy}
+                about={about}
+                id={id}
+                slug={slug}
+                hasMessages={hasMessages}
+                hasPosts={hasPosts}
+                users={users}
+                owner={owner}
+              />
             );
           }}
         </Query>
@@ -104,3 +99,5 @@ export default class Community extends React.Component {
     );
   }
 }
+
+export default withRouter(Community);

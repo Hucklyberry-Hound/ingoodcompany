@@ -28,6 +28,7 @@ type Mutation {
 
 type Subscription {
   newPosts: Post
+  newMember: User
 }
 
 # Define schema based on Prisma DB relations
