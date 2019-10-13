@@ -2,10 +2,11 @@ import React from "react";
 import About from "./about";
 import Posts from "./posts";
 import Thread from "./thread";
+import Members from "./memberlist";
 import { Link, Route, Switch } from "react-router-dom";
 
 const CustomCommunity = props => {
-  const { slug, about, name, id, posts, hasPosts, hasMessages } = props;
+  const { slug, about, name, id, posts, hasPosts, hasMessages, users } = props;
 
   return (
     <React.Fragment>
@@ -17,6 +18,7 @@ const CustomCommunity = props => {
         ) : (
           ""
         )}
+        <Link to={`/community/${slug}/members`}>Members</Link>
       </div>
 
       <div className="community-container">
@@ -30,6 +32,12 @@ const CustomCommunity = props => {
             path="/community/:community/posts"
             render={props => (
               <Posts {...props} posts={posts} communityId={id} slug={slug} />
+            )}
+          />
+          <Route
+            path="/community/:community/members"
+            render={props => (
+              <Members {...props} users={users} communityName={name} />
             )}
           />
           <Route

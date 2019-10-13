@@ -29,7 +29,17 @@ class Header extends React.Component {
               </div>
               <div>
                 <Link to="/create">
-                  <p>create a community</p>
+                  <p>Create a community</p>
+                </Link>
+              </div>
+              <div>
+                <Link to={`/user/${user}`}>
+                  <p>Your Profile</p>
+                </Link>
+              </div>
+              <div>
+                <Link to={`/home`}>
+                  <p>Browse Communities</p>
                 </Link>
               </div>
             </nav>

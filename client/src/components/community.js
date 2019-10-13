@@ -1,14 +1,12 @@
 import React from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { USER } from "../constants";
 import CustomCommunity from "./CustomCommunity";
 import { useMutation } from "@apollo/react-hooks";
 
-import About from "./about";
-import Posts from "./posts";
-import Thread from "./thread";
+import JoinPage from "./joinpage";
 
 const GET_COMMUNITY = gql`
   query GetCommunity($slug: String!) {
@@ -37,14 +35,6 @@ const GET_COMMUNITY = gql`
   }
 `;
 
-const ADD_USER = gql`
-  mutation AddUserToCommunity($communityId: String!) {
-    addUserToCommunity(communityId: $communityId) {
-      id
-    }
-  }
-`;
-
 export default class Community extends React.Component {
   constructor(props) {
     super(props);
@@ -53,10 +43,13 @@ export default class Community extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.forceUpdate();
+  }
+
   render() {
     const username = localStorage.getItem(USER);
     const slug = this.state.slug;
-    const collectionOfUsers = [];
 
     return (
       <React.Fragment>
@@ -75,26 +68,10 @@ export default class Community extends React.Component {
               hasPosts,
               hasMessages
             } = data.getCommunity;
+            console.log(users);
             return (
               <div className="community">
-                {users.map(user => {
-                  collectionOfUsers.push(user.username);
-                })}
-                {!collectionOfUsers.includes(username) ? (
-                  <div>
-                    <Mutation
-                      mutation={ADD_USER}
-                      variables={{ communityId: id }}
-                      onCompleted={post =>
-                        this.props.history.push(`/community/${slug}`)
-                      }
-                    >
-                      {mutation => (
-                        <button onClick={mutation}>Click Here to Join!</button>
-                      )}
-                    </Mutation>
-                  </div>
-                ) : (
+                {users.map(user => user.username).includes(username) ? (
                   <CustomCommunity
                     name={name}
                     privacy={privacy}
@@ -104,7 +81,20 @@ export default class Community extends React.Component {
                     slug={slug}
                     hasMessages={hasMessages}
                     hasPosts={hasPosts}
+                    users={users}
                   />
+                ) : (
+                  <div>
+                    <Redirect
+                      to={{
+                        pathname: "/join",
+                        state: {
+                          communityId: id,
+                          slug
+                        }
+                      }}
+                    />
+                  </div>
                 )}
               </div>
             );

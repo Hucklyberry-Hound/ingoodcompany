@@ -78,7 +78,7 @@ function createNewCommunity(
   });
 }
 
-function createNewComment(parent, { content, postId }, context, info) {
+async function createNewComment(parent, { content, postId }, context, info) {
   const authorId = getUserId(context);
   console.log(authorId);
   return context.prisma.createComment({

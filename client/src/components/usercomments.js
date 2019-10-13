@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const UserComments = ({ user }) => {
   return (
@@ -9,12 +9,12 @@ const UserComments = ({ user }) => {
         return (
           <div className="profile-item">
             <h3>
-              {user.username} commented on
+              {user.username} commented on{" "}
               <Link
                 to={`/community/${comment.post.community.slug}/thread/${comment.post.id}`}
               >
                 {comment.post.title}
-              </Link>
+              </Link>{" "}
               in {comment.post.community.name}:
             </h3>
             <small>{comment.content}</small>
