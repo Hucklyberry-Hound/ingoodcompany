@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { AUTH_TOKEN, USER } from '../constants';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import '../styles/Login.css'
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation(
@@ -39,38 +38,20 @@ const LOGIN_MUTATION = gql`
 `;
 
 class Login extends Component {
-  constructor() {
-    super()
-    this.state = {
-      login: true, // switch between Login and SignUp
-      email: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      username: '',
-    };
-
-    this.handleClick=this.handleClick.bind(this)
-
-  }
- 
-
-  handleClick() {
-    // document.getElementsByClassName("login-box").style.height = "650px";
-    this.setState({ login: !this.state.login})
-  }
+  state = {
+    login: true, // switch between Login and SignUp
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    username: '',
+  };
 
   render() {
     const { login } = this.state;
 
     return (
-      <div className="login-page">
-        <div className="login-welcome-message">
-          <h4>Welcome to in Good Company!</h4>
-          <p>A place to build your own community of like-minded people</p>
-          <p>Sign Up or Login to Start!</p>
-        </div>
-        <div className="login-box">
+      <div>
         <h4>{login ? 'Login' : 'Sign Up'}</h4>
         <div>
           {!login && (
@@ -121,10 +102,9 @@ class Login extends Component {
               </button>
             )}
           </Mutation>
-          <button onClick={this.handleClick}>
+          <button onClick={() => this.setState({ login: !login })}>
             {login ? 'need to create an account?' : 'already have an account?'}
           </button>
-        </div>
         </div>
       </div>
     );
@@ -133,7 +113,7 @@ class Login extends Component {
   _confirm = async data => {
     const { token, user } = this.state.login ? data.login : data.signup;
     this._saveUserData(token, user.username);
-    this.props.history.push(`/home`);
+    this.props.history.push(`/`);
   };
 
   //Save user data in local storage

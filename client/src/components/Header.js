@@ -23,16 +23,18 @@ class Header extends React.Component {
     const user = localStorage.getItem(USER);
     return (
       <div className ="header-bar">
+        {(authToken) ? 
         <div className='burger'>
-        <i class="fa fa-bars" aria-hidden="true" onClick={() => this.toggleMenu()}></i>
+        <i className="fa fa-bars" aria-hidden="true" onClick={() => this.toggleMenu()}></i>
         </div>
+        : ""}
         <div>
           {authToken ? (
             <div className="loggedin-header-bar">
               {(this.state.show) ?
               <React.Fragment>
                 <div className="close">
-                <i class="fa fa-window-close" aria-hidden="true" onClick={() => this.toggleMenu()}></i>
+                <i className="fa fa-window-close" aria-hidden="true" onClick={() => this.toggleMenu()}></i>
                 </div>
               <h4 className="welcome-header-bar">Welcome {user}!</h4>
               <div className="links-header-bar">
