@@ -43,7 +43,7 @@ class Header extends React.Component {
               </Link>
 
               <Link className="element-header-bar" to="/create">
-              <div >create a community</div>
+              <div >create</div>
               </Link>
 
             
