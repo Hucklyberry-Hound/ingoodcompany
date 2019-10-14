@@ -1,10 +1,10 @@
 import React from 'react';
 import ColumnData from './profilecolumn';
-import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
+import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
-
 import { USER } from '../constants';
+import '../styles/ProfilePage.css';
 
 const GET_COMMUNITIES = gql`
   {

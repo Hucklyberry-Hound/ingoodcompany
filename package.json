@@ -16,6 +16,7 @@
     "jsonwebtoken": "^8.5.1",
     "prisma-client-lib": "^1.34.8",
     "react-router": "^5.1.2",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "react-transition-group": "^4.3.0"
   }
 }
