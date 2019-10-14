@@ -1,0 +1,44 @@
+.column-li {
+    font-family:arial,sans-serif;
+    font-size:100%;
+    font-weight:normal;
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    height:10em;
+    width:10em;
+    padding:1em;
+    margin:1em;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+
+}
+
+.column-li:nth-child(even){
+    transform:rotate(4deg);
+    z-index: 0;
+}
+
+ .column-li:nth-child(3n){
+    transform:rotate(-7deg)
+
+}
+
+
+.column-li a{
+    text-decoration: none;
+    color: inherit;
+    position:relative;
+    top:5px;
+
+}
+/* 
+.column-li h5{
+    font-size:140%;
+    font-weight:bold;
+    padding-bottom:10px;
+}
+
+.column-li small {
+  font-family:"Reenie Beanie",arial,sans-serif;
+  font-size:110%;
+}    */
