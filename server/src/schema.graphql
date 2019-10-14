@@ -7,7 +7,7 @@ type Query {
   info: String!
   posts: [Post!]
   users: [User!]
-  communities: [Community!]
+  communities(filter: String): [Community!]
   comments: [Comment!]
   userByHandle(username: String!, id: String) : User
   communityByName(name: String!, id: String) : Community

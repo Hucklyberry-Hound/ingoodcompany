@@ -9,7 +9,13 @@ function users(parent, args, context, info) {
 }
 
 function communities(parent, args, context, info) {
-  return context.prisma.communities();
+  const where = args.filter
+    ? {
+        OR: [{ category: args.filter }],
+      }
+    : {};
+
+  return context.prisma.communities({ where });
 }
 
 function comments(parent, args, context, info) {
@@ -51,5 +57,5 @@ module.exports = {
   communityByName,
   getPost,
   getCommunity,
-  getCurrentUser
+  getCurrentUser,
 };

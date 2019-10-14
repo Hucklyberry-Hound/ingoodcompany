@@ -1,10 +1,10 @@
-import React from "react";
-import ColumnData from "./profilecolumn";
-import { Link } from "react-router-dom";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import React from 'react';
+import ColumnData from './profilecolumn';
+import { Link } from 'react-router-dom';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
-import { USER } from "../constants";
+import { USER } from '../constants';
 
 const GET_COMMUNITIES = gql`
   {
@@ -30,7 +30,7 @@ export default class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: ["Animals", "Computers", "Food", "Chair"]
+      categories: ['Animals', 'Computers', 'Food', 'Chair'],
     };
   }
 
@@ -47,7 +47,7 @@ export default class UserProfile extends React.Component {
             c.users.map(u => u.username).includes(username)
           );
           const publicCommunities = communities.filter(
-            c => c.privacy.toLowerCase() === "public"
+            c => c.privacy.toLowerCase() === 'public'
           );
           return (
             <div className="profile-container">
@@ -66,7 +66,7 @@ export default class UserProfile extends React.Component {
                 {this.state.categories.map((cat, index) => {
                   return (
                     <div className="column column-li" key={index}>
-                      <Link to={`/topics/${cat}`}>{cat}</Link>
+                      <Link to={`/category/${cat}`}>{cat}</Link>
                     </div>
                   );
                 })}

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ColumnData = props => {
   const { headerText, listData } = props;
@@ -11,7 +11,9 @@ const ColumnData = props => {
           <div className="column column-li" key={index}>
             <Link to={`/community/${community.slug}`}>
               <h5>{community.name}</h5>
-              <small>Category: {community.category}</small>
+              <Link to={`/category/${community.category}`}>
+                <small>Category: {community.category}</small>
+              </Link>
             </Link>
             <small>{community.users.length + 1} Members</small>
           </div>
