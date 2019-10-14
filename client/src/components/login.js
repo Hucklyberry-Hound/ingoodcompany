@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { AUTH_TOKEN, USER } from "../constants";
-import { Mutation } from "react-apollo";
-import gql from "graphql-tag";
+import React, { Component } from 'react';
+import { AUTH_TOKEN, USER } from '../constants';
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+import '../styles/Login.css';
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation(
@@ -40,73 +41,92 @@ const LOGIN_MUTATION = gql`
 `;
 
 class Login extends Component {
-  state = {
-    login: true, // switch between Login and SignUp
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    username: ""
-  };
+  constructor() {
+    super();
+    this.state = {
+      login: true, // switch between Login and SignUp
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      username: '',
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    // document.getElementsByClassName("login-box").style.height = "650px";
+    this.setState({ login: !this.state.login });
+  }
 
   render() {
     const { login } = this.state;
 
     return (
-      <div>
-        <h4>{login ? "Login" : "Sign Up"}</h4>
-        <div>
-          {!login && (
-            <div>
-              <input
-                value={this.state.firstName}
-                onChange={e => this.setState({ firstName: e.target.value })}
-                type="text"
-                placeholder="First Name"
-              />
-              <input
-                value={this.state.name}
-                onChange={e => this.setState({ lastName: e.target.value })}
-                type="text"
-                placeholder="Last Name"
-              />
-              <input
-                value={this.state.username}
-                onChange={e => this.setState({ username: e.target.value })}
-                type="text"
-                placeholder="Username"
-              />
-            </div>
-          )}
-          <input
-            value={this.state.email}
-            onChange={e => this.setState({ email: e.target.value })}
-            type="text"
-            placeholder="Your email address"
-          />
-          <input
-            value={this.state.password}
-            onChange={e => this.setState({ password: e.target.value })}
-            type="password"
-            placeholder="Choose a safe password"
-          />
+      <div className="login-page">
+        <div className="login-welcome-message">
+          <h4>Welcome to in Good Company!</h4>
+          <p>A place to build your own community of like-minded people</p>
+          <p>Sign Up or Login to Start!</p>
         </div>
-        <div>
-          <Mutation
-            mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
-            variables={this.state}
-            onCompleted={data => this._confirm(data)}
-          >
-            {mutation => (
-              <button onClick={mutation}>
-                {" "}
-                {login ? "login" : "create account"}{" "}
-              </button>
+        <div className="login-box">
+          <h4>{login ? 'Login' : 'Sign Up'}</h4>
+          <div>
+            {!login && (
+              <div>
+                <input
+                  value={this.state.firstName}
+                  onChange={e => this.setState({ firstName: e.target.value })}
+                  type="text"
+                  placeholder="First Name"
+                />
+                <input
+                  value={this.state.name}
+                  onChange={e => this.setState({ lastName: e.target.value })}
+                  type="text"
+                  placeholder="Last Name"
+                />
+                <input
+                  value={this.state.username}
+                  onChange={e => this.setState({ username: e.target.value })}
+                  type="text"
+                  placeholder="Username"
+                />
+              </div>
             )}
-          </Mutation>
-          <button onClick={() => this.setState({ login: !login })}>
-            {login ? "need to create an account?" : "already have an account?"}
-          </button>
+            <input
+              value={this.state.email}
+              onChange={e => this.setState({ email: e.target.value })}
+              type="text"
+              placeholder="Your email address"
+            />
+            <input
+              value={this.state.password}
+              onChange={e => this.setState({ password: e.target.value })}
+              type="password"
+              placeholder="Choose a safe password"
+            />
+          </div>
+          <div>
+            <Mutation
+              mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
+              variables={this.state}
+              onCompleted={data => this._confirm(data)}
+            >
+              {mutation => (
+                <button onClick={mutation}>
+                  {' '}
+                  {login ? 'login' : 'create account'}{' '}
+                </button>
+              )}
+            </Mutation>
+            <button onClick={this.handleClick}>
+              {login
+                ? 'need to create an account?'
+                : 'already have an account?'}
+            </button>
+          </div>
         </div>
       </div>
     );
