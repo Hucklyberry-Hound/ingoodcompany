@@ -8,16 +8,20 @@ import CommentContainer from "./commentcontainer";
 const GET_ONE_POST = gql`
   query GetPost($postId: String!) {
     getPost(id: $postId) {
+      id
       title
       content
       postedBy {
+        id
         username
       }
       comments {
+        id
+        content
         author {
+          id
           username
         }
-        content
       }
       community {
         id

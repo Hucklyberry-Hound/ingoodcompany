@@ -66,7 +66,7 @@ code {
 
 .create-field {
   margin-top: 20px;
-  width: 20%;
+  width: 100%;
   align-self: center;
   display: flex;
   flex-direction: row;
@@ -123,4 +123,14 @@ nav {
 .post-form {
   display: flex;
   flex-direction: column;
+}
+
+.community-form-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.community-form {
+  width: 25%;
 }

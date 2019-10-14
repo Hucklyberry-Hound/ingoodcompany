@@ -80,7 +80,6 @@ function createNewCommunity(
 
 async function createNewComment(parent, { content, postId }, context, info) {
   const authorId = getUserId(context);
-  console.log(authorId);
   const newComment = await context.prisma.createComment({
     content,
     author: { connect: { id: authorId } },

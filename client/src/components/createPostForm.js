@@ -14,9 +14,11 @@ const CREATE_POST_MUTATION = gql`
       content
       title
       postedBy {
+        id
         username
       }
       community {
+        id
         slug
       }
     }
@@ -45,7 +47,7 @@ class CreatPostForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="post-form-container">
         <form className="post-form">
           <input
             type="text"

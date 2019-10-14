@@ -14,15 +14,12 @@ const GET_COMMUNITIES = gql`
       category
       privacy
       slug
-      users {
-        id
-        username
-      }
       owner {
         id
         username
       }
       users {
+        id
         username
       }
     }

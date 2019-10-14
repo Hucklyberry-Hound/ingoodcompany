@@ -9,11 +9,13 @@ const NEW_COMMENT = gql`
       id
       content
       author {
+        id
         username
       }
       post {
         id
         community {
+          id
           slug
         }
       }
@@ -59,8 +61,8 @@ class CommentForm extends React.Component {
           }}
           onCompleted={mutation => {
             const comment = mutation.createNewComment;
-            this.setState({ content: "" });
             updateParent(comment);
+            this.setState({ content: "" });
             return (
               <p>
                 Your comment has been posted if it doesn't show up, try

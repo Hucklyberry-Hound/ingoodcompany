@@ -11,6 +11,7 @@ const GET_USER = gql`
     userByHandle(username: $username) {
       username
       communities {
+        id
         name
         category
         slug
@@ -20,16 +21,19 @@ const GET_USER = gql`
         title
         content
         community {
+          id
           name
           slug
         }
       }
       comments {
+        id
         content
         post {
           id
           title
           community {
+            id
             name
             slug
           }
