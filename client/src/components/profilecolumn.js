@@ -13,7 +13,6 @@ const ColumnData = props => {
               <h5>{community.name}</h5>
               <small>Category: {community.category}</small>
             </Link>
-
             <small>{community.users.length + 1} Members</small>
           </div>
         );
