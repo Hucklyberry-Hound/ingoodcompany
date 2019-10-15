@@ -1,7 +1,11 @@
-import React from 'react';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
 
 const CREATE_COMMUNITY_MUTATION = gql`
   mutation CreateMutation(
@@ -31,12 +35,12 @@ export default class CreatePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      category: 'animals',
+      name: "",
+      category: "animals",
       hasPosts: true,
       hasMessages: true,
-      privacy: 'Public',
-      about: '',
+      privacy: "public",
+      about: ""
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -44,6 +48,7 @@ export default class CreatePage extends React.Component {
 
   handleOnChange(event) {
     const key = event.target.name;
+    console.log(event.target.name);
     const updatedValue = { [key]: event.target.value };
     this.setState(updatedValue);
   }
@@ -64,60 +69,86 @@ export default class CreatePage extends React.Component {
           </div>
           <div className="create-field">
             <label htmlFor="category">Select A Topic: </label>
-            <select
-              name="category"
-              onChange={event => this.handleOnChange(event)}
-              value={this.state.category}
-            >
-              <option value="animals">Animals</option>"
-              <option value="computers">Computers</option>
-              <option value="food">Food</option>
-              <option value="chair">Chair</option>
-            </select>
+            <FormControl variant="outlined">
+              <Select
+                value={this.state.category}
+                onChange={this.handleOnChange}
+                inputProps={{
+                  name: "category"
+                }}
+              >
+                <MenuItem value="animals">Animals</MenuItem>
+                <MenuItem value="computers">Computers</MenuItem>
+                <MenuItem value="food">Food</MenuItem>
+                <MenuItem value="games">Games</MenuItem>
+                <MenuItem value="health">Head</MenuItem>
+                <MenuItem value="movies">Movies</MenuItem>
+                <MenuItem value="nature">Nature</MenuItem>"
+                <MenuItem value="photography">Photography</MenuItem>
+                <MenuItem value="random">Random</MenuItem>
+                <MenuItem value="science">Science</MenuItem>
+                <MenuItem value="sports">Sports</MenuItem>
+              </Select>
+            </FormControl>
           </div>
           <div className="create-field">
             <label htmlFor="about">About: </label>
-            <textarea
-              name="about"
-              placeholder="Describe your community"
-              value={this.state.about}
-              onChange={this.handleOnChange}
+            <TextField
+              id="outlined-multiline-flexible"
+              label="About Your Community"
+              name="content"
+              multiline
+              rowsMax="10"
+              value={this.state.content}
+              onChange={this.handleChange}
+              margin="normal"
+              variant="outlined"
             />
           </div>
           <div className="create-field">
             <label htmlFor="hasPosts">Has Posts: </label>
-            <select
-              name="hasPosts"
-              onChange={() => this.setState({ hasPosts: !this.state.hasPosts })}
-              value={this.state.hasPosts}
-            >
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
-            </select>
+            <FormControl variant="outlined">
+              <Select
+                value={this.state.hasPosts}
+                onChange={this.handleOnChange}
+                inputProps={{
+                  name: "hasPosts"
+                }}
+              >
+                <MenuItem value={true}>Yes</MenuItem>
+                <MenuItem value={false}>No</MenuItem>
+              </Select>
+            </FormControl>
           </div>
           <div className="create-field">
             <label htmlFor="hasMessages">Has Messages: </label>
-            <select
-              name="hasMessages"
-              onChange={() =>
-                this.setState({ hasMessages: !this.state.hasMessages })
-              }
-              value={this.state.hasMessages}
-            >
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
-            </select>
+            <FormControl variant="outlined">
+              <Select
+                value={this.state.hasMessages}
+                onChange={this.handleOnChange}
+                inputProps={{
+                  name: "hasMessages"
+                }}
+              >
+                <MenuItem value={true}>Yes</MenuItem>
+                <MenuItem value={false}>No</MenuItem>
+              </Select>
+            </FormControl>
           </div>
           <div className="create-field">
             <label htmlFor="privacy">Privacy Settings: </label>
-            <select
-              name="privacy"
-              onChange={this.handleOnChange}
-              value={this.state.privacy}
-            >
-              <option value="public">Public</option>
-              <option value="private">Private</option>
-            </select>
+            <FormControl variant="outlined">
+              <Select
+                value={this.state.privacy}
+                inputProps={{
+                  name: "privacy"
+                }}
+                onChange={this.handleOnChange}
+              >
+                <MenuItem value="public">Public</MenuItem>
+                <MenuItem value="private">Private</MenuItem>
+              </Select>
+            </FormControl>
           </div>
           <div className="submit-button">
             <Mutation

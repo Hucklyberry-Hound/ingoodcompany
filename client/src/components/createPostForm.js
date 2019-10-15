@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import gql from "graphql-tag";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Box from "@material-ui/core/Box";
 
 const CREATE_POST_MUTATION = gql`
   mutation CreateNewPost(
@@ -45,7 +46,6 @@ class CreatPostForm extends Component {
     this.setState({
       [evt.target.name]: evt.target.value
     });
-    console.log(this.content);
   }
 
   render() {
@@ -65,7 +65,7 @@ class CreatPostForm extends Component {
             label="Create A New Post"
             name="content"
             multiline
-            rowsMax="6"
+            rowsMax="10"
             value={this.state.content}
             onChange={this.handleChange}
             margin="normal"
@@ -82,13 +82,16 @@ class CreatPostForm extends Component {
           }}
         >
           {createMutation => (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={createMutation}
-            >
-              Submit
-            </Button>
+            <Box p={3}>
+              <Button
+                p={10}
+                variant="contained"
+                color="primary"
+                onClick={createMutation}
+              >
+                Submit
+              </Button>
+            </Box>
           )}
         </Mutation>
       </div>

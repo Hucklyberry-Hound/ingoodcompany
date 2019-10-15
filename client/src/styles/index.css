@@ -85,7 +85,8 @@ code {
   align-self: center;
   justify-content: center;
   margin-left: 40px;
-  padding: 65px;
+  padding: 40px;
+  padding-left: 95px;
 }
 
 .comment-container {
@@ -135,4 +136,20 @@ nav {
 
 .community-form {
   width: 25%;
+}
+
+input {
+  padding: 0;
+  height: 30px;
+  position: relative;
+  left: 0;
+  outline: none;
+  border: 1px solid #cdcdcd;
+  border-color: rgba(0, 0, 0, 0.15);
+  background-color: white;
+  font-size: 16px;
+}
+
+.select-form {
+  min-width: 200;
 }

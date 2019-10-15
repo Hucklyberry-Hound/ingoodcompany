@@ -31,7 +31,6 @@ const CustomCommunity = props => {
         )}
         <Link href={`/community/${slug}/members`}>Members</Link>
       </div>
-
       <div className="community-container">
         <Switch>
           {/* https://tylermcginnis.com/react-router-pass-props-to-components/ */}
