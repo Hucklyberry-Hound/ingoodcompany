@@ -14,7 +14,7 @@ import '../styles/main.scss'
 import '../styles/Calendar.css'
 
 
-const GET_EVENTS = gql`
+export const GET_EVENTS = gql`
   query events {
       events {
       title

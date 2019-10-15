@@ -1,6 +1,7 @@
 import React from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import {GET_EVENTS} from "./Events"
 
 //CSS imports
 import '../styles/Calendar.css'
@@ -91,6 +92,10 @@ class CreateEvent extends React.Component {
               mutation={ADD_EVENT}
               variables={this.state}
               onCompleted={this.props.closeView}
+              refetchQueries={() => {
+                return [{
+                   query: GET_EVENTS}];
+                  }}
               >
                {createMutation => (
                 <button onClick={createMutation}>Submit</button>
