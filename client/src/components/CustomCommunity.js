@@ -15,6 +15,7 @@ const CustomCommunity = props => {
     posts,
     hasPosts,
     hasMessages,
+    hasEvents,
     users,
     owner
   } = props;
@@ -30,7 +31,11 @@ const CustomCommunity = props => {
           ""
         )}
         <Link to={`/community/${slug}/members`}>Members</Link>
-        <Link to={`/community/${slug}/events`}>Events</Link>
+        {hasEvents ? (
+          <Link to={`/community/${slug}/events`}>Events</Link>
+        ) : (
+          ""
+        )}
       </div>
 
       <div className="community-container">

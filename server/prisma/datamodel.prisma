@@ -22,6 +22,7 @@ type Community {
     posts: [Post!]
     hasPosts: Boolean!
     hasMessages: Boolean!
+    hasEvents: Boolean!
     users: [User!] @relation(name:"Users")
     events: [Event!]
     privacy: String!

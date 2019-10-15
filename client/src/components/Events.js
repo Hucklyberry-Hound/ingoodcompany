@@ -84,8 +84,7 @@ class Events extends React.Component {
 
               const events = data.events.filter(
                 event => event.community.id === this.props.communityId
-              );
-
+              );              
               return (
 
                     <div className="calendar">

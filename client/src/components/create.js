@@ -8,6 +8,7 @@ const CREATE_COMMUNITY_MUTATION = gql`
     $category: String!
     $hasPosts: Boolean!
     $hasMessages: Boolean!
+    $hasEvents: Boolean!
     $privacy: String!
     $about: String!
   ) {
@@ -16,6 +17,7 @@ const CREATE_COMMUNITY_MUTATION = gql`
       category: $category
       hasPosts: $hasPosts
       hasMessages: $hasMessages
+      hasEvents: $hasEvents
       privacy: $privacy
       about: $about
     ) {
@@ -33,6 +35,7 @@ export default class CreatePage extends React.Component {
       name: "",
       category: "animals",
       hasPosts: true,
+      hasEvents: true,
       hasMessages: true,
       privacy: "Public",
       about: ""
@@ -89,6 +92,17 @@ export default class CreatePage extends React.Component {
               name="hasPosts"
               onChange={() => this.setState({ hasPosts: !this.state.hasPosts })}
               value={this.state.hasPosts}
+            >
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
+            </select>
+          </div>
+          <div className="create-field">
+            <label htmlFor="hasEvents">Has Events: </label>
+            <select
+              name="hasEvents"
+              onChange={() => this.setState({ hasEvents: !this.state.hasEvents })}
+              value={this.state.hasEvents}
             >
               <option value={true}>Yes</option>
               <option value={false}>No</option>

@@ -60,7 +60,7 @@ function createNewPost(parent, args, context, info) {
 
 function createNewCommunity(
   parent,
-  { name, category, hasPosts, hasMessages, privacy, about },
+  { name, category, hasPosts, hasMessages, hasEvents, privacy, about },
   context,
   info
 ) {
@@ -70,6 +70,7 @@ function createNewCommunity(
     name,
     category,
     hasPosts,
+    hasEvents,
     hasMessages,
     privacy,
     slug,

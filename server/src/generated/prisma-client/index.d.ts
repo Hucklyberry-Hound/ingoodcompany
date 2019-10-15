@@ -365,6 +365,8 @@ export type CommunityOrderByInput =
   | "hasPosts_DESC"
   | "hasMessages_ASC"
   | "hasMessages_DESC"
+  | "hasEvents_ASC"
+  | "hasEvents_DESC"
   | "privacy_ASC"
   | "privacy_DESC"
   | "createdAt_ASC"
@@ -513,6 +515,7 @@ export interface CommunityUpdateWithoutEventsDataInput {
   posts?: Maybe<PostUpdateManyWithoutCommunityInput>;
   hasPosts?: Maybe<Boolean>;
   hasMessages?: Maybe<Boolean>;
+  hasEvents?: Maybe<Boolean>;
   users?: Maybe<UserUpdateManyWithoutCommunitiesInput>;
   privacy?: Maybe<String>;
   owner?: Maybe<UserUpdateOneWithoutOwnerOfInput>;
@@ -561,6 +564,7 @@ export interface CommunityUpdateDataInput {
   posts?: Maybe<PostUpdateManyWithoutCommunityInput>;
   hasPosts?: Maybe<Boolean>;
   hasMessages?: Maybe<Boolean>;
+  hasEvents?: Maybe<Boolean>;
   users?: Maybe<UserUpdateManyWithoutCommunitiesInput>;
   events?: Maybe<EventUpdateManyWithoutCommunityInput>;
   privacy?: Maybe<String>;
@@ -888,6 +892,7 @@ export interface CommunityUpdateInput {
   posts?: Maybe<PostUpdateManyWithoutCommunityInput>;
   hasPosts?: Maybe<Boolean>;
   hasMessages?: Maybe<Boolean>;
+  hasEvents?: Maybe<Boolean>;
   users?: Maybe<UserUpdateManyWithoutCommunitiesInput>;
   events?: Maybe<EventUpdateManyWithoutCommunityInput>;
   privacy?: Maybe<String>;
@@ -1124,6 +1129,7 @@ export interface CommunityUpdateWithoutPostsDataInput {
   slug?: Maybe<String>;
   hasPosts?: Maybe<Boolean>;
   hasMessages?: Maybe<Boolean>;
+  hasEvents?: Maybe<Boolean>;
   users?: Maybe<UserUpdateManyWithoutCommunitiesInput>;
   events?: Maybe<EventUpdateManyWithoutCommunityInput>;
   privacy?: Maybe<String>;
@@ -1277,6 +1283,7 @@ export interface CommunityUpdateWithoutUsersDataInput {
   posts?: Maybe<PostUpdateManyWithoutCommunityInput>;
   hasPosts?: Maybe<Boolean>;
   hasMessages?: Maybe<Boolean>;
+  hasEvents?: Maybe<Boolean>;
   events?: Maybe<EventUpdateManyWithoutCommunityInput>;
   privacy?: Maybe<String>;
   owner?: Maybe<UserUpdateOneWithoutOwnerOfInput>;
@@ -1631,6 +1638,7 @@ export interface CommunityCreateInput {
   posts?: Maybe<PostCreateManyWithoutCommunityInput>;
   hasPosts: Boolean;
   hasMessages: Boolean;
+  hasEvents: Boolean;
   users?: Maybe<UserCreateManyWithoutCommunitiesInput>;
   events?: Maybe<EventCreateManyWithoutCommunityInput>;
   privacy: String;
@@ -1711,6 +1719,8 @@ export interface CommunityScalarWhereInput {
   hasPosts_not?: Maybe<Boolean>;
   hasMessages?: Maybe<Boolean>;
   hasMessages_not?: Maybe<Boolean>;
+  hasEvents?: Maybe<Boolean>;
+  hasEvents_not?: Maybe<Boolean>;
   privacy?: Maybe<String>;
   privacy_not?: Maybe<String>;
   privacy_in?: Maybe<String[] | String>;
@@ -1785,6 +1795,7 @@ export interface CommunityUpdateManyDataInput {
   slug?: Maybe<String>;
   hasPosts?: Maybe<Boolean>;
   hasMessages?: Maybe<Boolean>;
+  hasEvents?: Maybe<Boolean>;
   privacy?: Maybe<String>;
   about?: Maybe<String>;
 }
@@ -1842,6 +1853,7 @@ export interface CommunityCreateWithoutUsersInput {
   posts?: Maybe<PostCreateManyWithoutCommunityInput>;
   hasPosts: Boolean;
   hasMessages: Boolean;
+  hasEvents: Boolean;
   events?: Maybe<EventCreateManyWithoutCommunityInput>;
   privacy: String;
   owner?: Maybe<UserCreateOneWithoutOwnerOfInput>;
@@ -1855,6 +1867,7 @@ export interface CommunityUpdateWithoutOwnerDataInput {
   posts?: Maybe<PostUpdateManyWithoutCommunityInput>;
   hasPosts?: Maybe<Boolean>;
   hasMessages?: Maybe<Boolean>;
+  hasEvents?: Maybe<Boolean>;
   users?: Maybe<UserUpdateManyWithoutCommunitiesInput>;
   events?: Maybe<EventUpdateManyWithoutCommunityInput>;
   privacy?: Maybe<String>;
@@ -2099,6 +2112,7 @@ export interface CommunityCreateWithoutEventsInput {
   posts?: Maybe<PostCreateManyWithoutCommunityInput>;
   hasPosts: Boolean;
   hasMessages: Boolean;
+  hasEvents: Boolean;
   users?: Maybe<UserCreateManyWithoutCommunitiesInput>;
   privacy: String;
   owner?: Maybe<UserCreateOneWithoutOwnerOfInput>;
@@ -2118,6 +2132,7 @@ export interface CommunityCreateWithoutPostsInput {
   slug: String;
   hasPosts: Boolean;
   hasMessages: Boolean;
+  hasEvents: Boolean;
   users?: Maybe<UserCreateManyWithoutCommunitiesInput>;
   events?: Maybe<EventCreateManyWithoutCommunityInput>;
   privacy: String;
@@ -2307,6 +2322,8 @@ export interface CommunityWhereInput {
   hasPosts_not?: Maybe<Boolean>;
   hasMessages?: Maybe<Boolean>;
   hasMessages_not?: Maybe<Boolean>;
+  hasEvents?: Maybe<Boolean>;
+  hasEvents_not?: Maybe<Boolean>;
   users_every?: Maybe<UserWhereInput>;
   users_some?: Maybe<UserWhereInput>;
   users_none?: Maybe<UserWhereInput>;
@@ -2384,6 +2401,7 @@ export interface CommunityUpdateManyMutationInput {
   slug?: Maybe<String>;
   hasPosts?: Maybe<Boolean>;
   hasMessages?: Maybe<Boolean>;
+  hasEvents?: Maybe<Boolean>;
   privacy?: Maybe<String>;
   about?: Maybe<String>;
 }
@@ -2544,6 +2562,7 @@ export interface CommunityCreateWithoutOwnerInput {
   posts?: Maybe<PostCreateManyWithoutCommunityInput>;
   hasPosts: Boolean;
   hasMessages: Boolean;
+  hasEvents: Boolean;
   users?: Maybe<UserCreateManyWithoutCommunitiesInput>;
   events?: Maybe<EventCreateManyWithoutCommunityInput>;
   privacy: String;
@@ -3285,6 +3304,7 @@ export interface CommunityPreviousValues {
   slug: String;
   hasPosts: Boolean;
   hasMessages: Boolean;
+  hasEvents: Boolean;
   privacy: String;
   createdAt: DateTimeOutput;
   about: String;
@@ -3299,6 +3319,7 @@ export interface CommunityPreviousValuesPromise
   slug: () => Promise<String>;
   hasPosts: () => Promise<Boolean>;
   hasMessages: () => Promise<Boolean>;
+  hasEvents: () => Promise<Boolean>;
   privacy: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   about: () => Promise<String>;
@@ -3313,6 +3334,7 @@ export interface CommunityPreviousValuesSubscription
   slug: () => Promise<AsyncIterator<String>>;
   hasPosts: () => Promise<AsyncIterator<Boolean>>;
   hasMessages: () => Promise<AsyncIterator<Boolean>>;
+  hasEvents: () => Promise<AsyncIterator<Boolean>>;
   privacy: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   about: () => Promise<AsyncIterator<String>>;
@@ -3544,6 +3566,7 @@ export interface Community {
   slug: String;
   hasPosts: Boolean;
   hasMessages: Boolean;
+  hasEvents: Boolean;
   privacy: String;
   createdAt: DateTimeOutput;
   about: String;
@@ -3565,6 +3588,7 @@ export interface CommunityPromise extends Promise<Community>, Fragmentable {
   }) => T;
   hasPosts: () => Promise<Boolean>;
   hasMessages: () => Promise<Boolean>;
+  hasEvents: () => Promise<Boolean>;
   users: <T = FragmentableArray<User>>(args?: {
     where?: UserWhereInput;
     orderBy?: UserOrderByInput;
@@ -3607,6 +3631,7 @@ export interface CommunitySubscription
   }) => T;
   hasPosts: () => Promise<AsyncIterator<Boolean>>;
   hasMessages: () => Promise<AsyncIterator<Boolean>>;
+  hasEvents: () => Promise<AsyncIterator<Boolean>>;
   users: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
     where?: UserWhereInput;
     orderBy?: UserOrderByInput;
@@ -3649,6 +3674,7 @@ export interface CommunityNullablePromise
   }) => T;
   hasPosts: () => Promise<Boolean>;
   hasMessages: () => Promise<Boolean>;
+  hasEvents: () => Promise<Boolean>;
   users: <T = FragmentableArray<User>>(args?: {
     where?: UserWhereInput;
     orderBy?: UserOrderByInput;

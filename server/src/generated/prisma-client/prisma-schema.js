@@ -285,6 +285,7 @@ type Community {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
   hasPosts: Boolean!
   hasMessages: Boolean!
+  hasEvents: Boolean!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
   privacy: String!
@@ -307,6 +308,7 @@ input CommunityCreateInput {
   posts: PostCreateManyWithoutCommunityInput
   hasPosts: Boolean!
   hasMessages: Boolean!
+  hasEvents: Boolean!
   users: UserCreateManyWithoutCommunitiesInput
   events: EventCreateManyWithoutCommunityInput
   privacy: String!
@@ -347,6 +349,7 @@ input CommunityCreateWithoutEventsInput {
   posts: PostCreateManyWithoutCommunityInput
   hasPosts: Boolean!
   hasMessages: Boolean!
+  hasEvents: Boolean!
   users: UserCreateManyWithoutCommunitiesInput
   privacy: String!
   owner: UserCreateOneWithoutOwnerOfInput
@@ -361,6 +364,7 @@ input CommunityCreateWithoutOwnerInput {
   posts: PostCreateManyWithoutCommunityInput
   hasPosts: Boolean!
   hasMessages: Boolean!
+  hasEvents: Boolean!
   users: UserCreateManyWithoutCommunitiesInput
   events: EventCreateManyWithoutCommunityInput
   privacy: String!
@@ -374,6 +378,7 @@ input CommunityCreateWithoutPostsInput {
   slug: String!
   hasPosts: Boolean!
   hasMessages: Boolean!
+  hasEvents: Boolean!
   users: UserCreateManyWithoutCommunitiesInput
   events: EventCreateManyWithoutCommunityInput
   privacy: String!
@@ -389,6 +394,7 @@ input CommunityCreateWithoutUsersInput {
   posts: PostCreateManyWithoutCommunityInput
   hasPosts: Boolean!
   hasMessages: Boolean!
+  hasEvents: Boolean!
   events: EventCreateManyWithoutCommunityInput
   privacy: String!
   owner: UserCreateOneWithoutOwnerOfInput
@@ -413,6 +419,8 @@ enum CommunityOrderByInput {
   hasPosts_DESC
   hasMessages_ASC
   hasMessages_DESC
+  hasEvents_ASC
+  hasEvents_DESC
   privacy_ASC
   privacy_DESC
   createdAt_ASC
@@ -428,6 +436,7 @@ type CommunityPreviousValues {
   slug: String!
   hasPosts: Boolean!
   hasMessages: Boolean!
+  hasEvents: Boolean!
   privacy: String!
   createdAt: DateTime!
   about: String!
@@ -494,6 +503,8 @@ input CommunityScalarWhereInput {
   hasPosts_not: Boolean
   hasMessages: Boolean
   hasMessages_not: Boolean
+  hasEvents: Boolean
+  hasEvents_not: Boolean
   privacy: String
   privacy_not: String
   privacy_in: [String!]
@@ -560,6 +571,7 @@ input CommunityUpdateDataInput {
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
+  hasEvents: Boolean
   users: UserUpdateManyWithoutCommunitiesInput
   events: EventUpdateManyWithoutCommunityInput
   privacy: String
@@ -574,6 +586,7 @@ input CommunityUpdateInput {
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
+  hasEvents: Boolean
   users: UserUpdateManyWithoutCommunitiesInput
   events: EventUpdateManyWithoutCommunityInput
   privacy: String
@@ -587,6 +600,7 @@ input CommunityUpdateManyDataInput {
   slug: String
   hasPosts: Boolean
   hasMessages: Boolean
+  hasEvents: Boolean
   privacy: String
   about: String
 }
@@ -597,6 +611,7 @@ input CommunityUpdateManyMutationInput {
   slug: String
   hasPosts: Boolean
   hasMessages: Boolean
+  hasEvents: Boolean
   privacy: String
   about: String
 }
@@ -658,6 +673,7 @@ input CommunityUpdateWithoutEventsDataInput {
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
+  hasEvents: Boolean
   users: UserUpdateManyWithoutCommunitiesInput
   privacy: String
   owner: UserUpdateOneWithoutOwnerOfInput
@@ -671,6 +687,7 @@ input CommunityUpdateWithoutOwnerDataInput {
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
+  hasEvents: Boolean
   users: UserUpdateManyWithoutCommunitiesInput
   events: EventUpdateManyWithoutCommunityInput
   privacy: String
@@ -683,6 +700,7 @@ input CommunityUpdateWithoutPostsDataInput {
   slug: String
   hasPosts: Boolean
   hasMessages: Boolean
+  hasEvents: Boolean
   users: UserUpdateManyWithoutCommunitiesInput
   events: EventUpdateManyWithoutCommunityInput
   privacy: String
@@ -697,6 +715,7 @@ input CommunityUpdateWithoutUsersDataInput {
   posts: PostUpdateManyWithoutCommunityInput
   hasPosts: Boolean
   hasMessages: Boolean
+  hasEvents: Boolean
   events: EventUpdateManyWithoutCommunityInput
   privacy: String
   owner: UserUpdateOneWithoutOwnerOfInput
@@ -804,6 +823,8 @@ input CommunityWhereInput {
   hasPosts_not: Boolean
   hasMessages: Boolean
   hasMessages_not: Boolean
+  hasEvents: Boolean
+  hasEvents_not: Boolean
   users_every: UserWhereInput
   users_some: UserWhereInput
   users_none: UserWhereInput
