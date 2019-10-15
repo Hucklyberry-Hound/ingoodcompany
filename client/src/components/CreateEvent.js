@@ -2,6 +2,9 @@ import React from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
+//CSS imports
+import '../styles/Calendar.css'
+
 
 const ADD_EVENT = gql`
   mutation CreateMutation(
@@ -55,8 +58,8 @@ class CreateEvent extends React.Component {
     render() {
         console.log(this.props)
       return (
-        <div className="community-form-container">
-          <div className="community-form">
+        <div className="single-event">
+          <div className="create-event">
             <h1>Create New Event on {this.props.selectedDate}</h1>
             <div className="create-field">
               <label htmlFor="name">Event Title: </label>
@@ -82,6 +85,7 @@ class CreateEvent extends React.Component {
               <Mutation 
               mutation={ADD_EVENT}
               variables={this.state}
+              onCompleted={this.props.closeView}
               >
                {createMutation => (
                 <button onClick={createMutation}>Submit</button>

@@ -42,7 +42,8 @@ class Events extends React.Component {
             selectedEvent: {
                 title: '',
                 start: '',
-                description: ''
+                description: '',
+                hostedby: ''
             },
             selectedDate: ""
         }
@@ -51,17 +52,19 @@ class Events extends React.Component {
         this.closeView = this.closeView.bind(this)
     }
 
-     handleDateClick(arg) { // bind with an arrow function
+     handleDateClick(arg) { 
         const date = arg.dateStr;
         console.log(date)
         this.setState({showCreate: true, selectedDate: date})
     }
 
       handleEventClick(calEvent, jsEvent, view, resourceObj) {
+          console.log('CALEVENT', calEvent);
           const event = {
               title: calEvent.event.title,
               start: calEvent.event.start,
-              description: calEvent.event.extendedProps.description
+              description: calEvent.event.extendedProps.description,
+              hostedby: calEvent.event.extendedProps.hostedby.username
           }
           
          this.setState({showEvent: true, selectedEvent: event})
