@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const UserCommunities = ({ user }) => {
   return (
     <React.Fragment>
-      <h2>Commuities {user.username} is a part of: </h2>
+      <h2>Communities {user.username} is a part of: </h2>
       {user.communities.map(community => {
         return (
           <div className="profile-item">

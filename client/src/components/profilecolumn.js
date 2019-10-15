@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/ProfileColumn.css'
+import '../styles/ProfileColumn.css';
 
 const ColumnData = props => {
   const { headerText, listData } = props;
@@ -13,9 +13,11 @@ const ColumnData = props => {
             <Link to={`/community/${community.slug}`}>
               <h5>{community.name}</h5>
               <Link to={`/category/${community.category}`}>
+                <br></br>
                 <small>Category: {community.category}</small>
               </Link>
             </Link>
+            <br></br>
             <small>{community.users.length + 1} Members</small>
           </div>
         );

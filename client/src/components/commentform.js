@@ -1,7 +1,8 @@
-import React from "react";
-import { Mutation } from "react-apollo";
-import { withRouter } from "react-router-dom";
-import gql from "graphql-tag";
+import React from 'react';
+import { Mutation } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
+import gql from 'graphql-tag';
+import Button from '@material-ui/core/Button';
 
 const NEW_COMMENT = gql`
   mutation CreateNewComment($content: String!, $postId: String!) {
@@ -28,10 +29,10 @@ class CommentForm extends React.Component {
     super(props);
     const { postId, communityId, updateParent } = props;
     this.state = {
-      content: "",
+      content: '',
       postId,
       communityId,
-      updateParent
+      updateParent,
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -57,12 +58,12 @@ class CommentForm extends React.Component {
           mutation={NEW_COMMENT}
           variables={{
             postId,
-            content
+            content,
           }}
           onCompleted={mutation => {
             const comment = mutation.createNewComment;
             updateParent(comment);
-            this.setState({ content: "" });
+            this.setState({ content: '' });
             return (
               <p>
                 Your comment has been posted if it doesn't show up, try
@@ -71,7 +72,11 @@ class CommentForm extends React.Component {
             );
           }}
         >
-          {doMutation => <button onClick={doMutation}>Reply</button>}
+          {doMutation => (
+            <Button variant="contained" color="primary" onClick={doMutation}>
+              Reply
+            </Button>
+          )}
         </Mutation>
       </div>
     );
