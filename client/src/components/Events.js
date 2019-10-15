@@ -72,19 +72,24 @@ class Events extends React.Component {
     }
 
     render() {
+        console.log(this.props.communityId)
         return (
             <Query query={GET_EVENTS} >
             {({ loading, error, data }) => {
               if (loading) return <div>Loading</div>;
               if (error) return <div>ERROR</div>;
-              console.log(data.events)
+
+              const events = data.events.filter(
+                event => event.community.id === this.props.communityId
+              );
+
               return (
 
                     <div className="calendar">
                     <FullCalendar defaultView="dayGridMonth" 
                     plugins={[ dayGridPlugin, interactionPlugin ]} 
                     weekends={true}
-                    events={data.events}
+                    events={events}
                     dateClick={this.handleDateClick}
                     navLinks= {true}
                     eventLimit= {true}
