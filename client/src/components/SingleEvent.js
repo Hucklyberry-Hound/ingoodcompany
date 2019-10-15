@@ -10,7 +10,6 @@ class SingleEvent extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         return(
         <div className="single-event">
         <div className="single-event-details">
