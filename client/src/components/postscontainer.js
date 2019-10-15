@@ -3,6 +3,7 @@ import React from "react";
 import CreatePostForm from "./createPostForm";
 import PostItem from "./postitem";
 
+
 export default class PostContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +24,7 @@ export default class PostContainer extends React.Component {
   render() {
     const { posts, communityId, slug } = this.state;
     return posts.length ? (
-      <div>
+      <div >
         <CreatePostForm communityId={communityId} updateParent={this.update} />
         {posts.map(post => {
           return (
