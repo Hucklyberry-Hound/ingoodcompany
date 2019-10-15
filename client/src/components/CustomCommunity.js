@@ -6,6 +6,8 @@ import Members from "./memberlist";
 import Events from './Events';
 import { Link, Route, Switch } from "react-router-dom";
 
+import "../styles/CustomCommunity.css"
+
 const CustomCommunity = props => {
   const {
     slug,
@@ -23,19 +25,23 @@ const CustomCommunity = props => {
   return (
     <React.Fragment>
       <div className="community-header">
-        <Link to={`/community/${slug}/about`}>About</Link>
-        {hasPosts ? <Link to={`/community/${slug}/posts`}>Posts</Link> : ""}
-        {hasMessages ? (
+        <div>
+        <Link to={`/community/${slug}/about`}>About</Link> </div>
+        <div>
+        {hasPosts ? <Link to={`/community/${slug}/posts`}>Posts</Link> : ""} </div>
+        <div>{hasMessages ? (
           <Link to={`/community/${slug}/messages`}>Messages</Link>
         ) : (
           ""
-        )}
-        <Link to={`/community/${slug}/members`}>Members</Link>
-        {hasEvents ? (
+        )}</div>
+        <div>
+        <Link to={`/community/${slug}/members`}>Members</Link> </div>
+        <div>{hasEvents ? (
           <Link to={`/community/${slug}/events`}>Events</Link>
         ) : (
           ""
         )}
+        </div>
       </div>
 
       <div className="community-container">

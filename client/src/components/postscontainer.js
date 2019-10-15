@@ -3,6 +3,8 @@ import React from "react";
 import CreatePostForm from "./createPostForm";
 import PostItem from "./postitem";
 
+//CSS import
+import "../styles/Post.css"
 
 export default class PostContainer extends React.Component {
   constructor(props) {
@@ -24,8 +26,9 @@ export default class PostContainer extends React.Component {
   render() {
     const { posts, communityId, slug } = this.state;
     return posts.length ? (
-      <div >
+      <div className="post-form">
         <CreatePostForm communityId={communityId} updateParent={this.update} />
+        <div className="all-post">
         {posts.map(post => {
           return (
             <PostItem
@@ -35,12 +38,15 @@ export default class PostContainer extends React.Component {
               key={post.id}
             />
           );
+
         })}
+         </div>
       </div>
     ) : (
       <div>
         <h1>Looks Like There Are No Posts Here :(</h1>
-        <CreatePostForm communityId={communityId} updateParent={this.update} />
+       
+          <CreatePostForm communityId={communityId} updateParent={this.update} />
       </div>
     );
   }
