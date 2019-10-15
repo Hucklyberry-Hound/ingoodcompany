@@ -95,7 +95,7 @@ class Events extends React.Component {
                     eventLimit= {true}
                     eventClick = {this.handleEventClick}
                     />
-                    {(this.state.showCreate) ? <CreateEvent selectedDate={this.state.selectedDate} closeView={this.closeView} /> : "" }
+                    {(this.state.showCreate) ? <CreateEvent selectedDate={this.state.selectedDate} closeView={this.closeView} communityId={this.props.communityId} /> : "" }
                     {(this.state.showEvent) ? <SingleEvent selectedEvent={this.state.selectedEvent} closeView={this.closeView} /> : "" }
                     </div>
               )
