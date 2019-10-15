@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 
 import PostContainer from "./postscontainer";
 
-const GET_POSTS = gql`
+export const GET_POSTS = gql`
   query {
     posts {
       id

@@ -9,8 +9,8 @@ const PostItem = props => {
       <Link href={`/community/${slug}/thread/${id}`}>
         <h3>{title}</h3>
       </Link>
+      <small>Posted By: </small>
       <Link href={`/user/${postedBy.username}`}>
-        <small>Posted By: </small>
         <small>{postedBy.username}</small>
       </Link>
     </div>

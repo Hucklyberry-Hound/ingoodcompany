@@ -34,8 +34,7 @@ class CreatPostForm extends Component {
     this.state = {
       communityId: props.communityId,
       title: "",
-      content: "",
-      updateParent: props.updateParent
+      content: ""
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -65,7 +64,7 @@ class CreatPostForm extends Component {
             label="Create A New Post"
             name="content"
             multiline
-            rowsMax="10"
+            rows="6"
             value={this.state.content}
             onChange={this.handleChange}
             margin="normal"
@@ -78,7 +77,7 @@ class CreatPostForm extends Component {
           onCompleted={mutation => {
             const post = mutation.createNewPost;
             this.setState({ title: "", content: "" });
-            this.state.updateParent(post);
+            this.props.updateParent(post);
           }}
         >
           {createMutation => (
