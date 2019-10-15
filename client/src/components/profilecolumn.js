@@ -9,7 +9,7 @@ const ColumnData = props => {
       <h2>{headerText}</h2>
       {listData.map((community, index) => {
         return (
-          <div className="column column-li" key={index}>
+          <div className="column column-li" key={index} style={{background: props.color}}>
             <Link to={`/community/${community.slug}`}>
               <h5>{community.name}</h5>
               <Link to={`/category/${community.category}`}>
@@ -26,7 +26,7 @@ const ColumnData = props => {
   ) : (
     <div className="column">
       <h2>{headerText}</h2>
-      <p>Looks Like there's nothing here</p>
+      <p>Empty</p>
     </div>
   );
 };

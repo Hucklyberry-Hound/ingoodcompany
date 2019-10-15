@@ -13,6 +13,31 @@
 
 }
 
+.column h2{
+    width: 200px;
+    height: 75;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    margin-right: 10px;
+    margin-left: 10px;
+    color: white;
+    background-color: #2c353a;
+}
+
+.column p{
+    display: flex;
+    width: 200px;
+    height: 20;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    margin-right: 10px;
+    margin-left: 10px;
+    color: white;
+    background-color: #2c353a;
+    justify-content: center;
+}
+
 .column-li:nth-child(even){
     transform:rotate(4deg);
     z-index: 0;
