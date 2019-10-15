@@ -16,8 +16,8 @@ class Header extends React.Component {
   toggleMenu() {
     this.setState({ show: !this.state.show });
     document
-      .getElementsByClassName('loggedin-header-bar')[0]
-      .classList.toggle('loggedin-header-bar-active');
+    .getElementsByClassName('loggedin-header-bar')[0]
+    .classList.toggle('loggedin-header-bar-active');
   }
 
   render() {

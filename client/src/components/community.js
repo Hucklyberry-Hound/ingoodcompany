@@ -14,6 +14,7 @@ const GET_COMMUNITY = gql`
       privacy
       hasMessages
       hasPosts
+      hasEvents
       owner {
         id
         username
@@ -50,6 +51,7 @@ class Community extends React.Component {
               users,
               slug,
               hasPosts,
+              hasEvents,
               hasMessages
             } = data.getCommunity;
 
@@ -62,6 +64,7 @@ class Community extends React.Component {
                 slug={slug}
                 hasMessages={hasMessages}
                 hasPosts={hasPosts}
+                hasEvents={hasEvents}
                 users={users}
                 owner={owner}
               />
