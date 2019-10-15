@@ -1,6 +1,7 @@
-import React from "react";
-import { Mutation } from "react-apollo";
-import gql from "graphql-tag";
+import React from 'react';
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+import Button from '@material-ui/core/Button';
 
 const CREATE_COMMUNITY_MUTATION = gql`
   mutation CreateMutation(
@@ -32,13 +33,13 @@ export default class CreatePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      category: "animals",
+      name: '',
+      category: 'animals',
       hasPosts: true,
       hasEvents: true,
       hasMessages: true,
-      privacy: "Public",
-      about: ""
+      privacy: 'Public',
+      about: '',
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -74,13 +75,22 @@ export default class CreatePage extends React.Component {
               <option value="animals">Animals</option>"
               <option value="computers">Computers</option>
               <option value="food">Food</option>
-              <option value="chair">Chair</option>
+              <option value="games">Games</option>
+              <option value="health">Health</option>"
+              <option value="movies">Movies</option>
+              <option value="nature">Nature</option>
+              <option value="photography">Photography</option>
+              <option value="random">Random</option>"
+              <option value="science">Science</option>
+              <option value="sports">Sports</option>
             </select>
           </div>
           <div className="create-field">
             <label htmlFor="about">About: </label>
             <textarea
               name="about"
+              cols="40"
+              rows="5"
               placeholder="Describe your community"
               value={this.state.about}
               onChange={this.handleOnChange}
@@ -143,7 +153,13 @@ export default class CreatePage extends React.Component {
               }
             >
               {createMutation => (
-                <button onClick={createMutation}>Submit</button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={createMutation}
+                >
+                  Submit
+                </Button>
               )}
             </Mutation>
           </div>
