@@ -14,7 +14,8 @@ const PostItem = props => {
         <h3>{title}</h3>
       </Link>
       <Link to={`/user/${postedBy.username}`}>
-        <small> Posted By: {postedBy.username}</small>
+        <small> Posted By:</small>
+        <p>{postedBy.username}</p>
       </Link>
       </div>
     </div>
