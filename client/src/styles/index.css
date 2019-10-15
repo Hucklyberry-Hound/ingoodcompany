@@ -81,12 +81,10 @@ code {
 }
 
 .submit-button {
-  width: 100px;
+  width: 100%;
   align-self: center;
   justify-content: center;
-  margin-left: 40px;
-  padding: 40px;
-  padding-left: 95px;
+  padding: 40px 0;
 }
 
 .comment-container {
