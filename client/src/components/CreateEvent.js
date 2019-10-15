@@ -61,7 +61,8 @@ class CreateEvent extends React.Component {
         <div className="single-event">
           <div className="create-event">
             <h1>Create New Event on {this.props.selectedDate}</h1>
-            <div className="create-field">
+            <div className="calendar-field">
+              <div>
               <label htmlFor="name">Event Title: </label>
               <input
                 name="title"
@@ -69,6 +70,8 @@ class CreateEvent extends React.Component {
                 value={this.state.title}
                 onChange={this.handleOnChange}
               />
+              </div>
+              <div>
             <label htmlFor="description">Event Description: </label>
               <input
                 name="description"
@@ -76,12 +79,14 @@ class CreateEvent extends React.Component {
                 value={this.state.description}
                 onChange={this.handleOnChange}
               />
-              
-            </div>
+              </div>
+              <div className="calendar-time">
             <input type="time" 
                 name="time" 
                 value={this.state.time}
                 onChange={this.handleOnDateChange}/>
+                </div>
+              </div>
               <Mutation 
               mutation={ADD_EVENT}
               variables={this.state}

@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction"
 import CreateEvent from './CreateEvent';
 import SingleEvent from './SingleEvent';
+import { useQuery } from "@apollo/react-hooks";
 
 import { Query, } from "react-apollo";
 import gql from "graphql-tag";
@@ -59,7 +60,6 @@ class Events extends React.Component {
     }
 
       handleEventClick(calEvent, jsEvent, view, resourceObj) {
-          console.log('CALEVENT', calEvent);
           const event = {
               title: calEvent.event.title,
               start: calEvent.event.start,

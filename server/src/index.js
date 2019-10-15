@@ -7,6 +7,7 @@ const Post = require("./resolvers/Post");
 const Subscription = require("./resolvers/Subscription");
 const Community = require("./resolvers/Community");
 const Comment = require("./resolvers/Comment");
+const Event = require("./resolvers/Event")
 
 const resolvers = {
   Query,
@@ -15,7 +16,8 @@ const resolvers = {
   User,
   Post,
   Community,
-  Comment
+  Comment,
+  Event
 };
 
 const server = new GraphQLServer({

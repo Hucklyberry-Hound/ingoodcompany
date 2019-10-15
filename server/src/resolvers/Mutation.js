@@ -111,6 +111,20 @@ async function addUserToCommunity(parent, args, context, info) {
   });
 }
 
+async function createEvent(parent, args, context, info) {
+  const userId = getUserId(context);
+
+  return context.prisma.createEvent({
+    title: args.title,
+    description: args.description,
+    date: args.date,
+    hostedby: { connect: { id: userId } },
+    community: { connect: { id: args.community } },
+
+  })
+
+}
+
 module.exports = {
   signup,
   login,
@@ -118,5 +132,6 @@ module.exports = {
   createNewPost,
   createNewCommunity,
   createNewComment,
-  addUserToCommunity
+  addUserToCommunity,
+  createEvent
 };

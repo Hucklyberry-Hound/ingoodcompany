@@ -48,6 +48,11 @@ async function getCurrentUser(parent, { username }, context, info) {
   return context.prisma.user({ username: username });
 }
 
+async function events(parent, {communityId}, context, info) {
+  return context.prisma.events();
+}
+
+
 module.exports = {
   posts,
   users,
@@ -58,4 +63,5 @@ module.exports = {
   getPost,
   getCommunity,
   getCurrentUser,
+  events
 };
