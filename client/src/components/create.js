@@ -72,13 +72,22 @@ export default class CreatePage extends React.Component {
               <option value="animals">Animals</option>"
               <option value="computers">Computers</option>
               <option value="food">Food</option>
-              <option value="chair">Chair</option>
+              <option value="games">Games</option>
+              <option value="health">Health</option>"
+              <option value="movies">Movies</option>
+              <option value="nature">Nature</option>
+              <option value="photography">Photography</option>
+              <option value="random">Random</option>"
+              <option value="science">Science</option>
+              <option value="sports">Sports</option>
             </select>
           </div>
           <div className="create-field">
             <label htmlFor="about">About: </label>
             <textarea
               name="about"
+              cols="40"
+              rows="5"
               placeholder="Describe your community"
               value={this.state.about}
               onChange={this.handleOnChange}

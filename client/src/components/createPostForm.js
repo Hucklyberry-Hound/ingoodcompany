@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import gql from 'graphql-tag';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
 const CREATE_POST_MUTATION = gql`
   mutation CreateNewPost(
@@ -61,6 +62,7 @@ class CreatPostForm extends Component {
           <textarea
             placeholder="Make a new post"
             name="content"
+            rows="10"
             value={this.state.content}
             onChange={this.handleChange}
             required
@@ -76,13 +78,16 @@ class CreatPostForm extends Component {
           }}
         >
           {createMutation => (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={createMutation}
-            >
-              Submit
-            </Button>
+            <Box p={3}>
+              <Button
+                p={10}
+                variant="contained"
+                color="primary"
+                onClick={createMutation}
+              >
+                Submit
+              </Button>
+            </Box>
           )}
         </Mutation>
       </div>

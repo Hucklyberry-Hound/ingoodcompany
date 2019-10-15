@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import gql from 'graphql-tag';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
 const NEW_COMMENT = gql`
   mutation CreateNewComment($content: String!, $postId: String!) {
@@ -50,6 +51,7 @@ class CommentForm extends React.Component {
           <h4>Reply To This Thread:</h4>
           <textarea
             value={this.state.content}
+            rows="10"
             onChange={this.handleOnChange}
             placeholder="Reply to this thread"
           />
@@ -73,9 +75,11 @@ class CommentForm extends React.Component {
           }}
         >
           {doMutation => (
-            <Button variant="contained" color="primary" onClick={doMutation}>
-              Reply
-            </Button>
+            <Box p={3}>
+              <Button variant="contained" color="primary" onClick={doMutation}>
+                Reply
+              </Button>
+            </Box>
           )}
         </Mutation>
       </div>
