@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
-import gql from 'graphql-tag';
-import Button from '@material-ui/core/Button';
+import React, { Component } from "react";
+import { Mutation } from "react-apollo";
+import { withRouter } from "react-router-dom";
+import gql from "graphql-tag";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 const CREATE_POST_MUTATION = gql`
   mutation CreateNewPost(
@@ -31,9 +32,9 @@ class CreatPostForm extends Component {
     super();
     this.state = {
       communityId: props.communityId,
-      title: '',
-      content: '',
-      updateParent: props.updateParent,
+      title: "",
+      content: "",
+      updateParent: props.updateParent
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -42,8 +43,9 @@ class CreatPostForm extends Component {
   }
   handleChange(evt) {
     this.setState({
-      [evt.target.name]: evt.target.value,
+      [evt.target.name]: evt.target.value
     });
+    console.log(this.content);
   }
 
   render() {
@@ -58,12 +60,16 @@ class CreatPostForm extends Component {
             placeholder="Post Title"
             required
           />
-          <textarea
-            placeholder="Make a new post"
+          <TextField
+            id="outlined-multiline-flexible"
+            label="Create A New Post"
             name="content"
+            multiline
+            rowsMax="6"
             value={this.state.content}
             onChange={this.handleChange}
-            required
+            margin="normal"
+            variant="outlined"
           />
         </form>
         <Mutation
@@ -71,7 +77,7 @@ class CreatPostForm extends Component {
           variables={{ ...this.state }}
           onCompleted={mutation => {
             const post = mutation.createNewPost;
-            this.setState({ title: '', content: '' });
+            this.setState({ title: "", content: "" });
             this.state.updateParent(post);
           }}
         >

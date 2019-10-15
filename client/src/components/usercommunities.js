@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Link from "@material-ui/core/Link";
 
 const UserCommunities = ({ user }) => {
   return (
@@ -8,7 +8,7 @@ const UserCommunities = ({ user }) => {
       {user.communities.map(community => {
         return (
           <div className="profile-item">
-            <Link to={`/community/${community.slug}`}>
+            <Link href={`/community/${community.slug}`}>
               <h3>{community.name}</h3>
             </Link>
             <small>Topic: {community.category}</small>

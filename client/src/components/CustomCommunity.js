@@ -3,7 +3,8 @@ import About from "./about";
 import Posts from "./posts";
 import Thread from "./thread";
 import Members from "./memberlist";
-import { Link, Route, Switch } from "react-router-dom";
+import Link from "@material-ui/core/Link";
+import { Route, Switch } from "react-router-dom";
 
 const CustomCommunity = props => {
   const {
@@ -21,14 +22,14 @@ const CustomCommunity = props => {
   return (
     <React.Fragment>
       <div className="community-header">
-        <Link to={`/community/${slug}/about`}>About</Link>
-        {hasPosts ? <Link to={`/community/${slug}/posts`}>Posts</Link> : ""}
+        <Link href={`/community/${slug}/about`}>About</Link>
+        {hasPosts ? <Link href={`/community/${slug}/posts`}>Posts</Link> : ""}
         {hasMessages ? (
-          <Link to={`/community/${slug}/messages`}>Messages</Link>
+          <Link href={`/community/${slug}/messages`}>Messages</Link>
         ) : (
           ""
         )}
-        <Link to={`/community/${slug}/members`}>Members</Link>
+        <Link href={`/community/${slug}/members`}>Members</Link>
       </div>
 
       <div className="community-container">

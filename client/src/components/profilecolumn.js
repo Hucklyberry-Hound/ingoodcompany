@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/ProfileColumn.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "../styles/ProfileColumn.css";
 
 const ColumnData = props => {
   const { headerText, listData } = props;
