@@ -5,10 +5,33 @@ import interactionPlugin from "@fullcalendar/interaction"
 import CreateEvent from './CreateEvent';
 import SingleEvent from './SingleEvent';
 
+import { Query, } from "react-apollo";
+import gql from "graphql-tag";
+
 //CSS imports
 import '../styles/main.scss'
 import '../styles/Calendar.css'
 
+
+const GET_EVENTS = gql`
+  query events {
+      events {
+      title
+      id
+      description
+      date
+      hostedby {
+          firstName
+          lastName
+          username
+      }
+      community{
+          name
+          id
+      }
+      }
+  }
+`;
 
 class Events extends React.Component {
     constructor(props) {
@@ -50,29 +73,32 @@ class Events extends React.Component {
 
     render() {
         return (
-        <div className="calendar">
-        <FullCalendar defaultView="dayGridMonth" 
-        plugins={[ dayGridPlugin, interactionPlugin ]} 
-        weekends={true}
-        events={[
-          {id: 'a', title: 'event 1', date: '2019-10-01 00:00:00', editable:true, 
-          extendedProps: { department: 'BioChemistry' }, description: 'Lecture'},
-          {title: 'event 2', date: '2019-10-02' },
-          {title: 'event 3', date: '2019-10-03' },
-          {title: 'event 3', date: '2019-10-03' },
-          {title: 'event 3', date: '2019-10-03' },
-          {title: 'event 3', date: '2019-10-03' },
-          {title: 'event 3', date: '2019-10-03' }
-        ]}
-        dateClick={this.handleDateClick}
-        navLinks= {true}
-        eventLimit= {true}
-        eventClick = {this.handleEventClick}
-        />
-        {(this.state.showCreate) ? <CreateEvent selectedDate={this.state.selectedDate} closeView={this.closeView} /> : "" }
-        {(this.state.showEvent) ? <SingleEvent selectedEvent={this.state.selectedEvent} closeView={this.closeView} /> : "" }
-        </div>
+            <Query query={GET_EVENTS} >
+            {({ loading, error, data }) => {
+              if (loading) return <div>Loading</div>;
+              if (error) return <div>ERROR</div>;
+              console.log(data.events)
+              return (
+
+                    <div className="calendar">
+                    <FullCalendar defaultView="dayGridMonth" 
+                    plugins={[ dayGridPlugin, interactionPlugin ]} 
+                    weekends={true}
+                    events={data.events}
+                    dateClick={this.handleDateClick}
+                    navLinks= {true}
+                    eventLimit= {true}
+                    eventClick = {this.handleEventClick}
+                    />
+                    {(this.state.showCreate) ? <CreateEvent selectedDate={this.state.selectedDate} closeView={this.closeView} /> : "" }
+                    {(this.state.showEvent) ? <SingleEvent selectedEvent={this.state.selectedEvent} closeView={this.closeView} /> : "" }
+                    </div>
+              )
+            }}
+              
+        </Query>
       )
+
     }
     
   
