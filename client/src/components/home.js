@@ -10,7 +10,7 @@ export default class HomePage extends React.Component {
         {authToken
           ? this.props.history.push('/home')
           : this.props.history.push('/login')}
-        <h1>Welcome to Good Company!</h1>
+        <h1>Welcome to In Good Company!</h1>
       </div>
     );
   }

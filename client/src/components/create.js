@@ -1,6 +1,7 @@
-import React from "react";
-import { Mutation } from "react-apollo";
-import gql from "graphql-tag";
+import React from 'react';
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+import Button from '@material-ui/core/Button';
 
 const CREATE_COMMUNITY_MUTATION = gql`
   mutation CreateMutation(
@@ -30,12 +31,12 @@ export default class CreatePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      category: "animals",
+      name: '',
+      category: 'animals',
       hasPosts: true,
       hasMessages: true,
-      privacy: "Public",
-      about: ""
+      privacy: 'Public',
+      about: '',
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -129,7 +130,13 @@ export default class CreatePage extends React.Component {
               }
             >
               {createMutation => (
-                <button onClick={createMutation}>Submit</button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={createMutation}
+                >
+                  Submit
+                </Button>
               )}
             </Mutation>
           </div>

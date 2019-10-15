@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { Mutation } from "react-apollo";
-import { withRouter } from "react-router-dom";
-import gql from "graphql-tag";
+import React, { Component } from 'react';
+import { Mutation } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
+import gql from 'graphql-tag';
+import Button from '@material-ui/core/Button';
 
 const CREATE_POST_MUTATION = gql`
   mutation CreateNewPost(
@@ -30,9 +31,9 @@ class CreatPostForm extends Component {
     super();
     this.state = {
       communityId: props.communityId,
-      title: "",
-      content: "",
-      updateParent: props.updateParent
+      title: '',
+      content: '',
+      updateParent: props.updateParent,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -41,7 +42,7 @@ class CreatPostForm extends Component {
   }
   handleChange(evt) {
     this.setState({
-      [evt.target.name]: evt.target.value
+      [evt.target.name]: evt.target.value,
     });
   }
 
@@ -70,11 +71,19 @@ class CreatPostForm extends Component {
           variables={{ ...this.state }}
           onCompleted={mutation => {
             const post = mutation.createNewPost;
-            this.setState({ title: "", content: "" });
+            this.setState({ title: '', content: '' });
             this.state.updateParent(post);
           }}
         >
-          {createMutation => <button onClick={createMutation}>Submit</button>}
+          {createMutation => (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={createMutation}
+            >
+              Submit
+            </Button>
+          )}
         </Mutation>
       </div>
     );
