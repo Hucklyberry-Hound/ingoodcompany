@@ -3,8 +3,7 @@ import About from './about';
 import Posts from './posts';
 import Thread from './thread';
 import Members from './memberlist';
-import Link from '@material-ui/core/Link';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import Events from './Events';
 
 import '../styles/CustomCommunity.css';
@@ -27,24 +26,17 @@ const CustomCommunity = props => {
     <React.Fragment>
       <div className="community-header">
         <div>
-          <Link href={`/community/${slug}/about`}>About</Link>{' '}
+          <Link to={`/community/${slug}/about`}>About</Link>{' '}
         </div>
         <div>
-          <Link href={`/community/${slug}/members`}>Members</Link>{' '}
+          <Link to={`/community/${slug}/members`}>Members</Link>{' '}
         </div>
         <div>
-          {hasPosts ? <Link href={`/community/${slug}/posts`}>Posts</Link> : ''}{' '}
-        </div>
-        <div>
-          {hasMessages ? (
-            <Link href={`/community/${slug}/messages`}>Messages</Link>
-          ) : (
-            ''
-          )}
+          {hasPosts ? <Link to={`/community/${slug}/posts`}>Posts</Link> : ''}{' '}
         </div>
         <div>
           {hasEvents ? (
-            <Link href={`/community/${slug}/events`}>Events</Link>
+            <Link to={`/community/${slug}/events`}>Events</Link>
           ) : (
             ''
           )}
@@ -90,10 +82,17 @@ const CustomCommunity = props => {
             path="/community/:community/events"
             render={props => <Events {...props} communityId={id} slug={slug} />}
           />
-
-          <Route
-            render={props => <Posts {...props} communityId={id} slug={slug} />}
-          />
+          {hasPosts ? (
+            <Route
+              render={props => (
+                <Posts {...props} posts={posts} communityId={id} slug={slug} />
+              )}
+            />
+          ) : (
+            <Route
+              render={props => <About {...props} info={about} name={name} />}
+            />
+          )}
         </Switch>
       </div>
     </React.Fragment>

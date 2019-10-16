@@ -57,27 +57,24 @@ class ParseCommunityQuery extends React.Component {
 
     return owner.username === thisUser ||
       users.map(user => user.username).includes(thisUser) ? (
-      <div className="community">
-        <CustomCommunity
-          name={name}
-          privacy={privacy}
-          about={about}
-          id={id}
-          slug={slug}
-          hasMessages={hasMessages}
-          hasPosts={hasPosts}
-          hasEvents={hasEvents}
-          users={users}
-          owner={owner}
-        />
-      </div>
-    ) : (
-      <JoinPage
-        communityId={id}
-        slug={slug}
-        updateParent={this.updateMembers}
-      />
-    );
+        <div className="community">
+          <CustomCommunity
+            name={name}
+            privacy={privacy}
+            about={about}
+            id={id}
+            slug={slug}
+            hasMessages={hasMessages}
+            hasPosts={hasPosts}
+            hasEvents={hasEvents}
+            users={users}
+            owner={owner}
+          />
+        </div>
+      ) : (
+        <JoinPage communityId={id} updateParent={this.updateMembers} about={about} name={name} />
+      );
+
   }
 }
 

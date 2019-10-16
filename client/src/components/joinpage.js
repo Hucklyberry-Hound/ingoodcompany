@@ -1,3 +1,4 @@
+import About from './about';
 import React from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
@@ -22,11 +23,12 @@ class JoinPage extends React.Component {
       communityId: props.communityId,
     };
   }
-
   render() {
-    const { communityId } = this.state;
+    const { about, name } = this.props;
+    const { communityId, updateParent } = this.state;
     return (
       <div>
+        <About info={about} name={name} />
         <Mutation
           mutation={ADD_USER}
           variables={{ communityId }}

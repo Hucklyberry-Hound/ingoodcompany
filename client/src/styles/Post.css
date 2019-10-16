@@ -67,3 +67,8 @@ body{
     color: #2c353a;
 }
 
+.post-item a:hover {
+    color: white;
+}
+
+

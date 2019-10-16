@@ -18,10 +18,12 @@ export const GET_COMMUNITY = gql`
       owner {
         id
         username
+        image
       }
       users {
         id
         username
+        image
       }
     }
   }

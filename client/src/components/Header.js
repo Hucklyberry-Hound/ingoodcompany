@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { AUTH_TOKEN, USER } from '../constants';
 import '../styles/Header.css';
@@ -49,19 +49,19 @@ class Header extends React.Component {
                 </div>
                 <h4 className="welcome-header-bar">Welcome {user}!</h4>
                 <div className="links-header-bar">
-                  <Link className="element-header-bar" href="/home">
+                  <Link className="element-header-bar" to="/home">
                     <div>home</div>
                   </Link>
 
-                  <Link className="element-header-bar" href="/create">
+                  <Link className="element-header-bar" to="/create">
                     <div>create</div>
                   </Link>
 
-                  <Link className="element-header-bar" href={`/user/${user}`}>
+                  <Link className="element-header-bar" to={`/user/${user}`}>
                     <div>profile</div>
                   </Link>
 
-                  <Link className="element-header-bar-logout" href="/">
+                  <Link className="element-header-bar-logout" to="/">
                     <div
                       onClick={() => {
                         localStorage.removeItem(AUTH_TOKEN);

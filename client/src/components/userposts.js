@@ -1,13 +1,14 @@
 import React from "react";
-import Link from "@material-ui/core/Link";
+import {Link} from 'react-router-dom';
 
 const UserPosts = ({ user }) => {
   return (
     <React.Fragment>
       <h2>Posts: </h2>
+      <div className="user-communities">
       {user.posts.map(post => {
         return (
-          <div className="profile-item">
+          <div className="profile-item" style={{background: "violet"}}>
             <h2>
               {user.username} posted to{" "}
               <Link href={`/community/${post.community.slug}`}>
@@ -20,6 +21,7 @@ const UserPosts = ({ user }) => {
           </div>
         );
       })}
+      </div>
     </React.Fragment>
   );
 };

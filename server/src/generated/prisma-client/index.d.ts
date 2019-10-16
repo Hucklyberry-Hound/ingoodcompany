@@ -337,6 +337,8 @@ export type UserOrderByInput =
   | "email_DESC"
   | "username_ASC"
   | "username_DESC"
+  | "image_ASC"
+  | "image_DESC"
   | "password_ASC"
   | "password_DESC"
   | "createdAt_ASC"
@@ -381,6 +383,7 @@ export interface UserUpdateWithoutPostsDataInput {
   lastName?: Maybe<String>;
   email?: Maybe<String>;
   username?: Maybe<String>;
+  image?: Maybe<String>;
   password?: Maybe<String>;
   messages?: Maybe<MessageUpdateManyWithoutSenderInput>;
   events?: Maybe<EventUpdateManyWithoutHostedbyInput>;
@@ -692,6 +695,7 @@ export interface UserUpdateInput {
   lastName?: Maybe<String>;
   email?: Maybe<String>;
   username?: Maybe<String>;
+  image?: Maybe<String>;
   password?: Maybe<String>;
   messages?: Maybe<MessageUpdateManyWithoutSenderInput>;
   events?: Maybe<EventUpdateManyWithoutHostedbyInput>;
@@ -1019,6 +1023,7 @@ export interface UserUpdateWithoutCommunitiesDataInput {
   lastName?: Maybe<String>;
   email?: Maybe<String>;
   username?: Maybe<String>;
+  image?: Maybe<String>;
   password?: Maybe<String>;
   messages?: Maybe<MessageUpdateManyWithoutSenderInput>;
   events?: Maybe<EventUpdateManyWithoutHostedbyInput>;
@@ -1214,6 +1219,7 @@ export interface UserUpdateWithoutEventsDataInput {
   lastName?: Maybe<String>;
   email?: Maybe<String>;
   username?: Maybe<String>;
+  image?: Maybe<String>;
   password?: Maybe<String>;
   messages?: Maybe<MessageUpdateManyWithoutSenderInput>;
   comments?: Maybe<CommentUpdateManyWithoutAuthorInput>;
@@ -1268,6 +1274,7 @@ export interface UserUpdateWithoutCommentsDataInput {
   lastName?: Maybe<String>;
   email?: Maybe<String>;
   username?: Maybe<String>;
+  image?: Maybe<String>;
   password?: Maybe<String>;
   messages?: Maybe<MessageUpdateManyWithoutSenderInput>;
   events?: Maybe<EventUpdateManyWithoutHostedbyInput>;
@@ -1381,6 +1388,20 @@ export interface UserWhereInput {
   username_not_starts_with?: Maybe<String>;
   username_ends_with?: Maybe<String>;
   username_not_ends_with?: Maybe<String>;
+  image?: Maybe<String>;
+  image_not?: Maybe<String>;
+  image_in?: Maybe<String[] | String>;
+  image_not_in?: Maybe<String[] | String>;
+  image_lt?: Maybe<String>;
+  image_lte?: Maybe<String>;
+  image_gt?: Maybe<String>;
+  image_gte?: Maybe<String>;
+  image_contains?: Maybe<String>;
+  image_not_contains?: Maybe<String>;
+  image_starts_with?: Maybe<String>;
+  image_not_starts_with?: Maybe<String>;
+  image_ends_with?: Maybe<String>;
+  image_not_ends_with?: Maybe<String>;
   password?: Maybe<String>;
   password_not?: Maybe<String>;
   password_in?: Maybe<String[] | String>;
@@ -1431,6 +1452,7 @@ export interface UserUpdateWithoutOwnerOfDataInput {
   lastName?: Maybe<String>;
   email?: Maybe<String>;
   username?: Maybe<String>;
+  image?: Maybe<String>;
   password?: Maybe<String>;
   messages?: Maybe<MessageUpdateManyWithoutSenderInput>;
   events?: Maybe<EventUpdateManyWithoutHostedbyInput>;
@@ -1444,6 +1466,7 @@ export interface UserUpdateManyMutationInput {
   lastName?: Maybe<String>;
   email?: Maybe<String>;
   username?: Maybe<String>;
+  image?: Maybe<String>;
   password?: Maybe<String>;
 }
 
@@ -1617,6 +1640,7 @@ export interface UserCreateWithoutCommentsInput {
   lastName: String;
   email: String;
   username: String;
+  image: String;
   password: String;
   messages?: Maybe<MessageCreateManyWithoutSenderInput>;
   events?: Maybe<EventCreateManyWithoutHostedbyInput>;
@@ -1781,6 +1805,7 @@ export interface UserCreateWithoutCommunitiesInput {
   lastName: String;
   email: String;
   username: String;
+  image: String;
   password: String;
   messages?: Maybe<MessageCreateManyWithoutSenderInput>;
   events?: Maybe<EventCreateManyWithoutHostedbyInput>;
@@ -1977,6 +2002,7 @@ export interface UserCreateInput {
   lastName: String;
   email: String;
   username: String;
+  image: String;
   password: String;
   messages?: Maybe<MessageCreateManyWithoutSenderInput>;
   events?: Maybe<EventCreateManyWithoutHostedbyInput>;
@@ -2053,6 +2079,7 @@ export interface UserUpdateWithoutMessagesDataInput {
   lastName?: Maybe<String>;
   email?: Maybe<String>;
   username?: Maybe<String>;
+  image?: Maybe<String>;
   password?: Maybe<String>;
   events?: Maybe<EventUpdateManyWithoutHostedbyInput>;
   comments?: Maybe<CommentUpdateManyWithoutAuthorInput>;
@@ -2152,6 +2179,7 @@ export interface UserCreateWithoutOwnerOfInput {
   lastName: String;
   email: String;
   username: String;
+  image: String;
   password: String;
   messages?: Maybe<MessageCreateManyWithoutSenderInput>;
   events?: Maybe<EventCreateManyWithoutHostedbyInput>;
@@ -2231,6 +2259,20 @@ export interface UserScalarWhereInput {
   username_not_starts_with?: Maybe<String>;
   username_ends_with?: Maybe<String>;
   username_not_ends_with?: Maybe<String>;
+  image?: Maybe<String>;
+  image_not?: Maybe<String>;
+  image_in?: Maybe<String[] | String>;
+  image_not_in?: Maybe<String[] | String>;
+  image_lt?: Maybe<String>;
+  image_lte?: Maybe<String>;
+  image_gt?: Maybe<String>;
+  image_gte?: Maybe<String>;
+  image_contains?: Maybe<String>;
+  image_not_contains?: Maybe<String>;
+  image_starts_with?: Maybe<String>;
+  image_not_starts_with?: Maybe<String>;
+  image_ends_with?: Maybe<String>;
+  image_not_ends_with?: Maybe<String>;
   password?: Maybe<String>;
   password_not?: Maybe<String>;
   password_in?: Maybe<String[] | String>;
@@ -2392,6 +2434,7 @@ export interface UserUpdateManyDataInput {
   lastName?: Maybe<String>;
   email?: Maybe<String>;
   username?: Maybe<String>;
+  image?: Maybe<String>;
   password?: Maybe<String>;
 }
 
@@ -2417,6 +2460,7 @@ export interface UserCreateWithoutPostsInput {
   lastName: String;
   email: String;
   username: String;
+  image: String;
   password: String;
   messages?: Maybe<MessageCreateManyWithoutSenderInput>;
   events?: Maybe<EventCreateManyWithoutHostedbyInput>;
@@ -2437,6 +2481,7 @@ export interface UserCreateWithoutEventsInput {
   lastName: String;
   email: String;
   username: String;
+  image: String;
   password: String;
   messages?: Maybe<MessageCreateManyWithoutSenderInput>;
   comments?: Maybe<CommentCreateManyWithoutAuthorInput>;
@@ -2546,6 +2591,7 @@ export interface UserCreateWithoutMessagesInput {
   lastName: String;
   email: String;
   username: String;
+  image: String;
   password: String;
   events?: Maybe<EventCreateManyWithoutHostedbyInput>;
   comments?: Maybe<CommentCreateManyWithoutAuthorInput>;
@@ -2592,6 +2638,7 @@ export interface UserPreviousValues {
   lastName: String;
   email: String;
   username: String;
+  image: String;
   password: String;
   createdAt: DateTimeOutput;
 }
@@ -2604,6 +2651,7 @@ export interface UserPreviousValuesPromise
   lastName: () => Promise<String>;
   email: () => Promise<String>;
   username: () => Promise<String>;
+  image: () => Promise<String>;
   password: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
 }
@@ -2616,6 +2664,7 @@ export interface UserPreviousValuesSubscription
   lastName: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   username: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -2802,6 +2851,7 @@ export interface User {
   lastName: String;
   email: String;
   username: String;
+  image: String;
   password: String;
   createdAt: DateTimeOutput;
 }
@@ -2812,6 +2862,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   lastName: () => Promise<String>;
   email: () => Promise<String>;
   username: () => Promise<String>;
+  image: () => Promise<String>;
   password: () => Promise<String>;
   messages: <T = FragmentableArray<Message>>(args?: {
     where?: MessageWhereInput;
@@ -2878,6 +2929,7 @@ export interface UserSubscription
   lastName: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   username: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   messages: <T = Promise<AsyncIterator<MessageSubscription>>>(args?: {
     where?: MessageWhereInput;
@@ -2944,6 +2996,7 @@ export interface UserNullablePromise
   lastName: () => Promise<String>;
   email: () => Promise<String>;
   username: () => Promise<String>;
+  image: () => Promise<String>;
   password: () => Promise<String>;
   messages: <T = FragmentableArray<Message>>(args?: {
     where?: MessageWhereInput;
