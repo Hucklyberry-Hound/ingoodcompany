@@ -1,0 +1,16 @@
+.community-header{
+    background-color: #2c353a;
+    height: 45px;
+    font-size: 40px;
+    width: 100%;
+}
+
+.community-header a{
+    text-decoration: none;
+    margin-left: 5px;
+    color: white;
+}
+
+.community-header a:hover{
+    color: lightgrey;
+}
