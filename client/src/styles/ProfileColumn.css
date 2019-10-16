@@ -1,6 +1,6 @@
 .column-li {
     font-family:arial,sans-serif;
-    font-size:100%;
+    font-size: 25px;
     font-weight:normal;
     text-decoration:none;
     color:#000;
@@ -10,7 +10,14 @@
     padding:1em;
     margin:1em;
     box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+}
 
+.column-li h5{
+    font-size: 100%;
+}
+
+.column-li p{
+    font-size: 100%;
 }
 
 .column h2{
