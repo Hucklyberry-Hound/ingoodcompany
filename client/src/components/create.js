@@ -2,10 +2,13 @@ import React from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Button from '@material-ui/core/Button';
+
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import { GET_COMMUNITIES } from './profilepage'
+
 
 const CREATE_COMMUNITY_MUTATION = gql`
   mutation CreateMutation(
@@ -157,6 +160,11 @@ export default class CreatePage extends React.Component {
             <Mutation
               mutation={CREATE_COMMUNITY_MUTATION}
               variables={this.state}
+              refetchQueries={() => {
+                return [{
+                  query: GET_COMMUNITIES
+                }]
+              }}
               onCompleted={data =>
                 this.props.history.push(
                   `community/${data.createNewCommunity.slug}`
@@ -175,7 +183,7 @@ export default class CreatePage extends React.Component {
             </Mutation>
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 }

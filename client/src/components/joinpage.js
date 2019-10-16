@@ -3,9 +3,10 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
-import { GET_COMMUNITY } from './community';
+import { GET_COMMUNITIES } from "./profilepage"
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+
 
 const ADD_USER = gql`
   mutation AddUserToCommunity($communityId: String!) {
@@ -50,7 +51,13 @@ class JoinPage extends React.Component {
             const newMember = mutation.addUserToCommunity;
             this.props.updateParent(newMember);
           }}
+          refetchQueries={() => {
+            return [{
+              query: GET_COMMUNITIES
+            }];
+          }}
         >
+
           {mutation => (
             <Box p={3}>
               <Button
@@ -63,6 +70,7 @@ class JoinPage extends React.Component {
               </Button>
             </Box>
           )}
+
         </Mutation>
       </div>
     );
