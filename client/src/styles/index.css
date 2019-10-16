@@ -115,7 +115,8 @@ code {
 
 .thread-top {
   width: 100%;
-  background-color: #daebe8;
+  background-color: #2c353a;
+  color: white;
   border-radius: 8px;
   border: 1px solid black;
 }

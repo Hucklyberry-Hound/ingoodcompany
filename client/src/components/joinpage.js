@@ -27,7 +27,7 @@ class JoinPage extends React.Component {
     const { about, name } = this.props;
     const { communityId, updateParent } = this.state;
     return (
-      <div>
+      <div className="community-container">
         <About info={about} name={name} />
         <Mutation
           mutation={ADD_USER}
