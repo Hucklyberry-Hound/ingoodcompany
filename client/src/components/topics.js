@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import '../styles/Topic.css'
+
 const FILTER_COMMUNITY = gql`
   query FilterCommunity($filter: String!) {
     communities(filter: $filter) {
@@ -26,17 +28,17 @@ const TopicsPage = props => {
           if (error) console.log(error);
           const { communities } = data;
           return (
-            <ul>
+            <div className='all-topics'>
               {communities.map(community => {
                 return (
-                  <li>
+                  <div className='single-topic'>
                     <Link to={`/community/${community.slug}`}>
                       {community.name}
                     </Link>
-                  </li>
+                  </div>
                 );
               })}
-            </ul>
+            </div>
           );
         }}
       </Query>
