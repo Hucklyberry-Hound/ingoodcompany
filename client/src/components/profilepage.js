@@ -63,21 +63,23 @@ export default class UserProfile extends React.Component {
           );
           return (
             <div className="profile-container">
-              <ColumnData headerText="Communities You Own" listData={owned} />
+              <ColumnData headerText="Owned by you" listData={owned} color={"#ffc"}/>
               <ColumnData
-                headerText="Communities You're Subscribed To"
+                headerText="Subscriptions"
                 listData={belongsTo}
+                color={"tomato"}
               />
 
               <ColumnData
-                headerText="Public Communities"
+                headerText="All"
                 listData={publicCommunities}
+                color={"lightgreen"}
               />
               <div className="column">
-                <h2>Find Communities By Topic</h2>
+                <h2>Filter</h2>
                 {this.state.categories.map((cat, index) => {
                   return (
-                    <div className="column column-li" key={index}>
+                    <div className="column column-li filter" key={index} style={{background: 'violet'}}>
                       <Link to={`/category/${cat}`}>{cat}</Link>
                     </div>
                   );

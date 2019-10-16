@@ -75,6 +75,7 @@ class CreateEvent extends React.Component {
               <div>
             <label htmlFor="description">Event Description: </label>
               <input
+                className="text-field"
                 name="description"
                 type="text"
                 value={this.state.description}

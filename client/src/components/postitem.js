@@ -1,19 +1,22 @@
-import React from "react";
-import Link from "@material-ui/core/Link";
+import React from 'react';
+import Link from '@material-ui/core/Link';
+
+//CSS import
+import '../styles/Post.css';
 
 const PostItem = props => {
   const { item, slug } = props;
   const { postedBy, title, id, comments } = item;
   return (
     <div className="post-item">
-      <Link href={`/community/${slug}/thread/${id}`}>
-        <h3>{title}</h3>
-      </Link>
-      <div className="post-item-info">
-        <small className="post-item-text">
-          Posted By:{" "}
-          <Link href={`/user/${postedBy.username}`}>{postedBy.username}</Link>
-        </small>
+      <div>
+        <Link href={`/community/${slug}/thread/${id}`}>
+          <h4>{title}</h4>
+        </Link>
+        <Link href={`/user/${postedBy.username}`}>
+          <small> Posted By:</small>
+          <p>{postedBy.username}</p>
+        </Link>
         <p className="replies-text">{comments ? comments.length : 0} Replies</p>
       </div>
     </div>

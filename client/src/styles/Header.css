@@ -38,6 +38,7 @@
   width: 62px;
   cursor: pointer;
   z-index: 4;
+  margin-top: 40px
 }
 
 .burger:hover {

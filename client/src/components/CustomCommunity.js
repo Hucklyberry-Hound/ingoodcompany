@@ -1,11 +1,13 @@
-import React from "react";
-import About from "./about";
-import Posts from "./posts";
-import Thread from "./thread";
-import Members from "./memberlist";
-import Link from "@material-ui/core/Link";
-import { Route, Switch } from "react-router-dom";
-import Events from "./Events";
+import React from 'react';
+import About from './about';
+import Posts from './posts';
+import Thread from './thread';
+import Members from './memberlist';
+import Link from '@material-ui/core/Link';
+import { Route, Switch } from 'react-router-dom';
+import Events from './Events';
+
+import '../styles/CustomCommunity.css';
 
 const CustomCommunity = props => {
   const {
@@ -18,25 +20,35 @@ const CustomCommunity = props => {
     hasMessages,
     hasEvents,
     users,
-    owner
+    owner,
   } = props;
 
   return (
     <React.Fragment>
       <div className="community-header">
-        <Link href={`/community/${slug}/about`}>About</Link>
-        {hasPosts ? <Link href={`/community/${slug}/posts`}>Posts</Link> : ""}
-        {hasMessages ? (
-          <Link href={`/community/${slug}/messages`}>Messages</Link>
-        ) : (
-          ""
-        )}
-        <Link href={`/community/${slug}/members`}>Members</Link>
-        {hasEvents ? (
-          <Link href={`/community/${slug}/events`}>Events</Link>
-        ) : (
-          ""
-        )}
+        <div>
+          <Link href={`/community/${slug}/about`}>About</Link>{' '}
+        </div>
+        <div>
+          <Link href={`/community/${slug}/members`}>Members</Link>{' '}
+        </div>
+        <div>
+          {hasPosts ? <Link href={`/community/${slug}/posts`}>Posts</Link> : ''}{' '}
+        </div>
+        <div>
+          {hasMessages ? (
+            <Link href={`/community/${slug}/messages`}>Messages</Link>
+          ) : (
+            ''
+          )}
+        </div>
+        <div>
+          {hasEvents ? (
+            <Link href={`/community/${slug}/events`}>Events</Link>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
       <div className="community-container">
         <Switch>

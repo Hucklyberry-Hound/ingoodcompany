@@ -1,6 +1,6 @@
 .column-li {
     font-family:arial,sans-serif;
-    font-size:100%;
+    font-size: 25px;
     font-weight:normal;
     text-decoration:none;
     color:#000;
@@ -10,7 +10,39 @@
     padding:1em;
     margin:1em;
     box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+}
 
+.column-li h5{
+    font-size: 100%;
+}
+
+.column-li p{
+    font-size: 100%;
+}
+
+.column h2{
+    width: 200px;
+    height: 75;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    margin-right: 10px;
+    margin-left: 10px;
+    color: white;
+    background-color: #2c353a;
+}
+
+.column p{
+    display: flex;
+    width: 200px;
+    height: 20;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    margin-right: 10px;
+    margin-left: 10px;
+    color: white;
+    background-color: #2c353a;
+    justify-content: center;
 }
 
 .column-li:nth-child(even){
