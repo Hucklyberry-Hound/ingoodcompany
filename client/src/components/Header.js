@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "@material-ui/core/Link";
+import {Link} from 'react-router-dom';
 import { withRouter } from "react-router";
 import { AUTH_TOKEN, USER } from "../constants";
 import "../styles/Header.css";
