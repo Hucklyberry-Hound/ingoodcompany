@@ -9,7 +9,7 @@ import "../styles/MemberList.css"
 const MemberList = props => {
   const { users, communityName, owner } = props;
   return (
-    <div>
+    <div className="community-item">
       <h1>Members of {communityName}: </h1>
       <h2 className="memeber-owner"> 
       <Link to={`/user/${owner.username}`}>
