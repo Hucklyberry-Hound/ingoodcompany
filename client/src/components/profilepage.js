@@ -67,7 +67,7 @@ export default class UserProfile extends React.Component {
                 <h2>Filter</h2>
                 {this.state.categories.map((cat, index) => {
                   return (
-                    <div className="column column-li" key={index} style={{background: 'violet'}}>
+                    <div className="column column-li filter" key={index} style={{background: 'violet'}}>
                       <Link to={`/category/${cat}`}>{cat}</Link>
                     </div>
                   );
