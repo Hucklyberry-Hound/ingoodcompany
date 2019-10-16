@@ -10,7 +10,7 @@ body{
     text-align: center;
     text-align: center;    
     width: 33%;
-    margin-left: 350px;
+    margin-left: 500px;
 }
 
 .post-form-container input {
@@ -30,6 +30,7 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    
 }
 
 .post-item{
