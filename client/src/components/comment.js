@@ -6,11 +6,11 @@ const Comment = props => {
 
   return (
     <div className="comment">
-      <Link href={`/user/${author.username}`}>
-        <small>{author.username}</small>
-      </Link>
-      <small> wrote...:</small>
-      <p>{content}</p>
+      <small className="comment-author">
+        <Link href={`/user/${author.username}`}>{author.username}</Link>{" "}
+        wrote...:
+      </small>
+      <p className="comment-text">{content}</p>
     </div>
   );
 };

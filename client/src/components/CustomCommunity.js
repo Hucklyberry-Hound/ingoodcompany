@@ -5,6 +5,7 @@ import Thread from "./thread";
 import Members from "./memberlist";
 import Link from "@material-ui/core/Link";
 import { Route, Switch } from "react-router-dom";
+import Events from "./Events";
 
 const CustomCommunity = props => {
   const {
@@ -15,6 +16,7 @@ const CustomCommunity = props => {
     posts,
     hasPosts,
     hasMessages,
+    hasEvents,
     users,
     owner
   } = props;
@@ -30,6 +32,11 @@ const CustomCommunity = props => {
           ""
         )}
         <Link href={`/community/${slug}/members`}>Members</Link>
+        {hasEvents ? (
+          <Link href={`/community/${slug}/events`}>Events</Link>
+        ) : (
+          ""
+        )}
       </div>
       <div className="community-container">
         <Switch>
@@ -59,6 +66,13 @@ const CustomCommunity = props => {
             path="/community/:community/thread/:postId"
             component={Thread}
           />
+
+          <Route
+            exact
+            path="/community/:community/events"
+            render={props => <Events {...props} communityId={id} slug={slug} />}
+          />
+
           <Route
             render={props => <Posts {...props} communityId={id} slug={slug} />}
           />

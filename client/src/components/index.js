@@ -7,3 +7,4 @@ export { default as UserPage } from './user';
 export { default as createPostForm } from './createPostForm';
 export { default as JoinPage } from './joinpage';
 export { default as TopicsPage } from './topics';
+export { default as Events } from './Events'

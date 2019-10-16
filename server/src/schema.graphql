@@ -14,16 +14,18 @@ type Query {
   getPost(id: String!) : Post
   getCommunity(slug: String!) : Community
   getCurrentUser(username: String! ) : User
+  events: [Event!]
 }
 
 type Mutation {
   createNewPost(communityId: String!, title: String!, content: String!): Post!
-  createNewCommunity(name: String!, category: String!, hasPosts: Boolean!, hasMessages: Boolean!, privacy: String!, about: String!): Community!
+  createNewCommunity(name: String!, category: String!, hasPosts: Boolean!, hasEvents: Boolean!, hasMessages: Boolean!, privacy: String!, about: String!): Community!
   createNewComment(postId: String!, content: String!) : Comment!
   createNewUser(firstName: String!, lastName: String, email: String!, username: String!, password: String!) : User!
   signup(email: String!, password: String!, username: String!, firstName: String!, lastName: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   addUserToCommunity(communityId: String!) : User
+  createEvent(title: String!, date: String!, description: String!, community: String!): Event
 }
 
 type Subscription {
@@ -41,6 +43,7 @@ type User {
   username: String!
   password: String!
   messages: [Message!]
+  events: [Event!]
   communities: [Community!]
   ownerOf: [Community!]
   comments: [Comment!]
@@ -58,7 +61,9 @@ type Community {
     category: String!
     posts: [Post!]
     hasPosts: Boolean!
+    hasEvents: Boolean!
     hasMessages: Boolean!
+    events: [Event!]
     slug: String!
     privacy: String!
     users: [User!]
@@ -91,3 +96,11 @@ type Message {
     community: Community!
 }
 
+type Event {
+  id: ID!
+  title: String!
+  date: String!
+  description: String!
+  hostedby: User!
+  community: Community! 
+}

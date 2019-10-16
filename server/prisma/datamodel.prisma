@@ -6,6 +6,7 @@ type User {
     username: String! @unique
     password: String!
     messages: [Message!]
+    events: [Event!]
     comments: [Comment!]
     communities: [Community!] @relation(name:"Users")
     ownerOf: [Community!] @relation(name:"Owner")
@@ -21,7 +22,9 @@ type Community {
     posts: [Post!]
     hasPosts: Boolean!
     hasMessages: Boolean!
+    hasEvents: Boolean!
     users: [User!] @relation(name:"Users")
+    events: [Event!]
     privacy: String!
     owner: User @relation(name:"Owner")
     createdAt: DateTime! @createdAt
@@ -54,4 +57,13 @@ type Message {
     content: String!
     community: Community!
     createdAt: DateTime! @createdAt
+}
+
+type Event {
+    id: ID! @id
+    title: String!
+    date: String!
+    description: String!
+    hostedby: User!
+    community: Community! 
 }

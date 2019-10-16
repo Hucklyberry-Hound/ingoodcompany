@@ -23,7 +23,7 @@ export default class PostContainer extends React.Component {
   render() {
     const { posts, communityId, slug } = this.state;
     return posts.length ? (
-      <div>
+      <div className="community-item">
         <CreatePostForm communityId={communityId} updateParent={this.update} />
         {posts.map(post => {
           return (

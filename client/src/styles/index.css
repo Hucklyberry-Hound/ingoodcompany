@@ -39,6 +39,7 @@ code {
 .community {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
 }
 
@@ -53,9 +54,14 @@ code {
 }
 
 .community-container {
-  align-self: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.community-item {
   width: 33%;
-  margin-bottom: 30px;
 }
 
 .create-form {
@@ -87,13 +93,39 @@ code {
   padding: 40px 0;
 }
 
+.thread-container {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.thread-top {
+  width: 100%;
+  background-color: #daebe8;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+
+
 .comment-container {
-  margin-bottom: 0px;
+  width: 50%;
 }
 
 .comment {
   margin-top: 20px;
   border: 1px solid black;
+  border-radius: 8px;
+  text-align: left;
+  padding: 5px;
+  background-color: #34ebe5;
+}
+
+.comment-text {
+  position: relative;
+  bottom: 15px;
+  padding-left: 10px;
 }
 
 .comment-form {
@@ -119,6 +151,13 @@ nav {
   flex-direction: row;
   align-self: center;
   justify-content: space-between;
+}
+
+.post-item {
+  background-color: #34ebe5;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 10px;
 }
 
 .post-form {

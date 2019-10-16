@@ -18,6 +18,9 @@ export const GET_POSTS = gql`
         name
         id
       }
+      comments {
+        id
+      }
     }
   }
 `;

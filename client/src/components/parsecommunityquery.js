@@ -16,6 +16,7 @@ class ParseCommunityQuery extends React.Component {
       slug,
       hasPosts,
       hasMessages,
+      hasEvents,
       privacy
     } = props;
 
@@ -28,6 +29,7 @@ class ParseCommunityQuery extends React.Component {
       slug,
       hasPosts,
       hasMessages,
+      hasEvents,
       privacy
     };
 
@@ -48,6 +50,7 @@ class ParseCommunityQuery extends React.Component {
       users,
       slug,
       hasPosts,
+      hasEvents,
       hasMessages,
       privacy
     } = this.state;
@@ -63,6 +66,7 @@ class ParseCommunityQuery extends React.Component {
           slug={slug}
           hasMessages={hasMessages}
           hasPosts={hasPosts}
+          hasEvents={hasEvents}
           users={users}
           owner={owner}
         />
