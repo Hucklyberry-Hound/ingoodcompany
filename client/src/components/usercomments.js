@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+//CSS
+import '../styles/User.css'
+
 const UserComments = ({ user }) => {
   return (
     <React.Fragment>
       <h2>Comments: </h2>
+      <div className="user-communities">
       {user.comments.map(comment => {
         return (
-          <div className="profile-item">
+          <div className="profile-item" >
             <h3>
               {user.username} commented on{" "}
               <Link
@@ -24,6 +28,7 @@ const UserComments = ({ user }) => {
           </div>
         );
       })}
+      </div>
     </React.Fragment>
   );
 };
