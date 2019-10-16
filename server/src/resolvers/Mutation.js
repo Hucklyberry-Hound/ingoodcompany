@@ -23,9 +23,9 @@ async function signup(parent, args, context, info) {
   const password = await bcrypt.hash(args.password, 10);
   let image = '';
   if (!args.image) {
-    image = defaultImages[randIdx];
+    args.image = defaultImages[randIdx];
   }
-  const user = await context.prisma.createUser({ ...args, password, image });
+  const user = await context.prisma.createUser({ ...args, password });
   const token = jwt.sign({ userId: user.id }, APP_SECRET);
   return {
     token,

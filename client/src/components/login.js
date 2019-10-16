@@ -42,7 +42,6 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-
 //generate default pic
 
 class Login extends Component {
