@@ -4,6 +4,7 @@ type User {
     lastName: String!
     email: String! @unique
     username: String! @unique
+    image: String!
     password: String!
     messages: [Message!]
     events: [Event!]

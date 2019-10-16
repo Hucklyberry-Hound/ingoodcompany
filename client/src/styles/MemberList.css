@@ -1,0 +1,68 @@
+.all-users{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.one-user{
+    width: 350px;
+    height: 250px;
+    margin: 20px;
+}
+
+.one-user a {
+    text-decoration: none;
+    color: black;
+}
+
+.info:hover {
+    animation: shake 1000ms infinite;
+    animation-timing-function: linear;   
+  }
+  
+  @keyframes shake {
+    0% { transform: rotate(5deg); }
+    50% { transform: rotate(0deg); }
+    100% { transform: rotate(5deg); }
+  }
+    
+
+
+.one-user p{
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.image-container img{
+    margin-top: 5px;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    border: solid;
+}
+
+.image-container-header img{
+    margin-top: 5px;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    border: solid;
+}
+
+.memeber-owner a{
+    text-decoration: none;
+    color: black;
+}
+
+.memeber-owner a:hover {
+    color: white;
+    
+}
+
+.pin img{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    z-index: 2;
+}

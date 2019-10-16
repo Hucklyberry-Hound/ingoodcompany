@@ -11,6 +11,7 @@ const SIGNUP_MUTATION = gql`
     $firstName: String!
     $lastName: String!
     $username: String!
+    $image: String!
   ) {
     signup(
       email: $email
@@ -18,6 +19,7 @@ const SIGNUP_MUTATION = gql`
       firstName: $firstName
       lastName: $lastName
       username: $username
+      image: $image
     ) {
       token
       user {
@@ -40,6 +42,16 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
+
+//generate default pic
+const randIdx =  Math.floor(Math.random() * 3)
+const defaultImages = [ 
+    'https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Alien-512.png',
+    'https://66.media.tumblr.com/15aa93b2b3b4949d6d061735c9ba6b21/tumblr_inline_n6y3qnRoSg1r73jj6.png',
+    'https://cdn.imgbin.com/0/10/15/imgbin-robot-scalable-graphics-euclidean-icon-robot-qDGV4CMnQsejEwaqGRvRiU1PH.jpg',
+    'https://cdn.dribbble.com/users/2101624/screenshots/6068793/dribbble5.jpg'
+]
+
 class Login extends Component {
   constructor() {
     super();
@@ -49,6 +61,7 @@ class Login extends Component {
       password: '',
       firstName: '',
       lastName: '',
+      image: '' || defaultImages[randIdx],
       username: '',
     };
 
@@ -93,19 +106,25 @@ class Login extends Component {
                   type="text"
                   placeholder="Username"
                 />
+                 <input
+                  value={this.state.image}
+                  onChange={e => this.setState({ image: e.target.value })}
+                  type="text"
+                  placeholder="(Optional) Image URL"
+                />
               </div>
             )}
             <input
               value={this.state.email}
               onChange={e => this.setState({ email: e.target.value })}
               type="text"
-              placeholder="Your email address"
+              placeholder="Email Address"
             />
             <input
               value={this.state.password}
               onChange={e => this.setState({ password: e.target.value })}
               type="password"
-              placeholder="Choose a safe password"
+              placeholder="Password"
             />
           </div>
           <div>

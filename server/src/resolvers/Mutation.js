@@ -33,7 +33,7 @@ async function login(parent, args, context, info) {
 
 function createNewUser(
   parent,
-  { firstName, lastName, email, username, password },
+  { firstName, lastName, email, username, password, image },
   context,
   info
 ) {
@@ -42,7 +42,8 @@ function createNewUser(
     lastName,
     email,
     username,
-    password
+    password, 
+    image
   });
 }
 

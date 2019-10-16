@@ -1897,6 +1897,7 @@ type User {
   lastName: String!
   email: String!
   username: String!
+  image: String!
   password: String!
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
@@ -1919,6 +1920,7 @@ input UserCreateInput {
   lastName: String!
   email: String!
   username: String!
+  image: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
   events: EventCreateManyWithoutHostedbyInput
@@ -1964,6 +1966,7 @@ input UserCreateWithoutCommentsInput {
   lastName: String!
   email: String!
   username: String!
+  image: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
   events: EventCreateManyWithoutHostedbyInput
@@ -1978,6 +1981,7 @@ input UserCreateWithoutCommunitiesInput {
   lastName: String!
   email: String!
   username: String!
+  image: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
   events: EventCreateManyWithoutHostedbyInput
@@ -1992,6 +1996,7 @@ input UserCreateWithoutEventsInput {
   lastName: String!
   email: String!
   username: String!
+  image: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
   comments: CommentCreateManyWithoutAuthorInput
@@ -2006,6 +2011,7 @@ input UserCreateWithoutMessagesInput {
   lastName: String!
   email: String!
   username: String!
+  image: String!
   password: String!
   events: EventCreateManyWithoutHostedbyInput
   comments: CommentCreateManyWithoutAuthorInput
@@ -2020,6 +2026,7 @@ input UserCreateWithoutOwnerOfInput {
   lastName: String!
   email: String!
   username: String!
+  image: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
   events: EventCreateManyWithoutHostedbyInput
@@ -2034,6 +2041,7 @@ input UserCreateWithoutPostsInput {
   lastName: String!
   email: String!
   username: String!
+  image: String!
   password: String!
   messages: MessageCreateManyWithoutSenderInput
   events: EventCreateManyWithoutHostedbyInput
@@ -2058,6 +2066,8 @@ enum UserOrderByInput {
   email_DESC
   username_ASC
   username_DESC
+  image_ASC
+  image_DESC
   password_ASC
   password_DESC
   createdAt_ASC
@@ -2070,6 +2080,7 @@ type UserPreviousValues {
   lastName: String!
   email: String!
   username: String!
+  image: String!
   password: String!
   createdAt: DateTime!
 }
@@ -2145,6 +2156,20 @@ input UserScalarWhereInput {
   username_not_starts_with: String
   username_ends_with: String
   username_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
   password: String
   password_not: String
   password_in: [String!]
@@ -2195,6 +2220,7 @@ input UserUpdateInput {
   lastName: String
   email: String
   username: String
+  image: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
   events: EventUpdateManyWithoutHostedbyInput
@@ -2209,6 +2235,7 @@ input UserUpdateManyDataInput {
   lastName: String
   email: String
   username: String
+  image: String
   password: String
 }
 
@@ -2217,6 +2244,7 @@ input UserUpdateManyMutationInput {
   lastName: String
   email: String
   username: String
+  image: String
   password: String
 }
 
@@ -2279,6 +2307,7 @@ input UserUpdateWithoutCommentsDataInput {
   lastName: String
   email: String
   username: String
+  image: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
   events: EventUpdateManyWithoutHostedbyInput
@@ -2292,6 +2321,7 @@ input UserUpdateWithoutCommunitiesDataInput {
   lastName: String
   email: String
   username: String
+  image: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
   events: EventUpdateManyWithoutHostedbyInput
@@ -2305,6 +2335,7 @@ input UserUpdateWithoutEventsDataInput {
   lastName: String
   email: String
   username: String
+  image: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
   comments: CommentUpdateManyWithoutAuthorInput
@@ -2318,6 +2349,7 @@ input UserUpdateWithoutMessagesDataInput {
   lastName: String
   email: String
   username: String
+  image: String
   password: String
   events: EventUpdateManyWithoutHostedbyInput
   comments: CommentUpdateManyWithoutAuthorInput
@@ -2331,6 +2363,7 @@ input UserUpdateWithoutOwnerOfDataInput {
   lastName: String
   email: String
   username: String
+  image: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
   events: EventUpdateManyWithoutHostedbyInput
@@ -2344,6 +2377,7 @@ input UserUpdateWithoutPostsDataInput {
   lastName: String
   email: String
   username: String
+  image: String
   password: String
   messages: MessageUpdateManyWithoutSenderInput
   events: EventUpdateManyWithoutHostedbyInput
@@ -2459,6 +2493,20 @@ input UserWhereInput {
   username_not_starts_with: String
   username_ends_with: String
   username_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
   password: String
   password_not: String
   password_in: [String!]
