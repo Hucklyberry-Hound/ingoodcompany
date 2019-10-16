@@ -2,6 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import { withRouter } from "react-router-dom";
+import { GET_COMMUNITIES } from "./profilepage"
 
 const ADD_USER = gql`
   mutation AddUserToCommunity($communityId: String!) {
@@ -32,8 +33,13 @@ class JoinPage extends React.Component {
             const newMember = mutation.addUserToCommunity;
             updateParent(newMember);
           }}
+          refetchQueries={() => {
+            return [{
+              query: GET_COMMUNITIES
+            }];
+          }}
         >
-          {mutation => <button onClick={mutation}>Click Here to Join!</button>}
+          {mutation => <button onClick={mutation} >Click Here to Join!</button>}
         </Mutation>
       </div>
     );

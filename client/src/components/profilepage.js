@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import { USER } from '../constants';
 import '../styles/ProfilePage.css';
 
-const GET_COMMUNITIES = gql`
+export const GET_COMMUNITIES = gql`
   {
     communities {
       id
@@ -51,7 +51,7 @@ export default class UserProfile extends React.Component {
           );
           return (
             <div className="profile-container">
-              <ColumnData headerText="Owned by you" listData={owned} color={"#ffc"}/>
+              <ColumnData headerText="Owned by you" listData={owned} color={"#ffc"} />
               <ColumnData
                 headerText="Subscriptions"
                 listData={belongsTo}
@@ -67,7 +67,7 @@ export default class UserProfile extends React.Component {
                 <h2>Filter</h2>
                 {this.state.categories.map((cat, index) => {
                   return (
-                    <div className="column column-li filter" key={index} style={{background: 'violet'}}>
+                    <div className="column column-li filter" key={index} style={{ background: 'violet' }}>
                       <Link to={`/category/${cat}`}>{cat}</Link>
                     </div>
                   );
