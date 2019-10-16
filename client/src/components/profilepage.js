@@ -1,10 +1,10 @@
-import React from 'react';
-import ColumnData from './profilecolumn';
-import { Query } from 'react-apollo';
-import { Link } from 'react-router-dom';
-import gql from 'graphql-tag';
-import { USER } from '../constants';
-import '../styles/ProfilePage.css';
+import React from "react";
+import ColumnData from "./profilecolumn";
+import { Query } from "react-apollo";
+import { Link } from "react-router-dom";
+import gql from "graphql-tag";
+import { USER } from "../constants";
+import "../styles/ProfilePage.css";
 
 export const GET_COMMUNITIES = gql`
   {
@@ -30,7 +30,19 @@ export default class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: ['Animals', 'Computers', 'Food', 'Chair'],
+      categories: [
+        "Animals",
+        "Computers",
+        "Food",
+        "Games",
+        "Health",
+        "Movies",
+        "Nature",
+        "Photography",
+        "Random",
+        "Science",
+        "Sports"
+      ]
     };
   }
 
@@ -47,6 +59,7 @@ export default class UserProfile extends React.Component {
             c.users.map(u => u.username).includes(username)
           );
           const publicCommunities = communities.filter(
+
             c => (c.privacy.toLowerCase() === 'public')
           );
           const commWithoutYou = publicCommunities.filter(
@@ -58,6 +71,7 @@ export default class UserProfile extends React.Component {
                 return false
               } else return true
             }
+
           );
           return (
             <div className="profile-container">

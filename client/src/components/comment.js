@@ -1,15 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Link from "@material-ui/core/Link";
 
 const Comment = props => {
   const { author, content } = props.comment;
 
   return (
     <div className="comment">
-      <Link to={`/user/${author.username}`}>
-        <small>{author.username} wrote...:</small>
-      </Link>
-      <p>{content}</p>
+      <small className="comment-author">
+        <Link href={`/user/${author.username}`}>{author.username}</Link>{" "}
+        wrote...:
+      </small>
+      <p className="comment-text">{content}</p>
     </div>
   );
 };

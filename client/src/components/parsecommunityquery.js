@@ -74,6 +74,7 @@ class ParseCommunityQuery extends React.Component {
       ) : (
         <JoinPage communityId={id} updateParent={this.updateMembers} about={about} name={name} />
       );
+
   }
 }
 

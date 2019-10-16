@@ -6,10 +6,16 @@ import UserCommunities from "./usercommunities";
 import UserComments from "./usercomments";
 import UserPosts from "./userposts";
 
+//CSS
+import '../styles/User.css'
+
 const GET_USER = gql`
   query GetUser($username: String!) {
     userByHandle(username: $username) {
       username
+      image
+      firstName
+      lastName
       communities {
         id
         name
@@ -54,7 +60,9 @@ const UserProfile = props => {
         return (
           <div className="user-profile-container">
             <div className="user-profile">
-              <h1>Profile Page of {user.username}</h1>
+              <h1>{user.firstName} {user.lastName}</h1>
+              <h4>username: {user.username}</h4>
+              <img src={user.image} />
               <UserCommunities user={user} />
               <hr />
               <UserPosts user={user} />

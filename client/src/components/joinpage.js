@@ -1,9 +1,13 @@
-import React from "react";
-import gql from "graphql-tag";
-import { Mutation } from "react-apollo";
-import { withRouter } from "react-router-dom";
+import About from './about';
+import React from 'react';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 import { GET_COMMUNITIES } from "./profilepage"
 import About from "./about"
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+
 
 const ADD_USER = gql`
   mutation AddUserToCommunity($communityId: String!) {
@@ -19,7 +23,6 @@ class JoinPage extends React.Component {
     super(props);
     this.state = {
       communityId: props.communityId,
-      updateParent: props.updateParent
     };
   }
   render() {
@@ -31,9 +34,24 @@ class JoinPage extends React.Component {
         <Mutation
           mutation={ADD_USER}
           variables={{ communityId }}
+          // update={(store, { data: { addUserToCommunity } }) => {
+          //   let data = store.readQuery({
+          //     query: GET_COMMUNITY,
+          //     variables: { slug: this.props.slug }
+          //   });
+          //   data.getCommunity.users = [
+          //     ...data.getCommunity.users,
+          //     addUserToCommunity
+          //   ];
+          //   store.writeQuery({
+          //     query: GET_COMMUNITY,
+          //     data
+          //   });
+          //   return data;
+          // }}
           onCompleted={mutation => {
             const newMember = mutation.addUserToCommunity;
-            updateParent(newMember);
+            this.props.updateParent(newMember);
           }}
           refetchQueries={() => {
             return [{
@@ -41,7 +59,20 @@ class JoinPage extends React.Component {
             }];
           }}
         >
-          {mutation => <button onClick={mutation} >Click Here to Join!</button>}
+
+          {mutation => (
+            <Box p={3}>
+              <Button
+                p={10}
+                variant="contained"
+                color="primary"
+                onClick={mutation}
+              >
+                Click Here to Join!
+              </Button>
+            </Box>
+          )}
+
         </Mutation>
       </div>
     );

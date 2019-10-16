@@ -1,21 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
-import { AUTH_TOKEN, USER } from '../constants';
-import '../styles/Header.css';
+import React from "react";
+import {Link} from 'react-router-dom';
+import { withRouter } from "react-router";
+import { AUTH_TOKEN, USER } from "../constants";
+import "../styles/Header.css";
 
 class Header extends React.Component {
   constructor() {
     super();
     this.state = {
-      show: false,
+      show: false
     };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   toggleMenu() {
     this.setState({ show: !this.state.show });
-    document.getElementsByClassName('loggedin-header-bar')[0].classList.toggle('loggedin-header-bar-active');
+    document
+      .getElementsByClassName("loggedin-header-bar")[0]
+      .classList.toggle("loggedin-header-bar-active");
+
   }
 
   render() {
@@ -77,6 +80,7 @@ class Header extends React.Component {
                 ''
               )}
           </div>
+
         </div>
       </div>
     );

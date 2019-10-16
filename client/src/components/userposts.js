@@ -1,16 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from 'react-router-dom';
 
 const UserPosts = ({ user }) => {
   return (
     <React.Fragment>
       <h2>Posts: </h2>
+      <div className="user-communities">
       {user.posts.map(post => {
         return (
-          <div className="profile-item">
+          <div className="profile-item" style={{background: "violet"}}>
             <h2>
               {user.username} posted to{" "}
-              <Link to={`/community/${post.community.slug}`}>
+              <Link href={`/community/${post.community.slug}`}>
                 {post.community.name}
               </Link>
               :
@@ -20,6 +21,7 @@ const UserPosts = ({ user }) => {
           </div>
         );
       })}
+      </div>
     </React.Fragment>
   );
 };
