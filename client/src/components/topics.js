@@ -19,27 +19,31 @@ const TopicsPage = props => {
 
   return (
     <React.Fragment>
-      <h1>Communities about {category}</h1>
-      <Query query={FILTER_COMMUNITY} variables={{ filter: category }}>
-        {({ loading, error, data }) => {
-          if (loading) return <div>Loading</div>;
-          if (error) console.log(error);
-          const { communities } = data;
-          return (
-            <ul>
-              {communities.map(community => {
-                return (
-                  <li>
-                    <Link to={`/community/${community.slug}`}>
-                      {community.name}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          );
-        }}
-      </Query>
+      <div class="category-communities">
+        <div class="category-communities-box">
+          <h1>Communities about {category}</h1>
+          <Query query={FILTER_COMMUNITY} variables={{ filter: category }}>
+            {({ loading, error, data }) => {
+              if (loading) return <div>Loading</div>;
+              if (error) console.log(error);
+              const { communities } = data;
+              return (
+                <ul>
+                  {communities.map(community => {
+                    return (
+                      <li>
+                        <Link to={`/community/${community.slug}`}>
+                          {community.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              );
+            }}
+          </Query>
+        </div>
+      </div>
     </React.Fragment>
   );
 };

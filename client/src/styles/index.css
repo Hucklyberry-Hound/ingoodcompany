@@ -38,6 +38,7 @@ code {
 .community {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
 }
 
@@ -52,9 +53,17 @@ code {
 }
 
 .community-container {
-  align-self: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.community-item {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
   width: 33%;
-  margin-bottom: 30px;
 }
 
 .create-form {
@@ -86,13 +95,57 @@ code {
   padding: 40px 0;
 }
 
+.about {
+  background-color: white;
+}
+
+.thread-container {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.thread-top {
+  width: 100%;
+  background-color: #daebe8;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+
 .comment-container {
-  margin-bottom: 0px;
+  width: 50%;
+}
+
+.no-comments {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.comment-form {
+  background-color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
 .comment {
   margin-top: 20px;
   border: 1px solid black;
+  border-radius: 8px;
+  text-align: left;
+  padding: 5px;
+  background-color: #34ebe5;
+}
+
+.comment-text {
+  position: relative;
+  bottom: 15px;
+  padding-left: 10px;
 }
 
 .comment-form {
@@ -123,6 +176,13 @@ nav {
   justify-content: space-between;
 }
 
+.post-item {
+  background-color: #34ebe5;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 10px;
+}
+
 .post-form {
   display: flex;
   flex-direction: column;
@@ -136,6 +196,22 @@ nav {
 
 .community-form {
   width: 25%;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 25px;
+}
+
+.category-communities {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.category-communities-box {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 input {
@@ -148,4 +224,8 @@ input {
   border-color: rgba(0, 0, 0, 0.15);
   background-color: white;
   font-size: 16px;
+}
+
+.select-form {
+  min-width: 200;
 }

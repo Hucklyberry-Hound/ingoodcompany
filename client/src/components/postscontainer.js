@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import CreatePostForm from "./createPostForm";
-import PostItem from "./postitem";
+import CreatePostForm from './createPostForm';
+import PostItem from './postitem';
 
 //CSS import
-import "../styles/Post.css"
+import '../styles/Post.css';
 
 export default class PostContainer extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export default class PostContainer extends React.Component {
     this.state = {
       posts,
       communityId,
-      slug
+      slug,
     };
 
     this.update = this.update.bind(this);
@@ -26,28 +26,27 @@ export default class PostContainer extends React.Component {
   render() {
     const { posts, communityId, slug } = this.state;
     return posts.length ? (
-      <div className="post-form">
+      <React.Fragment>
         <CreatePostForm communityId={communityId} updateParent={this.update} />
         <div className="all-post">
-        {posts.map(post => {
-          return (
-            <PostItem
-              item={post}
-              slug={slug}
-              communityId={communityId}
-              key={post.id}
-            />
-          );
-
-        })}
-         </div>
-      </div>
+          {posts.map(post => {
+            return (
+              <PostItem
+                item={post}
+                slug={slug}
+                communityId={communityId}
+                key={post.id}
+              />
+            );
+          })}
+        </div>
+      </React.Fragment>
     ) : (
-      <div>
+      <React.Fragment>
         <h1>Looks Like There Are No Posts Here :(</h1>
-       
-          <CreatePostForm communityId={communityId} updateParent={this.update} />
-      </div>
+
+        <CreatePostForm communityId={communityId} updateParent={this.update} />
+      </React.Fragment>
     );
   }
 }
