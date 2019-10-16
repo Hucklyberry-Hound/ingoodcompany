@@ -1,7 +1,8 @@
-import React from "react";
-import gql from "graphql-tag";
-import { Mutation } from "react-apollo";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
+import About from './about';
 
 const ADD_USER = gql`
   mutation AddUserToCommunity($communityId: String!) {
@@ -17,7 +18,7 @@ class JoinPage extends React.Component {
     super(props);
     this.state = {
       communityId: props.communityId,
-      updateParent: props.updateParent
+      updateParent: props.updateParent,
     };
   }
 
@@ -25,6 +26,7 @@ class JoinPage extends React.Component {
     const { communityId, updateParent } = this.state;
     return (
       <div>
+        <About></About>
         <Mutation
           mutation={ADD_USER}
           variables={{ communityId }}
