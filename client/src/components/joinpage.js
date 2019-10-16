@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import { withRouter } from "react-router-dom";
 import { GET_COMMUNITIES } from "./profilepage"
+import About from "./about"
 
 const ADD_USER = gql`
   mutation AddUserToCommunity($communityId: String!) {
@@ -21,11 +22,12 @@ class JoinPage extends React.Component {
       updateParent: props.updateParent
     };
   }
-
   render() {
+    const { about, name } = this.props
     const { communityId, updateParent } = this.state;
     return (
       <div>
+        <About info={about} name={name} />
         <Mutation
           mutation={ADD_USER}
           variables={{ communityId }}
