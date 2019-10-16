@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 
 //CSS import
 import '../styles/Post.css';
@@ -10,10 +10,10 @@ const PostItem = props => {
   return (
     <div className="post-item">
       <div>
-        <Link href={`/community/${slug}/thread/${id}`}>
+        <Link to={`/community/${slug}/thread/${id}`}>
           <h4>{title}</h4>
         </Link>
-        <Link href={`/user/${postedBy.username}`}>
+        <Link to={`/user/${postedBy.username}`}>
           <small> Posted By:</small>
           <p>{postedBy.username}</p>
         </Link>

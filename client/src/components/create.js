@@ -9,6 +9,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import { GET_COMMUNITIES } from './profilepage'
 
+import '../styles/Create.css'
+
 
 const CREATE_COMMUNITY_MUTATION = gql`
   mutation CreateMutation(

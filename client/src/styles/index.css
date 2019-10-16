@@ -139,7 +139,9 @@ code {
   border-radius: 8px;
   text-align: left;
   padding: 5px;
-  background-color: #34ebe5;
+  background-color: #2c353a;
+  color: white;
+
 }
 
 .comment-text {
