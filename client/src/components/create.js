@@ -1,11 +1,11 @@
-import React from "react";
-import { Mutation } from "react-apollo";
-import gql from "graphql-tag";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
+import React from 'react';
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
 
 const CREATE_COMMUNITY_MUTATION = gql`
   mutation CreateMutation(
@@ -37,13 +37,13 @@ export default class CreatePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      category: "animals",
+      name: '',
+      category: 'animals',
       hasPosts: true,
       hasEvents: true,
       hasMessages: true,
-      privacy: "public",
-      about: ""
+      privacy: 'public',
+      about: '',
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -77,7 +77,7 @@ export default class CreatePage extends React.Component {
                 value={this.state.category}
                 onChange={this.handleOnChange}
                 inputProps={{
-                  name: "category"
+                  name: 'category',
                 }}
               >
                 <MenuItem value="animals">Animals</MenuItem>
@@ -115,7 +115,7 @@ export default class CreatePage extends React.Component {
                 value={this.state.hasPosts}
                 onChange={this.handleOnChange}
                 inputProps={{
-                  name: "hasPosts"
+                  name: 'hasPosts',
                 }}
               >
                 <MenuItem value={true}>Yes</MenuItem>
@@ -125,26 +125,13 @@ export default class CreatePage extends React.Component {
           </div>
           <div className="create-field">
             <label htmlFor="hasEvents">Has Events: </label>
-            <select
-              name="hasEvents"
-              onChange={() =>
-                this.setState({ hasEvents: !this.state.hasEvents })
-              }
-              value={this.state.hasEvents}
-            >
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
-            </select>
-          </div>
-          <div className="create-field">
-            <label htmlFor="hasMessages">Has Messages: </label>
             <FormControl variant="outlined">
               <Select
-                value={this.state.hasMessages}
-                onChange={this.handleOnChange}
-                inputProps={{
-                  name: "hasMessages"
-                }}
+                value={this.state.hasEvents}
+                inputProps={{ name: 'hasEvents' }}
+                onChange={() =>
+                  this.setState({ hasEvents: !this.state.hasEvents })
+                }
               >
                 <MenuItem value={true}>Yes</MenuItem>
                 <MenuItem value={false}>No</MenuItem>
@@ -157,7 +144,7 @@ export default class CreatePage extends React.Component {
               <Select
                 value={this.state.privacy}
                 inputProps={{
-                  name: "privacy"
+                  name: 'privacy',
                 }}
                 onChange={this.handleOnChange}
               >

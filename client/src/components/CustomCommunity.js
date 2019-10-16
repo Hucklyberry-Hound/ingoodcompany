@@ -36,13 +36,6 @@ const CustomCommunity = props => {
           {hasPosts ? <Link href={`/community/${slug}/posts`}>Posts</Link> : ''}{' '}
         </div>
         <div>
-          {hasMessages ? (
-            <Link href={`/community/${slug}/messages`}>Messages</Link>
-          ) : (
-            ''
-          )}
-        </div>
-        <div>
           {hasEvents ? (
             <Link href={`/community/${slug}/events`}>Events</Link>
           ) : (
