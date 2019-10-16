@@ -14,7 +14,7 @@ const PostItem = props => {
           Posted By:{" "}
           <Link href={`/user/${postedBy.username}`}>{postedBy.username}</Link>
         </small>
-        <p className="replies-text">{comments.length} Replies</p>
+        <p className="replies-text">{comments ? comments.length : 0} Replies</p>
       </div>
     </div>
   );
