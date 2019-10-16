@@ -59,7 +59,19 @@ export default class UserProfile extends React.Component {
             c.users.map(u => u.username).includes(username)
           );
           const publicCommunities = communities.filter(
-            c => c.privacy.toLowerCase() === "public"
+
+            c => (c.privacy.toLowerCase() === 'public')
+          );
+          const commWithoutYou = publicCommunities.filter(
+            c => {
+              console.log(c.users)
+              if (c.users.some(user => {
+                return user.username === username
+              })) {
+                return false
+              } else return true
+            }
+
           );
           return (
             <div className="profile-container">
@@ -72,7 +84,7 @@ export default class UserProfile extends React.Component {
 
               <ColumnData
                 headerText="All"
-                listData={publicCommunities}
+                listData={commWithoutYou}
                 color={"lightgreen"}
               />
               <div className="column">

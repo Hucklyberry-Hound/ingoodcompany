@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import { GET_COMMUNITIES } from "./profilepage"
+import About from "./about"
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 
@@ -24,11 +25,12 @@ class JoinPage extends React.Component {
       communityId: props.communityId,
     };
   }
-
   render() {
-    const { communityId } = this.state;
+    const { about, name } = this.props
+    const { communityId, updateParent } = this.state;
     return (
       <div>
+        <About info={about} name={name} />
         <Mutation
           mutation={ADD_USER}
           variables={{ communityId }}
