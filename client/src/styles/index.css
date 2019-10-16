@@ -153,15 +153,13 @@ code {
   flex-direction: column;
 }
 
-.user-profile {
-  background-color: white;
+/* .user-profile {
   align-self: center;
   width: 25%;
   text-align: left;
   margin-left: 38%;
-  border-radius: 10px;
-  padding: 10px;
-}
+} */
+
 
 .profile-item small {
   position: relative;
