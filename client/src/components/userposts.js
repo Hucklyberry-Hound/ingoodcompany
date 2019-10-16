@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "@material-ui/core/Link";
 
 const UserPosts = ({ user }) => {
   return (
@@ -10,7 +10,7 @@ const UserPosts = ({ user }) => {
           <div className="profile-item">
             <h2>
               {user.username} posted to{" "}
-              <Link to={`/community/${post.community.slug}`}>
+              <Link href={`/community/${post.community.slug}`}>
                 {post.community.name}
               </Link>
               :

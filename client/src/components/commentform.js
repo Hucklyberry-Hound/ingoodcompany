@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import gql from 'graphql-tag';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
+import TextField from '@material-ui/core/TextField';
 
 const NEW_COMMENT = gql`
   mutation CreateNewComment($content: String!, $postId: String!) {
@@ -46,14 +47,17 @@ class CommentForm extends React.Component {
   render() {
     const { postId, content, updateParent } = this.state;
     return (
-      <div>
+      <div className="comment-form">
         <form name="newcomment" className="comment-form">
-          <h4>Reply To This Thread:</h4>
-          <textarea
+          <TextField
+            label="Reply To This Thread"
+            name="content"
+            multiline
+            rows="6"
             value={this.state.content}
-            rows="10"
             onChange={this.handleOnChange}
-            placeholder="Reply to this thread"
+            margin="normal"
+            variant="outlined"
           />
         </form>
         <Mutation

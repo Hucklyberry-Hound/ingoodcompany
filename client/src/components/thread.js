@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "@material-ui/core/Link";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
@@ -42,14 +42,17 @@ const Thread = props => {
         const author = postedBy.username;
         return (
           <div className="thread-container">
-            <div className="thread-header">
-              <h2>{title}</h2>
-              <Link to={`/user/${author}`}>
-                <small>Posted By: {author}</small>
-              </Link>
-            </div>
-            <div className="thread-content">
-              <p>{content}</p>
+            <div className="thread-top">
+              <div className="thread-header">
+                <h2>{title}</h2>
+                <small>Posted By: </small>
+                <Link href={`/user/${author}`}>
+                  <small>{author}</small>
+                </Link>
+              </div>
+              <div className="thread-content">
+                <p>{content}</p>
+              </div>
             </div>
             <CommentContainer
               communityId={community.id}
