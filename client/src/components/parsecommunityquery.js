@@ -68,7 +68,11 @@ class ParseCommunityQuery extends React.Component {
         />
       </div>
     ) : (
-      <JoinPage communityId={id} updateParent={this.updateMembers} />
+      <JoinPage
+        communityId={id}
+        slug={slug}
+        updateParent={this.updateMembers}
+      />
     );
   }
 }

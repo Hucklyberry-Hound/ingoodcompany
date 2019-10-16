@@ -30,13 +30,21 @@ class JoinPage extends React.Component {
         <Mutation
           mutation={ADD_USER}
           variables={{ communityId }}
-          refetchQueries={() => {
-            return [
-              {
-                query: GET_COMMUNITY
-              }
-            ];
-          }}
+          // update={(store, { data: { addUserToCommunity } }) => {
+          //   let data = store.readQuery({
+          //     query: GET_COMMUNITY,
+          //     variables: { slug: this.props.slug }
+          //   });
+          //   data.getCommunity.users = [
+          //     ...data.getCommunity.users,
+          //     addUserToCommunity
+          //   ];
+          //   store.writeQuery({
+          //     query: GET_COMMUNITY,
+          //     data
+          //   });
+          //   return data;
+          // }}
           onCompleted={mutation => {
             const newMember = mutation.addUserToCommunity;
             this.props.updateParent(newMember);
