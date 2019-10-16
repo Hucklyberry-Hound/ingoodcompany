@@ -1,9 +1,9 @@
 /* eslint-disable no-unreachable */
-import React from "react";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import React from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
-import PostContainer from "./postscontainer";
+import PostContainer from './postscontainer';
 
 export const GET_POSTS = gql`
   query {

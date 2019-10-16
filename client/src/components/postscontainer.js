@@ -27,7 +27,11 @@ export default class PostContainer extends React.Component {
     const { posts, communityId, slug } = this.state;
     return posts.length ? (
       <React.Fragment>
-        <CreatePostForm communityId={communityId} updateParent={this.update} />
+        <CreatePostForm
+          communityId={communityId}
+          slug={slug}
+          updateParent={this.update}
+        />
         <div className="all-post">
           {posts.map(post => {
             return (
@@ -42,11 +46,10 @@ export default class PostContainer extends React.Component {
         </div>
       </React.Fragment>
     ) : (
-      <div>
-        <h1>Looks Like There Are No Posts Here :(</h1>
-
+      <React.Fragment>
+        <h1 className="no-posts">Looks Like There Are No Posts Here :(</h1>
         <CreatePostForm communityId={communityId} updateParent={this.update} />
-      </div>
+      </React.Fragment>
     );
   }
 }

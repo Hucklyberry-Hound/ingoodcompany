@@ -60,7 +60,13 @@ const CustomCommunity = props => {
           <Route
             path="/community/:community/posts"
             render={props => (
-              <Posts {...props} posts={posts} communityId={id} slug={slug} />
+              <Posts
+                {...props}
+                hasPosts={hasPosts}
+                posts={posts}
+                communityId={id}
+                slug={slug}
+              />
             )}
           />
           <Route

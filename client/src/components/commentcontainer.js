@@ -1,6 +1,6 @@
-import React from "react";
-import CommentForm from "./commentform";
-import CommentSection from "./commentsection";
+import React from 'react';
+import CommentForm from './commentform';
+import CommentSection from './commentsection';
 
 class CommentContainer extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class CommentContainer extends React.Component {
     this.state = {
       comments,
       communityId,
-      postId
+      postId,
     };
 
     this.update = this.update.bind(this);
@@ -23,7 +23,7 @@ class CommentContainer extends React.Component {
     const { comments, communityId, postId } = this.state;
     return (
       <div className="comment-container">
-        <h2>Replies:</h2>
+        <h2 className="replies-header">Replies:</h2>
         <CommentSection comments={comments} />
         <CommentForm
           postId={postId}

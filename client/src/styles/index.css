@@ -96,6 +96,12 @@ code {
   background-color: white;
 }
 
+.no-posts {
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px;
+}
+
 .thread-container {
   width: 40%;
   display: flex;
@@ -114,6 +120,11 @@ code {
 
 .comment-container {
   width: 50%;
+}
+
+.replies-header {
+  background-color: white;
+  border-radius: 5px;
 }
 
 .no-comments {

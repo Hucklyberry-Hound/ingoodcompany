@@ -1,14 +1,14 @@
-import React from "react";
-import Link from "@material-ui/core/Link";
-import { withRouter } from "react-router";
-import { AUTH_TOKEN, USER } from "../constants";
-import "../styles/Header.css";
+import React from 'react';
+import Link from '@material-ui/core/Link';
+import { withRouter } from 'react-router';
+import { AUTH_TOKEN, USER } from '../constants';
+import '../styles/Header.css';
 
 class Header extends React.Component {
   constructor() {
     super();
     this.state = {
-      show: false
+      show: false,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
@@ -16,8 +16,8 @@ class Header extends React.Component {
   toggleMenu() {
     this.setState({ show: !this.state.show });
     document
-      .getElementsByClassName("loggedin-header-bar")[0]
-      .classList.toggle("loggedin-header-bar-active");
+      .getElementsByClassName('loggedin-header-bar')[0]
+      .classList.toggle('loggedin-header-bar-active');
   }
 
   render() {
@@ -34,54 +34,51 @@ class Header extends React.Component {
             ></i>
           </div>
         ) : (
-          ""
+          ''
         )}
         <div>
-          {authToken ? (
-            <div className="loggedin-header-bar">
-              {this.state.show ? (
-                <React.Fragment>
-                  <div className="close">
-                    <i
-                      className="fa fa-window-close"
-                      aria-hidden="true"
-                      onClick={() => this.toggleMenu()}
-                    ></i>
-                  </div>
-                  <h4 className="welcome-header-bar">Welcome {user}!</h4>
-                  <div className="links-header-bar">
-                    <Link className="element-header-bar" href="/home">
-                      <div>home</div>
-                    </Link>
+          <div className="loggedin-header-bar">
+            {this.state.show ? (
+              <React.Fragment>
+                <div className="close">
+                  <i
+                    className="fa fa-window-close"
+                    aria-hidden="true"
+                    onClick={() => this.toggleMenu()}
+                  ></i>
+                </div>
+                <h4 className="welcome-header-bar">Welcome {user}!</h4>
+                <div className="links-header-bar">
+                  <Link className="element-header-bar" href="/home">
+                    <div>home</div>
+                  </Link>
 
-                    <Link className="element-header-bar" href="/create">
-                      <div>create</div>
-                    </Link>
+                  <Link className="element-header-bar" href="/create">
+                    <div>create</div>
+                  </Link>
 
-                    <Link className="element-header-bar" href={`/user/${user}`}>
-                      <div>profile</div>
-                    </Link>
+                  <Link className="element-header-bar" href={`/user/${user}`}>
+                    <div>profile</div>
+                  </Link>
 
-                    <Link className="element-header-bar-logout" href="/">
-                      <div
-                        onClick={() => {
-                          localStorage.removeItem(AUTH_TOKEN);
-                          localStorage.removeItem(USER);
-                          this.props.history.push(`/login`);
-                        }}
-                      >
-                        logout
-                      </div>
-                    </Link>
-                  </div>
-                </React.Fragment>
-              ) : (
-                ""
-              )}
-            </div>
-          ) : (
-            <Link href="/login"> login/create account </Link>
-          )}
+                  <Link className="element-header-bar-logout" href="/">
+                    <div
+                      onClick={() => {
+                        localStorage.removeItem(AUTH_TOKEN);
+                        localStorage.removeItem(USER);
+                        this.toggleMenu();
+                        this.props.history.push(`/login`);
+                      }}
+                    >
+                      logout
+                    </div>
+                  </Link>
+                </div>
+              </React.Fragment>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       </div>
     );
