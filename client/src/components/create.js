@@ -84,7 +84,7 @@ export default class CreatePage extends React.Component {
                 <MenuItem value="computers">Computers</MenuItem>
                 <MenuItem value="food">Food</MenuItem>
                 <MenuItem value="games">Games</MenuItem>
-                <MenuItem value="health">Head</MenuItem>
+                <MenuItem value="health">Health</MenuItem>
                 <MenuItem value="movies">Movies</MenuItem>
                 <MenuItem value="nature">Nature</MenuItem>"
                 <MenuItem value="photography">Photography</MenuItem>
@@ -99,11 +99,11 @@ export default class CreatePage extends React.Component {
             <TextField
               id="outlined-multiline-flexible"
               label="About Your Community"
-              name="content"
+              name="about"
               multiline
-              rowsMax="10"
-              value={this.state.content}
-              onChange={this.handleChange}
+              rows="10"
+              value={this.state.about}
+              onChange={this.handleOnChange}
               margin="normal"
               variant="outlined"
             />
@@ -127,7 +127,9 @@ export default class CreatePage extends React.Component {
             <label htmlFor="hasEvents">Has Events: </label>
             <select
               name="hasEvents"
-              onChange={() => this.setState({ hasEvents: !this.state.hasEvents })}
+              onChange={() =>
+                this.setState({ hasEvents: !this.state.hasEvents })
+              }
               value={this.state.hasEvents}
             >
               <option value={true}>Yes</option>
