@@ -138,16 +138,6 @@ export default class CreatePage extends React.Component {
                 <MenuItem value={false}>No</MenuItem>
               </Select>
             </FormControl>
-            <select
-              name="hasEvents"
-              onChange={() =>
-                this.setState({ hasEvents: !this.state.hasEvents })
-              }
-              value={this.state.hasEvents}
-            >
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
-            </select>
           </div>
           <div className="create-field">
             <label htmlFor="hasMessages">Has Messages: </label>

@@ -47,9 +47,10 @@ class CommentForm extends React.Component {
   render() {
     const { postId, content, updateParent } = this.state;
     return (
-      <div className="comment-form">
+      <div className="comment-form-container">
         <form name="newcomment" className="comment-form">
           <TextField
+            className="comment-form-text-field"
             label="Reply To This Thread"
             name="content"
             multiline
