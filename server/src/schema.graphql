@@ -26,6 +26,7 @@ type Mutation {
   login(email: String!, password: String!): AuthPayload
   addUserToCommunity(communityId: String!) : User
   createEvent(title: String!, date: String!, description: String!, community: String!): Event
+  deleteCommunity(communityId: String!): Community
 }
 
 type Subscription {
