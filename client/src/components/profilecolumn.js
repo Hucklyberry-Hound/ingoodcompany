@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/ProfileColumn.css";
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+import {GET_COMMUNITIES} from './profilepage';
+
 
 
 const DELETE_COMMUNITY = gql`
@@ -23,6 +27,7 @@ const ColumnData = props => {
     <div className="column">
       <h2>{headerText}</h2>
       {listData.map((community, index) => {
+        const communityId = community.id
         return (
           <div className="column column-li" key={index} style={{background: props.color}}>
             <Link to={`/community/${community.slug}`}>
@@ -42,10 +47,6 @@ const ColumnData = props => {
               return [
                 {
                   query: GET_COMMUNITIES,
-                  
-                }, {
-                  query: GET_USER,
-                  variables: {username: username},
                 }
               ];
             }}
