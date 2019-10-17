@@ -1,17 +1,17 @@
-import React from "react";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import CreateEvent from "./CreateEvent";
-import SingleEvent from "./SingleEvent";
-import { useQuery } from "@apollo/react-hooks";
+import React from 'react';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import CreateEvent from './CreateEvent';
+import SingleEvent from './SingleEvent';
+import { useQuery } from '@apollo/react-hooks';
 
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
 //CSS imports
-import "../styles/main.scss";
-import "../styles/Calendar.css";
+import '../styles/main.scss';
+import '../styles/Calendar.css';
 
 export const GET_EVENTS = gql`
   query events {
@@ -40,12 +40,12 @@ class Events extends React.Component {
       showCreate: false,
       showEvent: false,
       selectedEvent: {
-        title: "",
-        start: "",
-        description: "",
-        hostedby: ""
+        title: '',
+        start: '',
+        description: '',
+        hostedby: '',
       },
-      selectedDate: ""
+      selectedDate: '',
     };
     this.handleDateClick = this.handleDateClick.bind(this);
     this.handleEventClick = this.handleEventClick.bind(this);
@@ -54,7 +54,6 @@ class Events extends React.Component {
 
   handleDateClick(arg) {
     const date = arg.dateStr;
-    console.log(date);
     this.setState({ showCreate: true, selectedDate: date });
   }
 
@@ -63,7 +62,7 @@ class Events extends React.Component {
       title: calEvent.event.title,
       start: calEvent.event.start,
       description: calEvent.event.extendedProps.description,
-      hostedby: calEvent.event.extendedProps.hostedby.username
+      hostedby: calEvent.event.extendedProps.hostedby.username,
     };
 
     this.setState({ showEvent: true, selectedEvent: event });
@@ -74,11 +73,10 @@ class Events extends React.Component {
   }
 
   render() {
-    console.log(this.props.communityId);
     return (
       <Query query={GET_EVENTS}>
         {({ loading, error, data }) => {
-          if (loading) return <div>Loading</div>;
+          if (loading) return <div className="loading">Loading</div>;
           if (error) return <div>ERROR</div>;
 
           const events = data.events.filter(
@@ -104,7 +102,7 @@ class Events extends React.Component {
                     communityId={this.props.communityId}
                   />
                 ) : (
-                  ""
+                  ''
                 )}
                 {this.state.showEvent ? (
                   <SingleEvent
@@ -112,7 +110,7 @@ class Events extends React.Component {
                     closeView={this.closeView}
                   />
                 ) : (
-                  ""
+                  ''
                 )}
               </div>
             </div>

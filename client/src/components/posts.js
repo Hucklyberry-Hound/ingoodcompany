@@ -30,7 +30,7 @@ const Posts = props => {
   return (
     <Query query={GET_POSTS} variables={{ communityId }}>
       {({ loading, error, data }) => {
-        if (loading) return <div>Loading</div>;
+        if (loading) return <div className="loading">Loading</div>;
         if (error) return console.log(error);
         const posts = data.posts.filter(
           post => post.community.id === communityId

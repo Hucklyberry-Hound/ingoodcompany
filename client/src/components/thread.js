@@ -1,9 +1,9 @@
-import React from "react";
-import Link from "@material-ui/core/Link";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import React from 'react';
+import Link from '@material-ui/core/Link';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
-import CommentContainer from "./commentcontainer";
+import CommentContainer from './commentcontainer';
 
 const GET_ONE_POST = gql`
   query GetPost($postId: String!) {
@@ -35,7 +35,7 @@ const Thread = props => {
   return (
     <Query query={GET_ONE_POST} variables={{ postId }}>
       {({ loading, error, data }) => {
-        if (loading) return <div>Loading</div>;
+        if (loading) return <div className="loading">Loading</div>;
         if (error) console.log(error);
         const thread = data.getPost;
         const { title, content, postedBy, comments, community } = thread;

@@ -57,7 +57,6 @@ export default class CreatePage extends React.Component {
 
   handleOnChange(event) {
     const key = event.target.name;
-    console.log(event.target.name);
     const updatedValue = { [key]: event.target.value };
     this.setState(updatedValue);
   }

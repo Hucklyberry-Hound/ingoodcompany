@@ -1,13 +1,13 @@
-import React from "react";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import React from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
-import UserCommunities from "./usercommunities";
-import UserComments from "./usercomments";
-import UserPosts from "./userposts";
+import UserCommunities from './usercommunities';
+import UserComments from './usercomments';
+import UserPosts from './userposts';
 
 //CSS
-import '../styles/User.css'
+import '../styles/User.css';
 
 export const GET_USER = gql`
   query GetUser($username: String!) {
@@ -16,11 +16,18 @@ export const GET_USER = gql`
       image
       firstName
       lastName
-      communities {
+      ownerOf{
         id
         name
         category
         slug
+      }
+      communities {
+        id
+        name
+        category
+        slug 
+
       }
       posts {
         id
@@ -54,13 +61,15 @@ const UserProfile = props => {
   return (
     <Query query={GET_USER} variables={{ username }}>
       {({ loading, error, data }) => {
-        if (loading) return <div>Loading</div>;
+        if (loading) return <div className="loading">Loading</div>;
         if (error) console.log(error);
         const user = data.userByHandle;
         return (
           <div className="user-profile-container">
             <div className="user-profile">
-              <h1>{user.firstName} {user.lastName}</h1>
+              <h1>
+                {user.firstName} {user.lastName}
+              </h1>
               <h4>username: {user.username}</h4>
               <img src={user.image} />
               <UserCommunities user={user} />
