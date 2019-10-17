@@ -6,6 +6,9 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import { GET_POSTS } from './posts';
+import { GET_USER } from './user';
+import { GET_COMMUNITIES } from './profilepage';
+import { USER } from '../constants'
 
 const CREATE_POST_MUTATION = gql`
   mutation CreateNewPost(
@@ -49,6 +52,7 @@ class CreatPostForm extends Component {
   }
 
   render() {
+    const username = localStorage.getItem(USER)
     return (
       <div className="post-form-container">
         <form className="post-form">
@@ -79,6 +83,21 @@ class CreatPostForm extends Component {
             const post = mutation.createNewPost;
             this.setState({ title: '', content: '' });
             this.props.updateParent(post);
+          }}
+          refetchQueries={() => {
+            return [
+              {
+                query: GET_COMMUNITIES
+              },
+              {
+                query: GET_USER,
+                variables: { username }
+              },
+              {
+                query: GET_POSTS
+
+              }
+            ];
           }}
         >
           {createMutation => (

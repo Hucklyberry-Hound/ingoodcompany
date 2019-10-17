@@ -3,9 +3,12 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
-import { GET_COMMUNITIES } from './profilepage';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import { GET_USER } from './user';
+import { GET_COMMUNITIES } from './profilepage';
+import { GET_POSTS } from './posts';
+import { USER } from '../constants'
 
 const ADD_USER = gql`
   mutation AddUserToCommunity($communityId: String!) {
@@ -26,6 +29,7 @@ class JoinPage extends React.Component {
   render() {
     const { about, name } = this.props;
     const { communityId, updateParent } = this.state;
+    const username = localStorage.getItem(USER)
     return (
       <div className="community-container">
         <About info={about} name={name} />
@@ -54,8 +58,16 @@ class JoinPage extends React.Component {
           refetchQueries={() => {
             return [
               {
-                query: GET_COMMUNITIES,
+                query: GET_COMMUNITIES
               },
+              {
+                query: GET_USER,
+                variables: { username }
+              },
+              {
+                query: GET_POSTS
+
+              }
             ];
           }}
         >

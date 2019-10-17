@@ -64,7 +64,6 @@ export default class UserProfile extends React.Component {
           );
           const commWithoutYou = publicCommunities.filter(
             c => {
-              console.log(c.users)
               if (c.users.some(user => {
                 return user.username === username
               })) {

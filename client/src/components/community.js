@@ -44,7 +44,6 @@ class Community extends React.Component {
           {({ loading, error, data, subscribeToMore }) => {
             if (loading) return <div>Loading</div>;
             if (error) return console.log(error);
-            console.log("query");
             const {
               name,
               privacy,
