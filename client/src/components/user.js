@@ -21,15 +21,13 @@ export const GET_USER = gql`
         name
         category
         slug
-        owner {
-          username
-        }
       }
       communities {
         id
         name
         category
-        slug
+        slug 
+
       }
       posts {
         id
