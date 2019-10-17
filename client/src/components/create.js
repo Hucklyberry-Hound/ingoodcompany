@@ -88,7 +88,7 @@ export default class CreatePage extends React.Component {
                 <MenuItem value="games">Games</MenuItem>
                 <MenuItem value="health">Health</MenuItem>
                 <MenuItem value="movies">Movies</MenuItem>
-                <MenuItem value="nature">Nature</MenuItem>"
+                <MenuItem value="nature">Nature</MenuItem>
                 <MenuItem value="photography">Photography</MenuItem>
                 <MenuItem value="random">Random</MenuItem>
                 <MenuItem value="science">Science</MenuItem>
@@ -103,7 +103,7 @@ export default class CreatePage extends React.Component {
               label="About Your Community"
               name="about"
               multiline
-              rows="10"
+              rows="6"
               fullWidth
               value={this.state.about}
               onChange={this.handleOnChange}

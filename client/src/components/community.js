@@ -42,7 +42,7 @@ class Community extends React.Component {
       <React.Fragment>
         <Query query={GET_COMMUNITY} variables={this.state}>
           {({ loading, error, data, subscribeToMore }) => {
-            if (loading) return <div>Loading</div>;
+            if (loading) return <div className="loading">Loading</div>;
             if (error) return console.log(error);
             const {
               name,

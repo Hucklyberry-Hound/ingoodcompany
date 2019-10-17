@@ -16,8 +16,13 @@ const UserPosts = ({ user }) => {
                 </Link>
                 :
               </h2>
-              <h4>{post.title}</h4>
-              <small>{post.content}</small>
+              <h4>
+                <Link
+                  to={`/community/${post.community.slug}/thread/${post.id}`}
+                >
+                  {post.title}
+                </Link>
+              </h4>
             </div>
           );
         })}

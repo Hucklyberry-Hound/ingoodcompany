@@ -76,7 +76,7 @@ class Events extends React.Component {
     return (
       <Query query={GET_EVENTS}>
         {({ loading, error, data }) => {
-          if (loading) return <div>Loading</div>;
+          if (loading) return <div className="loading">Loading</div>;
           if (error) return <div>ERROR</div>;
 
           const events = data.events.filter(
