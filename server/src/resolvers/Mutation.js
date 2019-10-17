@@ -19,7 +19,6 @@ const defaultImages = [
 
 async function signup(parent, args, context, info) {
   const randIdx = Math.floor(Math.random() * defaultImages.length - 1);
-  console.log(randIdx);
   const password = await bcrypt.hash(args.password, 10);
   let image = '';
   if (!args.image) {
@@ -36,11 +35,17 @@ async function signup(parent, args, context, info) {
 async function login(parent, args, context, info) {
   const user = await context.prisma.user({ email: args.email });
   if (!user) {
-    throw new Error('No such user found');
+    return {
+      token: null,
+      user: null,
+    };
   }
   const valid = await bcrypt.compare(args.password, user.password);
   if (!valid) {
-    throw new Error('Invalid password');
+    return {
+      token: null,
+      user: null,
+    };
   }
   const token = jwt.sign({ userId: user.id }, APP_SECRET);
   return {

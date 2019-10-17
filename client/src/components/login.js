@@ -4,6 +4,9 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import '../styles/Login.css';
 
+const EMAIL_RE = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const validEmail = email => EMAIL_RE.test(email);
+
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation(
     $email: String!
@@ -42,7 +45,6 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-
 //generate default pic
 
 class Login extends Component {
@@ -54,8 +56,9 @@ class Login extends Component {
       password: '',
       firstName: '',
       lastName: '',
-      image: '' ,
+      image: '',
       username: '',
+      authError: false,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -99,7 +102,7 @@ class Login extends Component {
                   type="text"
                   placeholder="Username"
                 />
-                 <input
+                <input
                   value={this.state.image}
                   onChange={e => this.setState({ image: e.target.value })}
                   type="text"
@@ -107,18 +110,33 @@ class Login extends Component {
                 />
               </div>
             )}
-            <input
-              value={this.state.email}
-              onChange={e => this.setState({ email: e.target.value })}
-              type="text"
-              placeholder="Email Address"
-            />
-            <input
-              value={this.state.password}
-              onChange={e => this.setState({ password: e.target.value })}
-              type="password"
-              placeholder="Password"
-            />
+            <div className="auth-input">
+              {!validEmail(this.state.email) ? (
+                <small>Valid Email address required</small>
+              ) : (
+                <small></small>
+              )}
+              <input
+                value={this.state.email}
+                onChange={e => this.setState({ email: e.target.value })}
+                type="text"
+                placeholder="Email Address"
+              />
+            </div>
+            <div className="auth-input">
+              {this.state.password.length < 6 ? (
+                <small>Password should at least be 6 characters long</small>
+              ) : (
+                <small></small>
+              )}
+              <input
+                value={this.state.password}
+                onChange={e => this.setState({ password: e.target.value })}
+                type="password"
+                placeholder="Password"
+              />
+              {this.state.authError ? <p>Invalid Email/Password</p> : ''}
+            </div>
           </div>
           <div>
             <Mutation
@@ -127,7 +145,15 @@ class Login extends Component {
               onCompleted={data => this._confirm(data)}
             >
               {mutation => (
-                <button onClick={mutation}>
+                <button
+                  disabled={
+                    this.state.password.length < 6 ||
+                    !validEmail(this.state.email)
+                      ? true
+                      : false
+                  }
+                  onClick={mutation}
+                >
                   {' '}
                   {login ? 'login' : 'create account'}{' '}
                 </button>
@@ -146,13 +172,16 @@ class Login extends Component {
 
   _confirm = async data => {
     const { token, user } = this.state.login ? data.login : data.signup;
-    this._saveUserData(token, user.username);
-    this.props.history.push(`/home`);
+    if (!token || !user) {
+      this.setState({ authError: true });
+    } else {
+      this._saveUserData(token, user.username);
+      this.props.history.push(`/home`);
+    }
   };
 
   //Save user data in local storage
   _saveUserData = (token, username) => {
-    console.dir(username);
     localStorage.setItem(AUTH_TOKEN, token);
     localStorage.setItem(USER, username);
   };

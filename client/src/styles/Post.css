@@ -37,6 +37,7 @@ body{
     display: flex;
     min-width: 200px;
     min-height: 200px;
+    padding: 10px;
     margin: 10px;
     justify-content: center;
     box-shadow: 5px 5px 7px rgba(33,33,33,.7);

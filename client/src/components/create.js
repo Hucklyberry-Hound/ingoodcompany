@@ -54,7 +54,6 @@ export default class CreatePage extends React.Component {
 
   handleOnChange(event) {
     const key = event.target.name;
-    console.log(event.target.name);
     const updatedValue = { [key]: event.target.value };
     this.setState(updatedValue);
   }
@@ -135,21 +134,6 @@ export default class CreatePage extends React.Component {
                 onChange={this.handleOnChange}
                 inputProps={{
                   name: 'hasEvents',
-                }}
-              >
-                <MenuItem value={true}>Yes</MenuItem>
-                <MenuItem value={false}>No</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div className="create-field">
-            <label htmlFor="hasMessages">Has Messages: </label>
-            <FormControl variant="outlined">
-              <Select
-                value={this.state.hasMessages}
-                onChange={this.handleOnChange}
-                inputProps={{
-                  name: 'hasMessages',
                 }}
               >
                 <MenuItem value={true}>Yes</MenuItem>

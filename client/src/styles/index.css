@@ -23,7 +23,6 @@ code {
   flex-direction: column;
   width: 25%;
   align-items: center;
-  word-break: break-all;
 }
 
 .col-container h2 {
@@ -126,7 +125,8 @@ code {
 }
 
 .replies-header {
-  background-color: white;
+  background-color: #2c353a;
+  color: white;
   border-radius: 5px;
   border: 1px solid black;
 }
@@ -139,7 +139,8 @@ code {
 }
 
 .comment-form {
-  background-color: white;
+  background-color: #2c3e3a;
+  color: white;
 padding-left: 15px; 
 padding-right: 15px;
 padding-bottom: 15px;
@@ -211,6 +212,11 @@ nav {
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+.auth-input {
+  display: flex;
+  flex-direction: column;
 }
 
 .community-form {
