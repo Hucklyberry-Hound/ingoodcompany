@@ -89,7 +89,7 @@ export default class CreatePage extends React.Component {
                 <MenuItem value="games">Games</MenuItem>
                 <MenuItem value="health">Health</MenuItem>
                 <MenuItem value="movies">Movies</MenuItem>
-                <MenuItem value="nature">Nature</MenuItem>"
+                <MenuItem value="nature">Nature</MenuItem>
                 <MenuItem value="photography">Photography</MenuItem>
                 <MenuItem value="random">Random</MenuItem>
                 <MenuItem value="science">Science</MenuItem>
@@ -104,7 +104,7 @@ export default class CreatePage extends React.Component {
               label="About Your Community"
               name="about"
               multiline
-              rows="10"
+              rows="6"
               fullWidth
               value={this.state.about}
               onChange={this.handleOnChange}
@@ -135,21 +135,6 @@ export default class CreatePage extends React.Component {
                 onChange={this.handleOnChange}
                 inputProps={{
                   name: 'hasEvents',
-                }}
-              >
-                <MenuItem value={true}>Yes</MenuItem>
-                <MenuItem value={false}>No</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div className="create-field">
-            <label htmlFor="hasMessages">Has Messages: </label>
-            <FormControl variant="outlined">
-              <Select
-                value={this.state.hasMessages}
-                onChange={this.handleOnChange}
-                inputProps={{
-                  name: 'hasMessages',
                 }}
               >
                 <MenuItem value={true}>Yes</MenuItem>
