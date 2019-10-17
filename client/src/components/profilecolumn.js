@@ -2,6 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/ProfileColumn.css";
 
+
+const DELETE_COMMUNITY = gql`
+  mutation DeleteCommunity(
+    $communityId: String!
+  ) {
+    deleteCommunity(
+      communityId: $communityId
+    ) {
+      id
+      name
+    }
+  }
+`;
+
+
 const ColumnData = props => {
   const { headerText, listData } = props;
   return listData.length ? (
@@ -19,6 +34,32 @@ const ColumnData = props => {
             </Link>
             <br />
             <small>{community.users.length + 1} Members</small>
+            {(headerText === "Owned by you") ? 
+            <Mutation 
+            mutation={DELETE_COMMUNITY}
+            variables={{communityId: communityId}}
+            refetchQueries={() => {
+              return [
+                {
+                  query: GET_COMMUNITIES,
+                  
+                }, {
+                  query: GET_USER,
+                  variables: {username: username},
+                }
+              ];
+            }}
+            >
+           {deleteMutation => (
+              <button 
+              className="delete-community"
+              onClick={deleteMutation}
+            >
+              Delete
+            </button>
+           )}
+            </Mutation>
+            : ''}
           </div>
         );
       })}

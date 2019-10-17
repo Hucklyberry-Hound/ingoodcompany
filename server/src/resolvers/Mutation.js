@@ -131,6 +131,17 @@ async function addUserToCommunity(parent, args, context, info) {
   });
 }
 
+async function deleteCommunity(parent, args, context, info) {
+  // const userId = getUserId(context);
+
+  const deletedCommunity = await context.prisma.deleteCommunity({
+      id: args.communityId
+  
+  })
+
+  return deletedCommunity
+}
+
 async function createEvent(parent, args, context, info) {
   const userId = getUserId(context);
 
@@ -152,4 +163,5 @@ module.exports = {
   createNewComment,
   addUserToCommunity,
   createEvent,
+  deleteCommunity
 };
