@@ -5,6 +5,10 @@ import gql from 'graphql-tag';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
+import { GET_USER } from './user';
+import { GET_COMMUNITIES } from './profilepage';
+import { GET_POSTS } from './posts';
+import { USER } from '../constants'
 
 const NEW_COMMENT = gql`
   mutation CreateNewComment($content: String!, $postId: String!) {
@@ -45,6 +49,8 @@ class CommentForm extends React.Component {
   }
 
   render() {
+    const username = localStorage.getItem(USER)
+
     const { postId, content, updateParent } = this.state;
     return (
       <div className="comment-form-container">
@@ -78,6 +84,22 @@ class CommentForm extends React.Component {
               </p>
             );
           }}
+          refetchQueries={() => {
+            return [
+              {
+                query: GET_COMMUNITIES
+              },
+              {
+                query: GET_USER,
+                variables: { username }
+              },
+              {
+                query: GET_POSTS
+
+              }
+            ];
+          }}
+
         >
           {doMutation => (
             <Box p={3}>
