@@ -9,7 +9,7 @@ import UserPosts from "./userposts";
 //CSS
 import '../styles/User.css'
 
-const GET_USER = gql`
+export const GET_USER = gql`
   query GetUser($username: String!) {
     userByHandle(username: $username) {
       username

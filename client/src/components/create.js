@@ -6,7 +6,10 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import { GET_POSTS } from './posts';
+import { GET_USER } from './user';
 import { GET_COMMUNITIES } from './profilepage';
+import { USER } from '../constants'
 
 import '../styles/Create.css';
 
@@ -60,6 +63,7 @@ export default class CreatePage extends React.Component {
   }
 
   render() {
+    const username = localStorage.getItem(USER)
     return (
       <div className="community-form-container">
         <div className="community-form">
@@ -179,8 +183,16 @@ export default class CreatePage extends React.Component {
               refetchQueries={() => {
                 return [
                   {
-                    query: GET_COMMUNITIES,
+                    query: GET_COMMUNITIES
                   },
+                  {
+                    query: GET_USER,
+                    variables: { username }
+                  },
+                  {
+                    query: GET_POSTS
+
+                  }
                 ];
               }}
               onCompleted={data =>
