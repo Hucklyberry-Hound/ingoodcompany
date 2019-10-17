@@ -16,6 +16,15 @@ export const GET_USER = gql`
       image
       firstName
       lastName
+      ownerOf{
+        id
+        name
+        category
+        slug
+        owner {
+          username
+        }
+      }
       communities {
         id
         name
