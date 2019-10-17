@@ -4,6 +4,9 @@ import "../styles/ProfileColumn.css";
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import {GET_COMMUNITIES} from './profilepage';
+import { USER } from '../constants'
+import { GET_USER } from './user';
+
 
 
 
@@ -22,6 +25,7 @@ const DELETE_COMMUNITY = gql`
 
 
 const ColumnData = props => {
+  const username = localStorage.getItem(USER)
   const { headerText, listData } = props;
   return listData.length ? (
     <div className="column">
@@ -47,7 +51,10 @@ const ColumnData = props => {
               return [
                 {
                   query: GET_COMMUNITIES,
-                }
+                }, {
+                  query: GET_USER,
+                  variables: { username }
+                },
               ];
             }}
             >

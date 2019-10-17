@@ -171,6 +171,10 @@ export default class CreatePage extends React.Component {
                     query: GET_COMMUNITIES
                   },
                   {
+                    query: GET_USER,
+                    variables: { username }
+                  },
+                  {
                     query: GET_POSTS
 
                   }
