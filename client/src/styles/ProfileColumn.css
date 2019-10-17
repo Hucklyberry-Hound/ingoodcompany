@@ -73,6 +73,7 @@
     color: white;
     background: #D11A2A ;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .delete-community:hover{

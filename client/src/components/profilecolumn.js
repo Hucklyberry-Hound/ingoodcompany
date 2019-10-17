@@ -4,6 +4,7 @@ import "../styles/ProfileColumn.css";
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import {GET_COMMUNITIES} from './profilepage';
+import{GET_USER} from './user'
 
 
 const DELETE_COMMUNITY = gql`
@@ -26,7 +27,7 @@ const ColumnData = props => {
       <h2>{headerText}</h2>
       {listData.map((community, index) => {
         const communityId = community.id
-        console.log(communityId)
+        const username = `${community.owner.username}`
         return (
           <div className="column column-li" key={index} style={{background: props.color}}>
             <Link to={`/community/${community.slug}`}>
@@ -46,7 +47,11 @@ const ColumnData = props => {
               return [
                 {
                   query: GET_COMMUNITIES,
-                },
+                  
+                }, {
+                  query: GET_USER,
+                  variables: {username: username},
+                }
               ];
             }}
             >
