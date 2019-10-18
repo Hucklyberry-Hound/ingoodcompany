@@ -40,7 +40,7 @@ In Good Company’s back-end consist primarily of Node.js, Prisma (ORM, Database
 * Brian Oblad - GITHUB (INFO)
 * Andrew O’Grady - [aogrady3](https://github.com/aogrady3)
 * Jonathan Galletta - GITHUB (INFO)
-* Henri Bravo - [HenctheTank] (https://github.com/HencTheTank)
+* Henri Bravo - [HenctheTank](https://github.com/HencTheTank)
 
 ## :rocket: Deployment
 
