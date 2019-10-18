@@ -5,6 +5,9 @@ import gql from 'graphql-tag';
 
 import PostContainer from './postscontainer';
 
+import '../styles/Loading.css';
+
+
 export const GET_POSTS = gql`
   query {
     posts {
@@ -30,7 +33,7 @@ const Posts = props => {
   return (
     <Query query={GET_POSTS} variables={{ communityId }}>
       {({ loading, error, data }) => {
-        if (loading) return <div className="loading">Loading</div>;
+        if (loading) return <div className='loader-container'><div className="loader"></div></div>;
         if (error) return console.log(error);
         const posts = data.posts.filter(
           post => post.community.id === communityId
