@@ -1,3 +1,13 @@
 .community-form-container{
     margin-bottom: 15px;
 }
+
+.error p{
+    display: flex;
+    margin-right: 20px;
+    background: red;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 5px;
+    width: 150px;
+}

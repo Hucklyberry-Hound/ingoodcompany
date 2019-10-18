@@ -62,6 +62,12 @@ export default class CreatePage extends React.Component {
   }
 
   render() {
+    let nameBar = ''
+    let errorMsg = document.createElement("P");
+    let errorText = document.createTextNode("Error: Please Provide a Unique Name!");
+
+    errorMsg.appendChild(errorText)
+
     const username = localStorage.getItem(USER)
     return (
       <div className="community-form-container">
@@ -69,12 +75,14 @@ export default class CreatePage extends React.Component {
           <h1>Create A New Community</h1>
           <div className="create-field">
             <label htmlFor="name">Community Name: </label>
+            <div className="name-input" >
             <input
               name="name"
               type="text"
               value={this.state.name}
               onChange={this.handleOnChange}
             />
+            </div>
           </div>
           <div className="create-field">
             <label htmlFor="category">Select A Topic: </label>
@@ -163,6 +171,12 @@ export default class CreatePage extends React.Component {
           <div className="submit-button">
             <Mutation
               mutation={CREATE_COMMUNITY_MUTATION}
+              onError={() => {
+                nameBar = document.getElementsByClassName("name-input")
+                nameBar[0].classList.add('error')
+                nameBar[0].appendChild(errorMsg)
+              }
+                }
               variables={this.state}
               refetchQueries={() => {
                 return [
