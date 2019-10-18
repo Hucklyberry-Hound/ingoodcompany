@@ -10,22 +10,22 @@ type User {
     events: [Event!]
     comments: [Comment!]
     communities: [Community!] @relation(name:"Users")
-    ownerOf: [Community!] @relation(name:"Owner")
+    ownerOf: [Community!] @relation(name:"Owner" onDelete: CASCADE)
     posts: [Post!]
     createdAt: DateTime! @createdAt
 }
 
 type Community {
-    id: ID! @id
+    id: ID! @id 
     name: String! @unique
     category: String!
     slug: String!  @unique
-    posts: [Post!]
+    posts: [Post!] @relation(onDelete: CASCADE)
     hasPosts: Boolean!
     hasMessages: Boolean!
     hasEvents: Boolean!
     users: [User!] @relation(name:"Users")
-    events: [Event!]
+    events: [Event!] @relation(onDelete: CASCADE)
     privacy: String!
     owner: User @relation(name:"Owner")
     createdAt: DateTime! @createdAt
@@ -38,7 +38,7 @@ type Post {
     title: String!
     slug: String!
     community: Community!
-    comments: [Comment!]
+    comments: [Comment!] @relation(onDelete: CASCADE)
     postedBy: User!
     createdAt: DateTime! @createdAt
 }
