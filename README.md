@@ -21,7 +21,7 @@ Project was created as our Capstone Project for Fullstack Academy.
 
 In Good Company’s front-end consist primarily of React, Apollo Client, Material UI, and CSS. Modular React components allowed for easy design implementation throughout. Personal CSS contributed to most of the UI/UX of the site.
 
-In Good Company’s back-end consist primarily of Node.js, Prisma (ORM, Database, Server), and GraphQl. Heroku was used for deployment of app.
+In Good Company’s back-end consist primarily of Node.js, Prisma (ORM, Database, Server), and GraphQl. The backend of our application was handled by Prisma, which provided us with a database, ORM, and server. GraphQl replaced the typical RESTful architecture, by providing a single endpoint to mutate and query data from our database.  Heroku was used for deployment of app.
 
 * Javascript
 * React
