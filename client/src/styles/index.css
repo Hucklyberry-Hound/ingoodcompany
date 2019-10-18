@@ -216,11 +216,6 @@ nav {
   width: 100%;
 }
 
-.auth-input {
-  display: flex;
-  flex-direction: column;
-}
-
 .community-form {
   width: 33%;
   background-color: white;
