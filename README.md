@@ -4,7 +4,7 @@ Customized Social Network Application!
 
 ## :nerd_face: Motivation
 
-Project was created as for our Capstone Project for Fullstack Academy.
+Project was created as our Capstone Project for Fullstack Academy.
 
 ## :shopping_cart: Functionality
 
@@ -40,7 +40,7 @@ In Good Company’s back-end consist primarily of Node.js, Prisma (ORM, Database
 * Brian Oblad - GITHUB (INFO)
 * Andrew O’Grady - [aogrady3](https://github.com/aogrady3)
 * Jonathan Galletta - GITHUB (INFO)
-* Henri Bravo - GITHUB (INFO)
+* Henri Bravo - [HenctheTank] (https://github.com/HencTheTank)
 
 ## :rocket: Deployment
 
