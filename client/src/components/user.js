@@ -8,6 +8,8 @@ import UserPosts from './userposts';
 
 //CSS
 import '../styles/User.css';
+import '../styles/Loading.css';
+
 
 export const GET_USER = gql`
   query GetUser($username: String!) {
@@ -61,7 +63,7 @@ const UserProfile = props => {
   return (
     <Query query={GET_USER} variables={{ username }}>
       {({ loading, error, data }) => {
-        if (loading) return <div className="loading">Loading</div>;
+        if (loading) return <div className='loader-container'><div className="loader"></div></div>;
         if (error) console.log(error);
         const user = data.userByHandle;
         return (

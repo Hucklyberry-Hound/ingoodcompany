@@ -5,6 +5,9 @@ import gql from 'graphql-tag';
 
 import CommentContainer from './commentcontainer';
 
+import '../styles/Loading.css';
+
+
 const GET_ONE_POST = gql`
   query GetPost($postId: String!) {
     getPost(id: $postId) {
@@ -35,7 +38,7 @@ const Thread = props => {
   return (
     <Query query={GET_ONE_POST} variables={{ postId }}>
       {({ loading, error, data }) => {
-        if (loading) return <div className="loading">Loading</div>;
+        if (loading) return <div className='loader-container'><div className="loader"></div></div>;
         if (error) console.log(error);
         const thread = data.getPost;
         const { title, content, postedBy, comments, community } = thread;
