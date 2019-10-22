@@ -47,7 +47,7 @@ This website was deployed using Heroku.
 
 https://in-good-company.herokuapp.com
 
-## :video: Demo Presentation
+## :video_camera: Demo Presentation
 
 Watch our demo presentation below:
 
