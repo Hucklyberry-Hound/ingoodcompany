@@ -44,4 +44,5 @@ In Good Company’s back-end consists primarily of Node.js, Prisma (ORM, Databas
 ## :rocket: Deployment
 
 This website was deployed using Heroku.
+
 https://in-good-company.herokuapp.com
